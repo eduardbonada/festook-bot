@@ -4,5 +4,10 @@
   "description": "",
   "main": "index.js",
   "author": "Eduard Bonada",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.17",
+    "underscore": "^1.8.3"
+  }
 }
