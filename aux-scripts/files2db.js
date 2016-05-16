@@ -25,6 +25,7 @@ mongoose.connect(config.database, function(err) {
 	//loadListOfBands();
 
 	loadBandSimilarityMatrix();
+
 });
 
 
@@ -84,7 +85,7 @@ function loadBandSimilarityMatrix(){
 			}, 
 			{
 				$set: { 
-					similaritiesMatrix: matrix[bandName]
+					similarities: matrix[bandName]
 				}
 			}, 
 			function(err, doc){

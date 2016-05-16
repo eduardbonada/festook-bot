@@ -24,7 +24,7 @@ var BandSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	similaritiesMatrix:{
+	similarities:{
 		type: Object
 	}	
 });
