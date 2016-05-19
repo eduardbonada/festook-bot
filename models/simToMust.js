@@ -8,7 +8,7 @@ var Band = require('../db/band');
 
 exports.computeBandSimilarityToMustBands = function(user){
 	
-	mustBands = user['mustBands']
+	mustBands = user.mustBands
 
 	//console.log("SIM2MUST: Computing similarity to Must bands of user " + user['name'] + ": " + mustBands);
 

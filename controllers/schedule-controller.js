@@ -8,14 +8,14 @@ var Band = require('../db/band');
 
 /// ---------- COMPUTE SCHEDULE ---------- ///
 	
-var computeScheduleForDay = function(userName, day) {
+var computeScheduleForDay = function(telegramId, day, callback) {
 
-	console.log("[SERVER] Constructing schedule for user " + userName + ' for day '+ day);
+	console.log("[SERVER] Constructing schedule for user " + telegramId + ' for day '+ day);
 	
 	// get schedule object from DB
 	User.findOne(
 		{
-			name: userName
+			telegramId: telegramId
 		},
 		function(err, user){
 			if (err) throw err;
@@ -36,13 +36,13 @@ var computeScheduleForDay = function(userName, day) {
 											start: moment(day + " 12:00", "D/MM/YYYY HH:mm"),
 											end: moment(day + " 12:00", "D/MM/YYYY HH:mm").add(1, 'days')
 										});
-				console.log(textSchedule);
+				callback(textSchedule);
 			
 			}
 			else {
 
-				computeEntireScheduleForUser(userName, function(){
-					computeScheduleForDay(userName, day)
+				computeEntireScheduleForUser(telegramId, function(){
+					computeScheduleForDay(telegramId, day, callback)
 				});
 
 			}
@@ -52,18 +52,18 @@ var computeScheduleForDay = function(userName, day) {
 
 }
 
-var computeEntireScheduleForUser = function(userName, callback) {
+var computeEntireScheduleForUser = function(telegramId, callback) {
 
 	// day in the format 'dd/mm/yyyy'
 
-	console.log("[SERVER] Computing entire schedule for user " + userName);
+	console.log("[SERVER] Computing entire schedule for user " + telegramId);
 
 	var schedule = require('../models/schedule')
 
 	// get user
 	User.findOne(
 		{
-			name: userName
+			telegramId: telegramId
 		},
 		function(err, user){
 			if (err) throw err;
@@ -92,7 +92,7 @@ var computeEntireScheduleForUser = function(userName, callback) {
 					// store schedule object into DB
 					User.findOneAndUpdate(
 						{ 
-							name: userName
+							telegramId: telegramId
 						}, 
 						{
 							$set: { 
@@ -102,7 +102,7 @@ var computeEntireScheduleForUser = function(userName, callback) {
 						function(err, user){
 							if (err) throw err;
 
-							console.log("[SERVER] Schedule object succesfully stored for user " + user['name']);
+							console.log("[SERVER] Schedule object succesfully stored for user " + telegramId);
 
 							callback();
 						}
@@ -157,7 +157,7 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 		if( moment(bandStart).isAfter(momentsRange.start) && moment(bandStart).isBefore(momentsRange.end) ) {
 
-			textSchedule += objectSchedule[b]["uppercase"] + " (" + moment(objectSchedule[b]["start"]).format("D HH:mm") + " " + objectSchedule[b]["stage"] + ")\n";
+			textSchedule += "- " + objectSchedule[b]["uppercase"] + "\n  (" + moment(objectSchedule[b]["start"]).format("HH:mm") + " | " + objectSchedule[b]["stage"] + ")\n";
 		}
 
 	}
@@ -168,5 +168,4 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 module.exports = {
 	computeScheduleForDay : computeScheduleForDay,
-	computeEntireScheduleForUser : computeEntireScheduleForUser
 }

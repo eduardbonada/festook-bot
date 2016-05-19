@@ -1,3 +1,5 @@
+var config = require('../config');
+
 var moment  = require('moment');
 
 // import db schemas
@@ -5,7 +7,7 @@ var User = require('../db/user');
 var Band = require('../db/band');
 
 // array that stores the free slots in the schedule
-var freeSlots = [{"start": moment("2015-05-27T00:00:00+02:00"), "end": moment("2015-05-31T23:59:59+02:00")}];
+var freeSlots = [{"start": moment(config.festivalInfo.start), "end": moment(config.festivalInfo.end)}];
 // var freeSlots = [
 // 	{"start": moment("2015-05-27T00:00:00+02:00"), "end": moment("2015-05-28T22:00:00+02:00")},
 // 	{"start": moment("2015-05-30T22:20:00+02:00"), "end": moment("2015-05-30T23:35:00+02:00")},
@@ -17,7 +19,7 @@ bandsToAttend = []
 
 exports.generateSchedule = function(user, bandsInfo){
 
-	console.log("[SCHEDULE] Computing schedule for user " + user['name']);
+	console.log("[SCHEDULE] Computing schedule for user " + user['telegramId']);
 
 	// sort user bands by similarity
 	var sortedBandNames = getSortedKeys(user.simToMust, "descending");

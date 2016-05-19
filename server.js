@@ -4,6 +4,7 @@
 //var app 	 	= express();
 var mongoose 	= require('mongoose');
 
+
 // import general configuration
 var config = require('./config');
 
@@ -11,6 +12,7 @@ var config = require('./config');
 var userCntrl = require('./controllers/user-controller');
 var mustBandsCntrl = require('./controllers/mustBands-controller');
 var scheduleCntrl = require('./controllers/schedule-controller');
+var telegramCntrl = require('./controllers/telegram-controller');
 
 
 /// ---------- CONNECT TO DATABASE ---------- ///
@@ -28,16 +30,9 @@ mongoose.connect(config.database, function(err) {
 
 	// Schedule
 	//scheduleCntrl.computeEntireScheduleForUser('test_user_1')
-	scheduleCntrl.computeScheduleForDay('test_user_1', '29/05/2015')
+	//scheduleCntrl.computeScheduleForDay('test_user_1', '29/05/2015')
 
 });
-
-
-
-	
-
-
-
 
 
 

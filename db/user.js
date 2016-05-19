@@ -2,16 +2,26 @@ var mongoose = require('mongoose');
 
 // Schema defines how the 'user' data will be stored in MongoDB
 var UserSchema = new mongoose.Schema({
-	
-	name: {
+
+	telegramId: {
 		type: String,
 		unique: true,
 		required: true
 	},
 
+	telegramFirstName: {
+		type: String,
+		required: true
+	},
+
+	telegramLastName: {
+		type: String,
+		required: true
+	},
+	
 	// array of lowercase names 
 	mustBands: {
-		type: [String]
+		type: []
 	},
 
 	// Array that contains the value of similarity to must bands {"lowercase-name": "sim-value"}

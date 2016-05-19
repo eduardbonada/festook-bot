@@ -4,33 +4,55 @@ var User = require('../db/user');
 
 /// ---------- COMPUTE SIMILARITIES TO MUST BANDS ---------- ///
 
-exports.setMustBandsForUser = function(userName, mustBands){
+var addMustBandForUser = function(telegramId, mustBand){
 
 	// Store users must bands into DB
 	User.findOneAndUpdate(
 		{ 
-			name: userName
+			telegramId: telegramId
 		}, 
 		{
-			$set: { 
-				mustBands: mustBands
+			$push: { 
+				mustBands: mustBand
 			}
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[SERVER] Must bands succesfully stored for user " + user['name']);
+			console.log("[SERVER] Must bands succesfully stored for user " + user['telegramId']);
+			computeSimToMustBandsForUser(telegramId)
 		}
 	);
 
 }
 
-exports.computeSimToMustBandsForUser = function(userName){
+var removeMustBandForUser = function(telegramId, mustBand){
+
+	// Store users must bands into DB
+	User.findOneAndUpdate(
+		{ 
+			telegramId: telegramId
+		}, 
+		{
+			$pull: { 
+				mustBands: mustBand
+			}
+		}, 
+		function(err, user){
+			if (err) throw err;
+			console.log("[SERVER] Must band succesfully removed for user " + user['telegramId']);
+			computeSimToMustBandsForUser(telegramId)
+		}
+	);
+
+}
+
+var computeSimToMustBandsForUser = function(telegramId){
 
 	var simToMust = require('../models/simToMust')
 
 	User.findOne(
 		{
-			name: userName
+			telegramId: telegramId
 		},
 		function(err, user){
 			if (err) throw err;
@@ -38,4 +60,10 @@ exports.computeSimToMustBandsForUser = function(userName){
 		}
 	);
 
+}
+
+module.exports = {
+	addMustBandForUser : addMustBandForUser,
+	removeMustBandForUser : removeMustBandForUser,
+	computeSimToMustBandsForUser : computeSimToMustBandsForUser
 }
