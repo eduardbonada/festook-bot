@@ -24,10 +24,9 @@ mongoose.connect(config.database, function(err) {
 
 	//loadListOfBands();
 
-	loadBandSimilarityMatrix();
+	//loadBandSimilarityMatrix();
 
 });
-
 
 //// ----- LIST BANDS ----- ////
 

@@ -70,8 +70,6 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 			// store into temp array
 			simToMust[allBands[band].lowercase] = normharmMean;
 
- 			//console.log("Similarity of " + allBands[band].lowercase + ": " + normharmMean);
-
 		}
 
 	}
