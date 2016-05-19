@@ -1,6 +1,9 @@
+
 var _ 		= require('underscore');
-var Band 	= require('./models/band');
-var User 	= require('./models/user');
+
+// import db schemas
+var User = require('../db/user');
+var Band = require('../db/band');
 
 
 exports.computeBandSimilarityToMustBands = function(user){

@@ -1,8 +1,8 @@
 {
-  "name": "festook",
+  "name": "festook-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Eduard Bonada",
   "license": "ISC",
   "dependencies": {

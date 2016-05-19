@@ -1,7 +1,8 @@
 var moment  = require('moment');
 
-var Band 	= require('./models/band');
-var User 	= require('./models/user');
+// import db schemas
+var User = require('../db/user');
+var Band = require('../db/band');
 
 // array that stores the free slots in the schedule
 var freeSlots = [{"start": moment("2015-05-27T00:00:00+02:00"), "end": moment("2015-05-31T23:59:59+02:00")}];
