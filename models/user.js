@@ -14,8 +14,13 @@ var UserSchema = new mongoose.Schema({
 		type: [String]
 	},
 
-	// Array of {"lowercase-name": "sim-value"}
+	// Array that contains the value of similarity to must bands {"lowercase-name": "sim-value"}
 	simToMust:{
+		type: {}
+	},	
+
+	// Array that contains the object representation of the schedule
+	schedule:{
 		type: {}
 	}	
 

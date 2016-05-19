@@ -14,12 +14,17 @@ var Band = require('./models/band');
 
 mongoose.connect(config.database, function(err) {
 	if (err) throw err;
-	console.log("Connected to DB");
+	console.log("[SERVER] Connected to DB");
 
+	// User Management
 	//createUser('test_user_1');
+
+	// Must Bands
 	//setMustBandsForUser('test_user_1', ['interpol', 'thestrokes']);
 	//computeSimToMustBandsForUser('test_user_1');
 
+	// Schedule
+	//computeEntireScheduleForUser('test_user_1')
 	computeScheduleForDay('test_user_1', '29/05/2015')
 
 });
@@ -73,17 +78,64 @@ function computeSimToMustBandsForUser(userName){
 			name: userName
 		},
 		function(err, user){
+			if (err) throw err;
 			simToMust.computeBandSimilarityToMustBands(user);
 		}
 	);
 
 }
 
-/// ---------- SCHEDULE ---------- ///
-
+/// ---------- COMPUTE SCHEDULE ---------- ///
+	
 function computeScheduleForDay(userName, day) {
 
+	console.log("[SERVER] Constructing schedule for user " + userName + ' for day '+ day);
+	
+	// get schedule object from DB
+	User.findOne(
+		{
+			name: userName
+		},
+		function(err, user){
+			if (err) throw err;
+
+			if(user.schedule != null){
+
+				// Sort by start time 
+				var sortedSchedule = user.schedule.sort(function(a,b) {
+					if ( moment(a.start).isAfter(moment(b.start)) ){ return 1; }
+					else if (moment(a.start).isBefore(moment(b.start)) ){ return -1; }
+					else{ return 0; }
+				}); 
+
+				// convert schedule object into text
+				var textSchedule = textRepresentationOfScheduleInRange(
+										sortedSchedule, 
+										{
+											start: moment(day + " 12:00", "D/MM/YYYY HH:mm"),
+											end: moment(day + " 12:00", "D/MM/YYYY HH:mm").add(1, 'days')
+										});
+				console.log(textSchedule);
+			
+			}
+			else {
+
+				computeEntireScheduleForUser(userName, function(){
+					computeScheduleForDay(userName, day)
+				});
+
+			}
+
+		}
+	);
+
+}
+
+function computeEntireScheduleForUser(userName, callback) {
+
 	// day in the format 'dd/mm/yyyy'
+
+	console.log("[SERVER] Computing entire schedule for user " + userName);
 
 	var schedule = require('./schedule')
 
@@ -93,31 +145,47 @@ function computeScheduleForDay(userName, day) {
 			name: userName
 		},
 		function(err, user){
+			if (err) throw err;
 
 			// get bands info
 			Band.find(
 				{}, // where filter
 				'lowercase uppercase startTime endTime stage',	// fields to return
 				function (err, bands) {
+					if (err) throw err;
+
 					var bandsDict = {};
 					for(b in bands){
 						bandsDict[bands[b].lowercase] = bands[b];
 					}
 					
+					// generate schedule getting list of lowercase bands to attend
 					var bandsToAttend = schedule.generateSchedule(user, bandsDict);
 					
+					// convert list of bands into an object with all bands info (name, stage, start, end)
 					var objectSchedule = objectRepresentationOfSchedule(
 											bandsToAttend, 
 											bandsDict);
 					//console.log(objectSchedule);
 
-					var textSchedule = textRepresentationOfScheduleInRange(
-											objectSchedule, 
-											{
-												start: moment(day + " 12:00", "D/MM/YYYY HH:mm"),
-												end: moment(day + " 12:00", "D/MM/YYYY HH:mm").add(1, 'days')
-											});
-					console.log(textSchedule);
+					// store schedule object into DB
+					User.findOneAndUpdate(
+						{ 
+							name: userName
+						}, 
+						{
+							$set: { 
+								schedule: objectSchedule
+							}
+						}, 
+						function(err, user){
+							if (err) throw err;
+
+							console.log("[SERVER] Schedule object succesfully stored for user " + user['name']);
+
+							callback();
+						}
+					);
 
 				}
 			);
@@ -150,19 +218,10 @@ function objectRepresentationOfSchedule(bandsToAttend, bandsInfo){
 
 	// Sort by start time 
 	var scheduleObjectSortedByStartTime = scheduleObject.sort(function(a,b) {
-
-		if ( moment(a.start).isAfter(moment(b.start)) ){
-			return 1;
-		}
-		else if (moment(a.start).isBefore(moment(b.start)) ){
-			return -1;
-		}
-		else{
-			return 0;
-		}
-
+		if ( moment(a.start).isAfter(moment(b.start)) ){ return 1; }
+		else if (moment(a.start).isBefore(moment(b.start)) ){ return -1; }
+		else{ return 0; }
 	}); 
-
 
 	return(scheduleObjectSortedByStartTime);
 }
