@@ -40,7 +40,10 @@ var removeMustBandForUser = function(telegramId, mustBand){
 		function(err, user){
 			if (err) throw err;
 			console.log("[SERVER] Must band succesfully removed for user " + user['telegramId']);
-			computeSimToMustBandsForUser(telegramId)
+			if(user.mustBands.length>0){
+				computeSimToMustBandsForUser(telegramId)
+			}
+
 		}
 	);
 
@@ -56,7 +59,9 @@ var computeSimToMustBandsForUser = function(telegramId){
 		},
 		function(err, user){
 			if (err) throw err;
-			simToMust.computeBandSimilarityToMustBands(user);
+			if(user.mustBands.length>0){
+				simToMust.computeBandSimilarityToMustBands(user);
+			}
 		}
 	);
 
