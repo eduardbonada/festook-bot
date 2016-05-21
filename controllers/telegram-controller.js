@@ -107,35 +107,46 @@ bot.onText(/\/mustBands/, function (msg, match) {
 		function(err, user){
 			if (err) throw err;
 
-			if(!user.mustBands.length){ // if there are no must bands
-				console.log('[BOT] User ' + telegramId + ' has not introduced any must band yet');
-				bot.sendMessage(msg.chat.id, 'You have not added any \'must band\' (those that you don\'t want to miss). Do it with /addMustBand.')
-				.then(function () {});
-			}
-			else{ // if there are must bands
-				
-				// get bands info
-				Band.find({},function(err, bands){
+			if(user){
 
-					if (err) throw err;
-
-					var bandsInfo = {};
-					for(b in bands){
-						bandsInfo[bands[b].lowercase] = bands[b];
-					}
-
-					var messageMustBands = "Your must bands are:\n\n";
-					for(b in user.mustBands){
-						messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
-					}
-					messageMustBands += "\nEdit them with /addMustBand or /removeMustBand.";
-
-					bot.sendMessage(msg.chat.id, messageMustBands)
+				if(!user.mustBands.length){ // if there are no must bands
+					console.log('[BOT] User ' + telegramId + ' has not introduced any must band yet');
+					bot.sendMessage(msg.chat.id, 'You have not added any \'must band\' (those that you don\'t want to miss). Do it with /addMustBand.')
 					.then(function () {});
-	
-					console.log('[BOT] User ' + telegramId + ' has introduced ' + user.mustBands.length + ' bands');
+				}
+				else{ // if there are must bands
 					
-				});
+					// get bands info
+					Band.find({},function(err, bands){
+
+						if (err) throw err;
+
+						var bandsInfo = {};
+						for(b in bands){
+							bandsInfo[bands[b].lowercase] = bands[b];
+						}
+
+						var messageMustBands = "Your must bands are:\n\n";
+						for(b in user.mustBands){
+							messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
+						}
+						messageMustBands += "\nEdit them with /addMustBand or /removeMustBand.";
+
+						bot.sendMessage(msg.chat.id, messageMustBands)
+						.then(function () {});
+		
+						console.log('[BOT] User ' + telegramId + ' has introduced ' + user.mustBands.length + ' bands');
+						
+					});
+				}
+			}
+			else{
+
+				bot.sendMessage(msg.chat.id, "I did not find you in my user list! /start using Festook now")
+				.then(function () {});
+				
+				console.log('[BOT] User ' + telegramId + ' not found');
+
 			}
 		});
 

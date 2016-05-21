@@ -18,7 +18,7 @@ var addMustBandForUser = function(telegramId, mustBand){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[SERVER] Must bands succesfully stored for user " + user['telegramId']);
+			console.log("[MUST] Must bands succesfully stored for user " + user['telegramId']);
 			computeSimToMustBandsForUser(telegramId)
 		}
 	);
@@ -39,7 +39,7 @@ var removeMustBandForUser = function(telegramId, mustBand){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[SERVER] Must band succesfully removed for user " + user['telegramId']);
+			console.log("[MUST] Must band succesfully removed for user " + user['telegramId']);
 			if(user.mustBands.length>0){
 				computeSimToMustBandsForUser(telegramId)
 			}
