@@ -14,6 +14,9 @@ var addMustBandForUser = function(telegramId, mustBand){
 		{
 			$push: { 
 				mustBands: mustBand
+			},
+			$set: {
+				upToDateSchedule: false
 			}
 		}, 
 		function(err, user){
@@ -42,6 +45,9 @@ var removeMustBandForUser = function(telegramId, mustBand){
 		{
 			$pull: { 
 				mustBands: mustBand
+			},
+			$set: {
+				upToDateSchedule: false
 			}
 		}, 
 		function(err, user){

@@ -24,6 +24,11 @@ var UserSchema = new mongoose.Schema({
 		type: []
 	},
 
+	// array of lowercase names 
+	avoidBands: {
+		type: []
+	},
+
 	// Array that contains the value of similarity to must bands {"lowercase-name": "sim-value"}
 	simToMust:{
 		type: {}
@@ -32,12 +37,13 @@ var UserSchema = new mongoose.Schema({
 	// Array that contains the object representation of the schedule
 	schedule:{
 		type: {}
-	}	
+	},
+
+	// whether the schedule has to be recomputed or not
+	upToDateSchedule:{
+		type: Boolean
+	}
 
 });
-
-// BandSchema.pre('save', function(next) {};
-
-// BandSchema.methods.comparePassword = function(pw, cb) {
 
 module.exports = mongoose.model('User', UserSchema);

@@ -6,37 +6,41 @@ var moment  = require('moment');
 var User = require('../db/user');
 var Band = require('../db/band');
 
-// array that stores the free slots in the schedule
-var freeSlots = [{"start": moment(config.festivalInfo.start), "end": moment(config.festivalInfo.end)}];
-// var freeSlots = [
-// 	{"start": moment("2015-05-27T00:00:00+02:00"), "end": moment("2015-05-28T22:00:00+02:00")},
-// 	{"start": moment("2015-05-30T22:20:00+02:00"), "end": moment("2015-05-30T23:35:00+02:00")},
-// 	{"start": moment("2015-05-30T23:50:00+02:00"), "end": moment("2015-05-31T23:59:59+02:00")}
-// ];
-
-// array that stores the bands to attend
-bandsToAttend = []
+var freeSlots = []
 
 exports.generateSchedule = function(user, bandsInfo){
 
-	console.log("[SCHEDULE] Computing schedule for user " + user['telegramId']);
-
-	// sort user bands by similarity
-	var sortedBandNames = getSortedKeys(user.simToMust, "descending");
+	console.log("[SCHEDULE] Computing schedule for user " + user.telegramId);
 
 	// remove discarded bands
+	var bandsToSort = user.simToMust
+	//console.log("BEFORE REMOVING\n" + JSON.stringify(bandsToSort));
+	for (db in user.avoidBands){
+		//console.log("Remove " + user.avoidBands[db])
+		delete bandsToSort[user.avoidBands[db]]
+	}
+	//console.log("AFTER REMOVING\n" + JSON.stringify(bandsToSort));
+
+
+	// sort user bands by similarity
+	var sortedBandNames = getSortedKeys(bandsToSort, "descending");
+	//console.log("SORTED\n" + JSON.stringify(sortedBandNames));
 
 	// compute schedule with mode "FullConcert"
+	freeSlots = [{"start": moment(config.festivalInfo.start), "end": moment(config.festivalInfo.end)}];
+	var bandsToAttend = []
 	for (b in sortedBandNames){ // (var b = 0 ; b < 5 ; b++) { 
 
 		bandName = sortedBandNames[b]
 		simToMust = user.simToMust[bandName];
 
+		//console.log("Trying to add " + bandName + " to the schedule");
+
 		var slotIndex = isThereAFreeSlotBetweenDates(bandsInfo[bandName]["startTime"], bandsInfo[bandName]["endTime"]);
 		
 		if ( slotIndex != -1 ){ // if slot found
 			
-			//console.log("[SCHEDULE] Found a free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
+			//console.log("Found a free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
 			
 			bandsToAttend.push(bandName);
 
@@ -57,6 +61,8 @@ exports.generateSchedule = function(user, bandsInfo){
 
 		}
 	}
+
+	//console.log("BANDS TO ATTEND\n" + JSON.stringify(bandsToAttend));
 
 	return(bandsToAttend);
 }

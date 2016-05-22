@@ -22,14 +22,14 @@ var computeScheduleForDay = function(telegramId, day, callback) {
 
 			if(user){
 
-				if(user.schedule != null){
+				if(user.upToDateSchedule == true){
 
 					// Sort by start time 
 					var sortedSchedule = user.schedule.sort(function(a,b) {
 						if ( moment(a.start).isAfter(moment(b.start)) ){ return 1; }
 						else if (moment(a.start).isBefore(moment(b.start)) ){ return -1; }
 						else{ return 0; }
-					}); 
+					});
 
 					// convert schedule object into text
 					var textSchedule = textRepresentationOfScheduleInRange(
@@ -97,7 +97,6 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 							var objectSchedule = objectRepresentationOfSchedule(
 													bandsToAttend, 
 													bandsDict);
-							//console.log(objectSchedule);
 
 							// store schedule object into DB
 							User.findOneAndUpdate(
@@ -106,15 +105,16 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 								}, 
 								{
 									$set: { 
-										schedule: objectSchedule
+										schedule: objectSchedule,
+										upToDateSchedule: true
 									}
 								}, 
 								function(err, user){
 									if (err) throw err;
 
 									console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
-									callback();
 
+									callback();
 								}
 							);
 

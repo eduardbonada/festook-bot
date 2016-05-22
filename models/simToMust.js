@@ -10,7 +10,7 @@ exports.computeBandSimilarityToMustBands = function(user){
 	
 	mustBands = user.mustBands
 
-	console.log("[SIM2MUST] Computing similarity to Must bands of user " + user.name);
+	console.log("[SIM2MUST] Computing similarity to Must bands of user " + user.telegramId);
 
 	var bandsSimToMust = {}
 
@@ -92,7 +92,7 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[SIM2MUST]: Similarity to Must bands succesfully stored for user " + user.name);
+			console.log("[SIM2MUST]: Similarity to Must bands succesfully stored for user " + user.telegramId);
 		}
 	);
 
