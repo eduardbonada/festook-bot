@@ -18,8 +18,15 @@ var addMustBandForUser = function(telegramId, mustBand){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[MUST] Must bands succesfully stored for user " + user['telegramId']);
-			computeSimToMustBandsForUser(telegramId)
+
+			if(user){
+				console.log("[MUSTCTRL] Must bands succesfully stored for user " + user.telegramId);
+				computeSimToMustBandsForUser(telegramId)
+			}
+			else{
+				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to add a must band");
+			}
+
 		}
 	);
 
@@ -39,9 +46,18 @@ var removeMustBandForUser = function(telegramId, mustBand){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[MUST] Must band succesfully removed for user " + user['telegramId']);
-			if(user.mustBands.length>0){
-				computeSimToMustBandsForUser(telegramId)
+
+			if(user){
+
+				console.log("[MUSTCTRL] Must band succesfully removed for user " + user['telegramId']);
+				
+				if(user.mustBands.length>0){
+					computeSimToMustBandsForUser(telegramId)
+				}
+
+			}
+			else{
+				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to remove a must band");
 			}
 
 		}
@@ -59,11 +75,17 @@ var computeSimToMustBandsForUser = function(telegramId){
 		},
 		function(err, user){
 			if (err) throw err;
-			if(user.mustBands.length>0){
-				simToMust.computeBandSimilarityToMustBands(user);
+
+			if (user){
+				if(user.mustBands.length>0){
+					console.log("[MUSTCTRL] Computing Similarity to must bands for user " + user.telegramId);				
+					simToMust.computeBandSimilarityToMustBands(user);
+				}
 			}
-		}
-	);
+			else{
+				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to compute similarity to must bands");
+			}
+		});
 
 }
 

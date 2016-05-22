@@ -15,7 +15,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName){
 		function(err, user){
 			if (err) throw err;
 			
-			if ( !user ){
+			if (!user){
 
 				// create new user
 				var newUser = new User({

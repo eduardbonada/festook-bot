@@ -26,7 +26,7 @@ bot.onText(/\/start/, function (msg, match) {
 	var telegramFirstName = msg.from.first_name;
 	var telegramLastName = msg.from.last_name;
 	
-	console.log('[BOT] New user connected: ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
+	serverLog('New user connected: ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
 
 	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName);
 
@@ -47,7 +47,7 @@ bot.onText(/\/allBands/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
-	console.log('[BOT] User ' + telegramId + ' wants the list of bands');
+	serverLog('User ' + telegramId + ' wants the list of bands');
 
 	User.findOne(
 		{
@@ -56,38 +56,52 @@ bot.onText(/\/allBands/, function (msg, match) {
 		function(err, user){
 			if (err) throw err;
 
-			// get bands info
-			Band.find({}, function (err, bands) {
+			if(user){
+
+				// get bands info
+				Band.find({}, function (err, bands) {
 					if (err) throw err;
 
-					var bandsInfo = {};
-					for(b in bands){
-						bandsInfo[bands[b].lowercase] = bands[b];
-					}
+					if(bands.length){
 
-					var listBandsMessage = "";
-
-					if(!user.simToMust){ // if no similarities yet, print the list of all bands in festival
-						listBandsMessage += "These are all the bands playing: \n\n";
-						for (b in bandsInfo){
-							listBandsMessage += bandsInfo[b].uppercase + ', ';
+						var bandsInfo = {};
+						for(b in bands){
+							bandsInfo[bands[b].lowercase] = bands[b];
 						}
-						listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '						
-					}
-					else{ // if similarities set, print the list of bands sorted by similarity
-						listBandsMessage += "These are all the bands playing sorted according to your taste: \n\n";
-						var sortedBandNames = getSortedKeys(user.simToMust, "descending");
-						for (b in sortedBandNames){
-							listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
-						}
-						listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
-					}
-					listBandsMessage += "\n\nDid you chose your /mustBands already";
 
-					bot.sendMessage(msg.chat.id, listBandsMessage)
-					.then(function () {});
+						var listBandsMessage = "";
+
+						if(!user.simToMust){ // if no similarities yet, print the list of all bands in festival
+							listBandsMessage += "These are all the bands playing: \n\n";
+							for (b in bandsInfo){
+								listBandsMessage += bandsInfo[b].uppercase + ', ';
+							}
+							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '						
+						}
+						else{ // if similarities set, print the list of bands sorted by similarity
+							listBandsMessage += "These are all the bands playing sorted according to your taste: \n\n";
+							var sortedBandNames = getSortedKeys(user.simToMust, "descending");
+							for (b in sortedBandNames){
+								listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
+							}
+							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
+						}
+						listBandsMessage += "\n\nDid you chose your /mustBands already";
+
+						notify(msg.chat.id, 
+							listBandsMessage, 
+							"User " + telegramId + "gets the list of bands");
+
+					}
+					else{
+						notifyNoBands(telegramId, msg.chat.id);
+					}
 
 				});
+			}
+			else{
+				notifyUserNotFound(telegramId, msg.chat.id);
+			}
 
 		});
 
@@ -98,7 +112,7 @@ bot.onText(/\/mustBands/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
-	console.log('[BOT] User ' + telegramId + ' listing Must bands');
+	serverLog('User ' + telegramId + ' listing must bands');
 
 	User.findOne(
 		{
@@ -110,9 +124,9 @@ bot.onText(/\/mustBands/, function (msg, match) {
 			if(user){
 
 				if(!user.mustBands.length){ // if there are no must bands
-					console.log('[BOT] User ' + telegramId + ' has not introduced any must band yet');
-					bot.sendMessage(msg.chat.id, 'You have not added any \'must band\' (those that you don\'t want to miss). Do it with /addMustBand.')
-					.then(function () {});
+					notify(msg.chat.id, 
+						"You have not added any \'must band\' (those that you don\'t want to miss). Do it with /addMustBand.", 
+						"User " + telegramId + " has not introduced any must band yet");
 				}
 				else{ // if there are must bands
 					
@@ -121,32 +135,33 @@ bot.onText(/\/mustBands/, function (msg, match) {
 
 						if (err) throw err;
 
-						var bandsInfo = {};
-						for(b in bands){
-							bandsInfo[bands[b].lowercase] = bands[b];
-						}
+						if(bands.length){
 
-						var messageMustBands = "Your must bands are:\n\n";
-						for(b in user.mustBands){
-							messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
-						}
-						messageMustBands += "\nEdit them with /addMustBand or /removeMustBand.";
+							var bandsInfo = {};
+							for(b in bands){
+								bandsInfo[bands[b].lowercase] = bands[b];
+							}
 
-						bot.sendMessage(msg.chat.id, messageMustBands)
-						.then(function () {});
-		
-						console.log('[BOT] User ' + telegramId + ' has introduced ' + user.mustBands.length + ' bands');
+							var messageMustBands = "Your must bands are:\n\n";
+							for(b in user.mustBands){
+								messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
+							}
+							messageMustBands += "\nEdit them with /addMustBand or /removeMustBand.";
+
+							notify(msg.chat.id, 
+								messageMustBands, 
+								"User " + telegramId + " has " + user.mustBands.length + " must bands");
+
+						}
+						else{
+							notifyNoBands(telegramId, msg.chat.id);
+						}
 						
 					});
 				}
 			}
 			else{
-
-				bot.sendMessage(msg.chat.id, "I did not find you in my user list! /start using Festook now")
-				.then(function () {});
-				
-				console.log('[BOT] User ' + telegramId + ' not found');
-
+				notifyUserNotFound(telegramId, msg.chat.id);
 			}
 		});
 
@@ -157,7 +172,7 @@ bot.onText(/\/addMustBand/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
-	console.log('[BOT] User ' + telegramId + ' wants to add a must band');
+	serverLog('User ' + telegramId + ' wants to add a must band');
 
 	bot.sendMessage(
 		msg.chat.id,
@@ -171,7 +186,7 @@ bot.onText(/\/addMustBand/, function (msg, match) {
 
 			var mustBandToAdd = removeDiacritics(message.text.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-			console.log('[BOT] Trying to add must band ' + mustBandToAdd);
+			serverLog('Trying to add must band ' + mustBandToAdd);
 
 			// check of this must band exists in the list of must bands
 			Band.findOne(
@@ -194,35 +209,34 @@ bot.onText(/\/addMustBand/, function (msg, match) {
 							function(err, user){
 								if (err) throw err;
 
-								// Already in must bands
-								if(user.mustBands.indexOf(band.lowercase) != -1){
+								if(user){
 
-									bot.sendMessage(msg.chat.id, "You already marked '" + band.uppercase + "' as a must band!")
-									.then(function () {});
+									// Already in must bands
+									if(user.mustBands.indexOf(band.lowercase) != -1){
 
-									console.log('[BOT] Band ' + band.uppercase + ' already in list of must bands');
+										notify(msg.chat.id, 
+											"You already marked '" + band.uppercase + "' as a must band!", 
+											"Band " + band.uppercase + " already in list of must bands");
 
+									}
+									// Not yet in must bands
+									else{
+
+										mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
+
+										notify(msg.chat.id, 
+											"'" + band.uppercase + "' was added to your list of /mustBands!", 
+											"User " + telegramId + " added must band: " + band.uppercase);
+									}
 								}
-								// Not yet in must bands
 								else{
-
-									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
-
-									bot.sendMessage(msg.chat.id, "'" + band.uppercase + "' was added to your list of /mustBands!")
-									.then(function () {});
-
-									console.log('[BOT] User ' + telegramId + ' added must band: ' + band.uppercase);
-
+									notifyUserNotFound(telegramId, msg.chat.id);
 								}
+
 							});
 					}
 					else{
-
-						bot.sendMessage(msg.chat.id, "I could not find the band '" + message.text + "' :(")
-						.then(function () {});
-
-						console.log('[BOT] Band ' + message.text + ' is not a band');
-
+						notifyBandNotFound(telegramId, msg.chat.id, message.text);
 					}
 			});
 		});
@@ -235,7 +249,7 @@ bot.onText(/\/removeMustBand/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
-	console.log('[BOT] User ' + telegramId + ' wants to remove a must band');
+	serverLog('User ' + telegramId + ' wants to remove a must band');
 
 	bot.sendMessage(
 		msg.chat.id,
@@ -249,7 +263,7 @@ bot.onText(/\/removeMustBand/, function (msg, match) {
 
 			var mustBandToRemove = removeDiacritics(message.text.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-			console.log('[BOT] Trying to remove must band ' + mustBandToRemove);
+			serverLog('User ' + telegramId + ' trying to remove must band ' + mustBandToRemove);
 
 			// check of this must band exists in the list of must bands
 			Band.findOne(
@@ -272,34 +286,33 @@ bot.onText(/\/removeMustBand/, function (msg, match) {
 							function(err, user){
 								if (err) throw err;
 
-								if(user.mustBands.indexOf(band.lowercase) != -1){
+								if(user){
 
-									mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
+									if(user.mustBands.indexOf(band.lowercase) != -1){
 
-									bot.sendMessage(msg.chat.id, "'" + band.uppercase + "' was removed from your list of /mustBands!")
-									.then(function () {});
+										mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
 
-									console.log('[BOT] User ' + telegramId + ' removed must band: ' + band.uppercase);
+										bot.sendMessage(msg.chat.id, "'" + band.uppercase + "' was removed from your list of /mustBands!")
+										.then(function () {});
 
+										console.log('[BOT] User ' + telegramId + ' removed must band: ' + band.uppercase);
+
+									}
+									else{
+										notify(msg.chat.id, 
+											"'" + band.uppercase + "' is not on of your must bands...", 
+											"Band " + band.uppercase + " not in list of must bands");
+
+									}
 								}
 								else{
-
-									bot.sendMessage(msg.chat.id, "'" + band.uppercase + "' was not your must band")
-									.then(function () {});
-
-									console.log('[BOT] Band ' + band.uppercase + ' not found in list of must bands');
-
+									notifyUserNotFound(telegramId, msg.chat.id);
 								}
 
 							});
 					}
 					else{
-
-						bot.sendMessage(msg.chat.id, "I could not find the band '" + message.text + "' :(")
-						.then(function () {});
-
-						console.log('[BOT] Band ' + message.text + ' is not a band');
-
+						notifyBandNotFound(telegramId, msg.chat.id, message.text);
 					}
 				});
 		});
@@ -311,7 +324,7 @@ bot.onText(/\/schedule/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
-	console.log('[BOT] User ' + telegramId + ' wants the schedule');
+	serverLog('User ' + telegramId + ' wants the schedule');
 
 	bot.sendMessage(
 		msg.chat.id,
@@ -332,21 +345,17 @@ bot.onText(/\/schedule/, function (msg, match) {
 					scheduleMessage += textSchedule;
 					scheduleMessage += "\nEnjoy!";
 
-					bot.sendMessage(msg.chat.id, scheduleMessage)
-					.then(function () {});
-
-					console.log('[BOT] User ' + telegramId + ' got the schedule for day ' + festivalDay);
+					notify(msg.chat.id, 
+						scheduleMessage, 
+						"User " + telegramId + " got the schedule for day " + festivalDay);
 
 				});
 
 			}
 			else{
-
-				bot.sendMessage(msg.chat.id, "There is no festival in " + festivalDay + " :(")
-				.then(function () {});
-
-				console.log('[BOT] User ' + telegramId + ' entered a wrong festival day :'+ festivalDay);
-
+				notify(msg.chat.id, 
+					"There is no festival in " + festivalDay + " :(", 
+					"User " + telegramId + " entered a wrong festival day : " + festivalDay);
 			}
 
 		});
@@ -355,6 +364,27 @@ bot.onText(/\/schedule/, function (msg, match) {
 });
 
 
+function notifyNoBands(telegramId, telegramChatId){
+	notify(telegramChatId, "There was an error looking for bands. Please try again later.", "No bands found while trying to to list all bands for user " + telegramId)
+}
+
+function notifyUserNotFound(telegramId, telegramChatId){
+	notify(telegramChatId, "I did not find you in my user list! /start using Festook now!", "User " + telegramId + " not found.")
+}
+
+function notifyBandNotFound(telegramId, telegramChatId, bandName){
+	notify(telegramChatId, "Are you sure " + bandName  + " is playing?", "User " + telegramId + " provided band " + bandName + " but not found in the list of bands.")
+}
+
+function notify(telegramChatId, userMessage, logMessage){
+	bot.sendMessage(telegramChatId, userMessage)
+	.then(function () {});
+	console.log("[BOT] " + logMessage);
+}
+
+function serverLog(logMessage){
+	console.log("[BOT] " + logMessage);
+}
 
 function getSortedKeys(obj, sortMethod) {
 	// returns an array of sorted keys based on value and sortMethod

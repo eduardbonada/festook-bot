@@ -10,7 +10,7 @@ var Band = require('../db/band');
 	
 var computeScheduleForDay = function(telegramId, day, callback) {
 
-	console.log("[SERVER] Constructing schedule for user " + telegramId + ' for day '+ day);
+	console.log("[SCHEDCTRL] Constructing schedule for user " + telegramId + ' for day '+ day);
 	
 	// get schedule object from DB
 	User.findOne(
@@ -20,31 +20,37 @@ var computeScheduleForDay = function(telegramId, day, callback) {
 		function(err, user){
 			if (err) throw err;
 
-			if(user.schedule != null){
+			if(user){
 
-				// Sort by start time 
-				var sortedSchedule = user.schedule.sort(function(a,b) {
-					if ( moment(a.start).isAfter(moment(b.start)) ){ return 1; }
-					else if (moment(a.start).isBefore(moment(b.start)) ){ return -1; }
-					else{ return 0; }
-				}); 
+				if(user.schedule != null){
 
-				// convert schedule object into text
-				var textSchedule = textRepresentationOfScheduleInRange(
-										sortedSchedule, 
-										{
-											start: moment(day + " 12:00", "D/MM/YYYY HH:mm"),
-											end: moment(day + " 12:00", "D/MM/YYYY HH:mm").add(1, 'days')
-										});
-				callback(textSchedule);
-			
+					// Sort by start time 
+					var sortedSchedule = user.schedule.sort(function(a,b) {
+						if ( moment(a.start).isAfter(moment(b.start)) ){ return 1; }
+						else if (moment(a.start).isBefore(moment(b.start)) ){ return -1; }
+						else{ return 0; }
+					}); 
+
+					// convert schedule object into text
+					var textSchedule = textRepresentationOfScheduleInRange(
+											sortedSchedule, 
+											{
+												start: moment(day + " 12:00", "D/MM/YYYY HH:mm"),
+												end: moment(day + " 12:00", "D/MM/YYYY HH:mm").add(1, 'days')
+											});
+					callback(textSchedule);
+				
+				}
+				else {
+
+					computeEntireScheduleForUser(telegramId, function(){
+						computeScheduleForDay(telegramId, day, callback)
+					});
+
+				}
 			}
-			else {
-
-				computeEntireScheduleForUser(telegramId, function(){
-					computeScheduleForDay(telegramId, day, callback)
-				});
-
+			else{
+				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute schedule for day " + day);
 			}
 
 		}
@@ -56,7 +62,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 
 	// day in the format 'dd/mm/yyyy'
 
-	console.log("[SERVER] Computing entire schedule for user " + telegramId);
+	console.log("[SCHEDCTRL] Computing entire schedule for user " + telegramId);
 
 	var schedule = require('../models/schedule')
 
@@ -68,48 +74,65 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 		function(err, user){
 			if (err) throw err;
 
-			// get bands info
-			Band.find(
-				{}, // where filter
-				'lowercase uppercase startTime endTime stage',	// fields to return
-				function (err, bands) {
-					if (err) throw err;
+			if(user){
 
-					var bandsDict = {};
-					for(b in bands){
-						bandsDict[bands[b].lowercase] = bands[b];
-					}
-					
-					// generate schedule getting list of lowercase bands to attend
-					var bandsToAttend = schedule.generateSchedule(user, bandsDict);
-					
-					// convert list of bands into an object with all bands info (name, stage, start, end)
-					var objectSchedule = objectRepresentationOfSchedule(
-											bandsToAttend, 
-											bandsDict);
-					//console.log(objectSchedule);
+				// get bands info
+				Band.find(
+					{}, // where filter
+					'lowercase uppercase startTime endTime stage',	// fields to return
+					function (err, bands) {
+						if (err) throw err;
 
-					// store schedule object into DB
-					User.findOneAndUpdate(
-						{ 
-							telegramId: telegramId
-						}, 
-						{
-							$set: { 
-								schedule: objectSchedule
+						if(bands.length){
+
+							var bandsDict = {};
+							for(b in bands){
+								bandsDict[bands[b].lowercase] = bands[b];
 							}
-						}, 
-						function(err, user){
-							if (err) throw err;
+							
+							// generate schedule getting list of lowercase bands to attend
+							var bandsToAttend = schedule.generateSchedule(user, bandsDict);
+							
+							// convert list of bands into an object with all bands info (name, stage, start, end)
+							var objectSchedule = objectRepresentationOfSchedule(
+													bandsToAttend, 
+													bandsDict);
+							//console.log(objectSchedule);
 
-							console.log("[SERVER] Schedule object succesfully stored for user " + telegramId);
+							// store schedule object into DB
+							User.findOneAndUpdate(
+								{ 
+									telegramId: telegramId
+								}, 
+								{
+									$set: { 
+										schedule: objectSchedule
+									}
+								}, 
+								function(err, user){
+									if (err) throw err;
 
-							callback();
+									console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
+									callback();
+
+								}
+							);
+
 						}
-					);
+						else{
 
-				}
-			);
+							console.log("[SCHEDCTRL] No bands found while trying to compute schedule for day " + day);
+
+						}
+
+					}
+				);
+			
+			}
+			else{
+				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute entire schedule");
+			}
+
 
 		}
 	);

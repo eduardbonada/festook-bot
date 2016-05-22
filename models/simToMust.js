@@ -10,7 +10,7 @@ exports.computeBandSimilarityToMustBands = function(user){
 	
 	mustBands = user.mustBands
 
-	//console.log("SIM2MUST: Computing similarity to Must bands of user " + user['name'] + ": " + mustBands);
+	console.log("[SIM2MUST] Computing similarity to Must bands of user " + user.name);
 
 	var bandsSimToMust = {}
 
@@ -21,9 +21,14 @@ exports.computeBandSimilarityToMustBands = function(user){
 		function(err, bands){
 			if(err) throw err;
 
-			allBands = bands;
-			var maxDistToMust = maxDistanceToMust(allBands, mustBands);
-			computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDistToMust);
+			if(bands.length){
+				allBands = bands;
+				var maxDistToMust = maxDistanceToMust(allBands, mustBands);
+				computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDistToMust);
+			}
+			else{
+				console.log("[SIM2MUST] No bands found in the database.");
+			}
 
 		}
 	);
@@ -48,10 +53,8 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 
 		// if it is a must band
 		if( mustBands.indexOf(allBands[band].lowercase) != -1){ 
- 			// console.log("Similarity of " + allBands[band].lowercase + ": 1");
 
-			// store into temp array
-			simToMust[allBands[band].lowercase] = 1;
+			simToMust[allBands[band].lowercase] = 1; // store into temp array
 
 		}
 		// not a must band
@@ -89,7 +92,7 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("SIM2MUST: Similarity to Must bands succesfully stored for user " + user['name']);
+			console.log("[SIM2MUST]: Similarity to Must bands succesfully stored for user " + user.name);
 		}
 	);
 
