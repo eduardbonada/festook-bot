@@ -32,18 +32,24 @@ bot.onText(/\/start/, function (msg, match) {
 
 	bot.sendMessage(msg.chat.id, 'Hi ' + telegramFirstName + '! Let\'s build your schedule for the festival!')
 	.then(function () {
-		bot.sendMessage(msg.chat.id, 'This is the list of commands you can use. \n\
-			/allBands: Explanation ...\n\
-			/mustBands: Explanation ...\n\
-			/addMustBand: Explanation ...\n\
-			/removeMustBand: Explanation ...\n\
-			/schedule: Explanation ...\n\
-			I recommend you start with \'/addMustBand\'')
+		notifyHelp(telegramId, msg.chat.id);
 	});
 });
 
-// Matches /allBands
-bot.onText(/\/allBands/, function (msg, match) {
+// Matches /help
+bot.onText(/\/help/, function (msg, match) {
+
+	var telegramId = msg.from.id;
+
+	serverLog('User ' + telegramId + ' asks for help');
+
+	notifyHelp(telegramId, msg.chat.id);
+
+});
+
+
+// Matches /bands
+bot.onText(/\/bands/, function (msg, match) {
 
 	var telegramId = msg.from.id;
 
@@ -374,6 +380,21 @@ function notifyUserNotFound(telegramId, telegramChatId){
 
 function notifyBandNotFound(telegramId, telegramChatId, bandName){
 	notify(telegramChatId, "Are you sure " + bandName  + " is playing?", "User " + telegramId + " provided band " + bandName + " but not found in the list of bands.")
+}
+
+function notifyHelp(telegramId, telegramChatId){
+
+	var helpMessage = "What do you want?\n\
+			- All /bands\n\
+			- My /must bands\n\
+			- /addMust band\n\
+			- /removeMust band\n\
+			- My /schedule\n"
+
+	notify(telegramChatId, 
+		helpMessage, 
+		"Help provided to user " + telegramId);
+
 }
 
 function notify(telegramChatId, userMessage, logMessage){
