@@ -579,41 +579,50 @@ bot.onText(/\/schedule/, function (msg, match) {
 
 			if(user){
 
-/*				bot.sendMessage(
-					msg.chat.id,
-					'Which day (dd/mm/yyyy)?',
-					{
-						reply_markup: JSON.stringify({force_reply: true})
-					}
-				)
-				.then(function (sent) {
-					bot.onReplyToMessage(sent.chat.id, sent.message_id, function (message) {
-*/
-						var festivalDay = "28/05/2015"//;message.text;
+				if(user.mustBands.length > 0){
 
-						if(config.festivalInfo.days.indexOf(festivalDay)){ // if the day entered is one of the days of the festival
+					bot.sendMessage(
+						msg.chat.id,
+						'Which day (dd/mm/yyyy)?',
+						{
+							reply_markup: JSON.stringify({force_reply: true})
+						}
+					)
+					.then(function (sent) {
+						bot.onReplyToMessage(sent.chat.id, sent.message_id, function (message) {
 
-							scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
-								var scheduleMessage = "This is your schedule for day " + festivalDay + ": \n\n";
-								scheduleMessage += textSchedule;
-								scheduleMessage += "\nEnjoy!";
+							var festivalDay = message.text;
 
+							if(config.festivalInfo.days.indexOf(festivalDay)){ // if the day entered is one of the days of the festival
+
+								scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
+									var scheduleMessage = "This is your schedule for day " + festivalDay + ": \n\n";
+									scheduleMessage += textSchedule;
+									scheduleMessage += "\nEnjoy!";
+
+									notify(msg.chat.id, 
+										scheduleMessage, 
+										"User " + telegramId + " got the schedule for day " + festivalDay);
+
+								});
+
+							}
+							else{
 								notify(msg.chat.id, 
-									scheduleMessage, 
-									"User " + telegramId + " got the schedule for day " + festivalDay);
+									"There is no festival in " + festivalDay + " :(", 
+									"User " + telegramId + " entered a wrong festival day : " + festivalDay);
+							}
 
-							});
-
-						}
-						else{
-							notify(msg.chat.id, 
-								"There is no festival in " + festivalDay + " :(", 
-								"User " + telegramId + " entered a wrong festival day : " + festivalDay);
-						}
-/*
+						});
 					});
-				});
-*/
+				}
+				else{
+					notify(msg.chat.id, 
+						"I first need to know a little bit about your musical taste. Tell me which bands you don't want to miss in /addMust.", 
+						"User " + telegramId + " asks for the schedule but withou must bands set");
+
+				}
+
 			}
 			else{
 				notifyUserNotFound(telegramId, msg.chat.id);
