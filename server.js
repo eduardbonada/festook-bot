@@ -44,7 +44,7 @@ OPENSHIFT
 	https://github.com/ilbonte/node-telegram-bot-starter-kit
 	https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
 
-
+http://stackoverflow.com/questions/12657168/can-i-use-my-existing-git-repo-with-openshift/12669112#12669112
 
 */
 
