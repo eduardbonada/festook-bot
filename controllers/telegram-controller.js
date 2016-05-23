@@ -12,17 +12,17 @@ var User = require('../db/user');
 var Band = require('../db/band');
 
 // Setup Telegram connection - LONG POLLING
-//var TelegramBot = require('node-telegram-bot-api');
-//var options = { polling: true };
-//var bot = new TelegramBot(config.telegramBotToken, options);
+var TelegramBot = require('node-telegram-bot-api');
+var options = { polling: true };
+var bot = new TelegramBot(config.telegramBotToken, options);
 
 // Setup Telegram connection - OPENSHIFT WEBHOOK
-var TelegramBot = require('node-telegram-bot-api');
-var port = process.env.OPENSHIFT_NODEJS_PORT;
-var host = process.env.OPENSHIFT_NODEJS_IP;
-var domain = process.env.OPENSHIFT_APP_DNS;
-var bot = new TelegramBot(token, {webHook: {port: port, host: host}});
-bot.setWebHook(domain+':443/bot'+token); // OpenShift enroutes :443 request to OPENSHIFT_NODEJS_PORT
+//var TelegramBot = require('node-telegram-bot-api');
+//var port = process.env.OPENSHIFT_NODEJS_PORT;
+//var host = process.env.OPENSHIFT_NODEJS_IP;
+//var domain = process.env.OPENSHIFT_APP_DNS;
+//var bot = new TelegramBot(token, {webHook: {port: port, host: host}});
+//bot.setWebHook(domain+':443/bot'+token); // OpenShift enroutes :443 request to OPENSHIFT_NODEJS_PORT
 
 // Test bot
 bot.getMe().then(function (me) {
