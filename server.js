@@ -17,7 +17,15 @@ var telegramCntrl = require('./controllers/telegram-controller');
 
 /// ---------- CONNECT TO DATABASE ---------- ///
 
-mongoose.connect(config.database, function(err) {
+var mongoUrl = config.database;
+
+// if OPENSHIFT env variables are present, use the available connection info:
+if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+    mongoUrl = process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME;
+}
+
+
+mongoose.connect(mongoUrl, function(err) {
 	if (err) throw err;
 	console.log("[SERVER] Connected to DB");
 
