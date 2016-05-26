@@ -2,14 +2,26 @@ var asyncCommentPatterns = [
 
 	{ 
 		patterns  : ["fuck"], 
-		sentences : ["Argof**uckyourself!"] 
+		sentences : [
+			"Argof**uckyourself!", 
+			"Don't ever say that again!", 
+			"Do I like you?",
+			"I would prefer some flowers"
+			] 
 	},
 	{ 
 		patterns  : ["great scott"], 
 		sentences : [
-						"Roads? Where we're going, we don't need roads.", 
-						"This is heavy.", "1.21 gigawatts?! 1.21 gigawatts?!", 
-						"Are you telling me that you built a time machine... out of a DeLorean?"] 
+			"Roads? Where we're going, we don't need roads.",
+			"Great Scott!",
+			"1.21 gigawatts?! 1.21 gigawatts?! Great Scott!",
+			"If my calculations are correct, when this baby hits eighty-eight miles per hour...",
+			"Next Saturday night, we're sending you back to the future!",
+			"This is heavy.",
+			"Why do you keep calling me Calvin?",
+			"Are you telling me that you built a time machine... out of a DeLorean?", 
+			"Chuck. Chuck. It's Marvin - your cousin, Marvin BERRY. You know that new sound you're looking for? Well, listen to this."
+			] 
 	},
 
 	{
@@ -34,18 +46,6 @@ var unknownAnswerSentences = [
 	"That's not importnat now.",
 	"I'm trying to help you here."
 ];
-
-/*var backToTheFutureSentences = [
-	"Roads? Where we're going, we don't need roads.",
-	"Great Scott!",
-	"1.21 gigawatts?! 1.21 gigawatts?! Great Scott!",
-	"If my calculations are correct, when this baby hits eighty-eight miles per hour...",
-	"Next Saturday night, we're sending you back to the future!",
-	"This is heavy.",
-	"Why do you keep calling me Calvin?",
-	"Are you telling me that you built a time machine... out of a DeLorean?", 
-	"Chuck. Chuck. It's Marvin - your cousin, Marvin BERRY. You know that new sound you're looking for? Well, listen to this." 
-];*/
 
 var replyToAsyncComment = function(msg){
 

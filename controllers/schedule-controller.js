@@ -186,6 +186,63 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 	return(textSchedule);
 }
 
+
+/// ---------- NOW PLAYING ---------- ///
+
+var nowPlaying = function(telegramId, callback) {
+
+	console.log("[SCHEDCTRL] Gathering now playing bands for user " + telegramId);
+
+	var now = moment('28/05/2015 21:14', 'DD/MM/YYYY HH:mm').format();
+
+	var nowPlayingBands = [];
+	
+	Band.find({}, function(err, bands){
+		if(err){
+			callback(undefined);
+		}
+		if(bands.length){
+			for(b in bands){
+				var bandName = bands[b].uppercase;
+				var startTime = moment(bands[b].startTime);
+				var endTime = moment(bands[b].endTime);
+				var stage = bands[b].stage;
+
+				if(startTime.isBefore(now) && endTime.isAfter(now)){
+					var remainingTime = moment.duration(endTime.diff(now));
+					var remainingMinutes = remainingTime.asMinutes();
+					nowPlayingBands.push({"bandName" : bandName, "startTime": startTime, "endTime": endTime, "stage" : stage, "remaining" : remainingMinutes});
+				}
+			}
+
+			// sort by remaining time
+			var sortedNowPlayingBands = nowPlayingBands.sort(function(a,b) {
+				if(a.remaining > b.remaining) return 1;
+				else if(a.remaining < b.remaining) return -1;
+				else return 0;
+			});
+
+			// construct now playing text
+			var nowPlayingText = "";
+			for (b in sortedNowPlayingBands){
+				var bandName = sortedNowPlayingBands[b].bandName;
+				var stage = sortedNowPlayingBands[b].stage;
+				var remaining = sortedNowPlayingBands[b].remaining;
+				var remainingString = "";
+				if(remaining<15) remainingString = " (finishing)";
+
+				nowPlayingText += "<strong>" + bandName + "</strong> "+remainingString+"\n\t<i>" + stage + "</i>\n"
+			}
+			callback(nowPlayingText);
+		}
+		else{
+			callback(undefined);
+		}
+	});
+}
+
+
 module.exports = {
 	computeScheduleForDay : computeScheduleForDay,
+	nowPlaying : nowPlaying,
 }

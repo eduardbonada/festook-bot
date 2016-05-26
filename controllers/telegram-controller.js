@@ -32,7 +32,7 @@ bot.getMe().then(function (me) {
 	console.log('[BOT] %s is ready!', me.username);
 });
 
-var commands = ["/start", "/help", "/bands", "/must", "/addMust", "/removeMust", "/avoid", "/addAvoid", "/removeAvoid", "/schedule"]
+var commands = ["/start", "/help", "/bands", "/must", "/addMust", "/removeMust", "/avoid", "/addAvoid", "/removeAvoid", "/schedule", "/now"]
 
 /// ----- START & HELP ----- ///
 
@@ -665,7 +665,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 }
 
 
-/// ----- SCHEDULE BANDS ----- ///
+/// ----- SCHEDULE ----- ///
 
 // Matches /schedule
 bot.onText(/\/schedule/, function (message) {
@@ -745,6 +745,43 @@ bot.onText(/\/schedule/, function (message) {
 
 				}
 
+			}
+			else{
+				notifyUserNotFound(telegramId, message.chat.id);
+			}
+	});
+});
+
+// Matches /schedule
+bot.onText(/\/now/, function (message) {
+
+	var telegramId = message.from.id;
+
+	serverLog('User ' + telegramId + ' wants the now playing bands');
+
+	User.findOne(
+		{
+			telegramId: telegramId
+		},
+		function(err, user){
+			if (err) throw err;
+
+			if(user){
+				scheduleCntrl.nowPlaying(telegramId, function(nowPlaying){
+					if(typeof nowPlaying !== undefined){
+						var nowPlayingMessage = "Now playing:\n\n";
+						nowPlayingMessage += nowPlaying;
+						nowPlayingMessage += "\nEnjoy!";
+
+						notify(message.chat.id, 
+							nowPlayingMessage, 
+							"User " + telegramId + " got the now playing list");
+					}
+					else{
+						notifyNoBands(telegramId, message.chat.id);
+					}
+
+				});
 			}
 			else{
 				notifyUserNotFound(telegramId, message.chat.id);
