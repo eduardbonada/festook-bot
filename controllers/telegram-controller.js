@@ -641,7 +641,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 								avoidBandsCntrl.removeAvoidBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
-									"Done! I removed" + band.uppercase + "from the list of your /must bands.", 
+									"Done! I removed" + band.uppercase + " from the list of your /must bands.", 
 									"User " + telegramId + " removed avoid band: " + band.uppercase);
 
 							}
@@ -753,6 +753,7 @@ bot.onText(/\/schedule/, function (message) {
 });
 
 
+
 /// ----- NON COMMAND TEXT ----- ///
 
 bot.on('message', function (msg) {
@@ -775,15 +776,6 @@ bot.on('message', function (msg) {
 			});
 		});
 	}
-});
-
-
-/// ----- PROCESS CALLBACK QUERIES ----- ///
-
-bot.on('callback_query', function(msg) {
-    var user = msg.from.id;
-    var data = msg.data;
-    bot.sendMessage(msg.from.id, "You clicked button with data '"+ data +"'");
 });
 
 
@@ -828,7 +820,7 @@ function notifyHelp(telegramId, telegramChatId){
 }
 
 function notify(telegramChatId, userMessage, logMessage){
-	bot.sendMessage(telegramChatId, userMessage)
+	bot.sendMessage(telegramChatId, userMessage, {"parse_mode": "HTML"})
 	.then(function () {});
 	console.log("[BOT] " + logMessage);
 }

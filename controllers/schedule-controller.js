@@ -55,7 +55,6 @@ var computeScheduleForDay = function(telegramId, day, callback) {
 
 		}
 	);
-
 }
 
 var computeEntireScheduleForUser = function(telegramId, callback) {
@@ -136,7 +135,6 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 
 		}
 	);
-
 }
 
 function objectRepresentationOfSchedule(bandsToAttend, bandsInfo){
@@ -180,13 +178,12 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 		if( moment(bandStart).isAfter(momentsRange.start) && moment(bandStart).isBefore(momentsRange.end) ) {
 
-			textSchedule += "- " + objectSchedule[b]["uppercase"] + "\n  (" + moment(objectSchedule[b]["start"]).format("HH:mm") + " | " + objectSchedule[b]["stage"] + ")\n";
+			textSchedule += "<strong>" + objectSchedule[b]["uppercase"] + "</strong>\n\t<i>" + moment(objectSchedule[b]["start"]).format("HH:mm") + " | " + objectSchedule[b]["stage"] + "</i>\n";
 		}
 
 	}
 	
 	return(textSchedule);
-
 }
 
 module.exports = {

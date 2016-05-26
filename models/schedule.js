@@ -91,7 +91,6 @@ function isThereAFreeSlotBetweenDates(start, end){
 		}
 	}
 	return(-1);
-
 }
 
 function updateFreeSlotAfterAddingBand(bandName, slotIndex, bandsInfo){
@@ -131,7 +130,6 @@ function updateFreeSlotAfterAddingBand(bandName, slotIndex, bandsInfo){
 	}
 
 	//printFreeSlots();
-
 }
 
 function printFreeSlots(){
@@ -142,9 +140,7 @@ function printFreeSlots(){
 		console.log("  " + freeSlots[fs]["start"].format("D HH:mm") + " - " + freeSlots[fs]["end"].format("D HH:mm"))
 
 	}
-
 }
-
 
 function getSortedKeys(obj, sortMethod) {
 	// returns an array of sorted keys based on value and sortMethod
@@ -158,5 +154,4 @@ function getSortedKeys(obj, sortMethod) {
 	else if (sortMethod == "descending"){
 	    return keys.sort(function(a,b){ return obj[b]-obj[a]}) 
 	}
-    	
 }
