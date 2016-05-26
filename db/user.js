@@ -42,6 +42,11 @@ var UserSchema = new mongoose.Schema({
 	// whether the schedule has to be recomputed or not
 	upToDateSchedule:{
 		type: Boolean
+	},
+
+	// state of the FSM dealing with the bot sequence
+	botFsmState:{
+		type: String
 	}
 
 });

@@ -1,0 +1,128 @@
+Festook: CLAIM + Description
+
+
+*************************
+*************************
+
+
+/start
+******
+
+Hi <NAME>!
+This is Festook and I am here to help you plan your schedule for <FESTIVAL_NAME>.
+Let me explain you how this works:
+	- First you tell me which bands you must see.
+	- Then you sit back while I build up your schedule.
+Got it?
+
+	<= [Yes /No] ?
+
+[Yes]
+Ok, so how can you to tell your MUST bands? Typing /addMust. Easy peasy!
+When you are done adding MUST bands, type /schedule to see the magic.
+And remember that you can always type /help if you get lost.
+
+[1st No] Come on, it is not that difficult...
+[2nd No] Are you kidding me?
+	- First you tell me which bands you must see.
+	- Then you sit back while I build up your schedule.
+Got it?
+
+[3rd No] Argo****yourself! Want to add a MUST band? Type /addMust. Want the schedule? Type /schedule.
+
+*************************
+*************************
+
+/bands
+******
+These are all the bands playing in FESTIVALNAME: ...
+These are all the bands playing in FESTIVALNAME and sorted according to your taste: ...
+
+
+*************************
+*************************
+
+/must
+*****
+These are your MUST bands:
+- ...
+Remeber that you can edit them typing /addMust or /removeMust.
+Error1 => I don't find your MUST bands. Did you add any? Do it now with /addMust.
+
+
+/addMust [band]
+***************
+Which band?
+	<= reply with band name
+All ok => Done. I added <BANDNAME> to your /must bands. 
+Error1 => <BANDNAME> is already one of your /must bands!
+Error2 => What? You cannot make <BANDNAME> a /must band because it is in the list of bands to /avoid...
+
+
+/removeMust [band]
+******************
+Which band?
+	<= reply with band name
+All ok => Done. I removed <BANDNAME> from your /must bands.
+Error1 => <BANDNAME> is not one of your /must bands!
+
+
+*************************
+*************************
+
+
+/avoid
+******
+These are the bands you want to AVOID:
+- ...
+You can edit them typing /addAvoid or /removeAvoid.
+Error1 => I don't find your bands to AVOID. Did you add any? Do it now with /addAvoid.
+
+/addAvoid [band]
+****************
+Which band?
+	<= reply with band name
+All ok => Done. I added <BANDNAME> to the list of your bands to /avoid.
+Error1 => <BANDNAME> is already in the list of bands to /avoid!
+Error2 => What? You cannot /avoid <BANDNAME> band because it is a /must band...
+
+/removeAvoid [band]
+*******************
+Which band?
+	<= reply with band name
+Done. I removed <BANDNAME> from the list of your bands to /avoid.
+<BANDNAME> is not one of your /avoid bands...
+
+
+*************************
+*************************
+
+
+/schedule
+*********
+For which day?
+	<= reply with day
+All ok => This is your schedule for <DAY>: ... Enjoy!
+Error1 => There is no festival at <DAY> :(
+Error1 => Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me which bands you don't want to miss typing /addMust.
+
+
+*************************
+*************************
+
+/help
+*****
+???
+
+
+*************************
+*************************
+
+
+
+Global Errors
+*************
+
+No bands error: I'm sorry but I messed up my papers. Please try again later. :(
+No user error: Who are you? Do you want to /start using Festook?
+No band: Are you sure <BANDNAME> is playing? I don't see it the list of /bands.

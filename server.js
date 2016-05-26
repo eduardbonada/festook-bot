@@ -19,12 +19,6 @@ var telegramCntrl = require('./controllers/telegram-controller');
 
 var mongoUrl = config.database;
 
-// if OPENSHIFT env variables are present, use the available connection info:
-if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-    mongoUrl = process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME;
-}
-
-
 mongoose.connect(mongoUrl, function(err) {
 	if (err) throw err;
 	console.log("[SERVER] Connected to DB");
@@ -53,7 +47,12 @@ OPENSHIFT
 	https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
 
 http://stackoverflow.com/questions/12657168/can-i-use-my-existing-git-repo-with-openshift/12669112#12669112
-
+[local git init + git commit] 
+[create app in openshift]
+- git remote add openshift -f ssh://5742e11d0c1e66b329000106@test-festook.rhcloud.com/~/git/test.git/
+- git merge openshift/master -s recursive -X ours
+- git push openshift master
+[check logs in ssh]
 */
 
 

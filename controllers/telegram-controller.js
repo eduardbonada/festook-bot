@@ -7,6 +7,9 @@ var mustBandsCntrl = require('../controllers/mustBands-controller');
 var avoidBandsCntrl = require('../controllers/avoidBands-controller');
 var scheduleCntrl = require('../controllers/schedule-controller');
 
+// import models
+var botFSM = require('../models/botFSM');
+
 // import db schemas
 var User = require('../db/user');
 var Band = require('../db/band');
@@ -29,6 +32,7 @@ bot.getMe().then(function (me) {
 	console.log('[BOT] %s is ready!', me.username);
 });
 
+var commands = ["/start", "/help", "/bands", "/must", "/addMust", "/removeMust", "/avoid", "/addAvoid", "/removeAvoid", "/schedule"]
 
 /// ----- START & HELP ----- ///
 
@@ -40,11 +44,13 @@ bot.onText(/\/start/, function (message) {
 	
 	serverLog('New user connected: ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
 
-	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName);
-
-	bot.sendMessage(message.chat.id, 'Hi ' + telegramFirstName + '! Let\'s build your schedule for the festival!')
-	.then(function () {
-		notifyHelp(telegramId, message.chat.id);
+	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(){
+		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
+			bot.sendMessage(message.chat.id, replyMessage)
+			.then(function () {
+				serverLog("Sent message to user " + telegramId);
+			});
+		});
 	});
 });
 
@@ -91,14 +97,14 @@ bot.onText(/\/bands/, function (message) {
 						var listBandsMessage = "";
 
 						if(!user.simToMust){ // if no similarities yet, print the list of all bands in festival
-							listBandsMessage += "These are all the bands playing: \n\n";
+							listBandsMessage += "These are all the bands playing in " + config.festivalInfo.name + ": \n\n";
 							for (b in bandsInfo){
 								listBandsMessage += bandsInfo[b].uppercase + ', ';
 							}
 							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '						
 						}
 						else{ // if similarities set, print the list of bands sorted by similarity
-							listBandsMessage += "These are all the bands playing sorted according to your taste: \n\n";
+							listBandsMessage += "These are all the bands playing in " + config.festivalInfo.name + " and sorted according to your taste: \n\n";
 							var sortedBandNames = getSortedKeys(user.simToMust, "descending");
 							for (b in sortedBandNames){
 								listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
@@ -108,7 +114,7 @@ bot.onText(/\/bands/, function (message) {
 
 						notify(message.chat.id, 
 							listBandsMessage, 
-							"User " + telegramId + "gets the list of bands");
+							"User " + telegramId + " gets the list of bands");
 
 					}
 					else{
@@ -145,7 +151,7 @@ bot.onText(/\/must/, function (message) {
 
 				if(!user.mustBands.length){ // if there are no must bands
 					notify(message.chat.id, 
-						"You have not added any \'must band\' (those that you DON\'T WANT TO MISS). Do it with /addMust.", 
+						"I don't find your MUST bands. Did you add any? Do it now with /addMust.", 
 						"User " + telegramId + " has not introduced any must band yet");
 				}
 				else{ // if there are must bands
@@ -162,11 +168,11 @@ bot.onText(/\/must/, function (message) {
 								bandsInfo[bands[b].lowercase] = bands[b];
 							}
 
-							var messageMustBands = "Your must bands are:\n\n";
+							var messageMustBands = "These are your MUST bands:\n\n";
 							for(b in user.mustBands){
 								messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
 							}
-							messageMustBands += "\nEdit them with /addMust or /removeMust.";
+							messageMustBands += "\nRemeber that you can edit them typing /addMust or /removeMust.";
 
 							notify(message.chat.id, 
 								messageMustBands, 
@@ -260,7 +266,7 @@ function manageAddMust(telegramId, message, bandName){
 							if(user.mustBands.indexOf(band.lowercase) != -1){
 
 								notify(message.chat.id, 
-									"You already marked '" + band.uppercase + "' as a must band!", 
+									band.uppercase + " is already one of your /must bands!", 
 									"Band " + band.uppercase + " already in list of must bands");
 
 							}
@@ -270,7 +276,7 @@ function manageAddMust(telegramId, message, bandName){
 								// if it is an avoid band
 								if(user.avoidBands.indexOf(band.lowercase) != -1){
 									notify(message.chat.id, 
-										"You cannot make '" + band.uppercase + "' a must band... It is in the /discard list!", 
+										"What? You cannot make " + band.uppercase + " a /must band because it is in the list of bands to /avoid...",
 										"Band " + band.uppercase + " is an avoid band");
 								}
 								else{
@@ -278,7 +284,7 @@ function manageAddMust(telegramId, message, bandName){
 									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
-										"'" + band.uppercase + "' was added to your list of /must bands!", 
+										"Done! I added " + band.uppercase + " to your /must bands.", 
 										"User " + telegramId + " added must band: " + band.uppercase);
 
 								}
@@ -334,7 +340,6 @@ bot.onText(/\/removeMust (.+)/, function (message, match) {
 	serverLog('User ' + telegramId + ' wants to remove the must band ' + bandName);
 
 	manageRemoveMust(telegramId, message, bandName);
-
 });
 
 function manageRemoveMust(telegramId, message, bandName){
@@ -370,15 +375,14 @@ function manageRemoveMust(telegramId, message, bandName){
 
 								mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
 
-								bot.sendMessage(message.chat.id, "'" + band.uppercase + "' was removed from your list of /must bands!")
-								.then(function () {});
-
-								console.log('[BOT] User ' + telegramId + ' removed must band: ' + band.uppercase);
+								notify(message.chat.id, 
+									"Done. I removed " + band.uppercase + " from your /must bands.", 
+									"User " + telegramId + " removed must band: " + band.uppercase);
 
 							}
 							else{
 								notify(message.chat.id, 
-									"'" + band.uppercase + "' is not one of your must bands...", 
+									band.uppercase + " is not one of your must bands!", 
 									"Band " + band.uppercase + " not in list of must bands");
 
 							}
@@ -393,7 +397,6 @@ function manageRemoveMust(telegramId, message, bandName){
 				notifyBandNotFound(telegramId, message.chat.id, bandName);
 			}
 		});
-
 }
 
 
@@ -418,7 +421,7 @@ bot.onText(/\/avoid/, function (message) {
 
 				if(!user.avoidBands.length){ // if there are no avoid bands
 					notify(message.chat.id, 
-						"You have not added any \'avoid band\' (those that you DON'T WANT TO SEE). Do it with /addAvoid.", 
+						"I don't find your bands to AVOID. Did you add any? Do it now with /addAvoid.", 
 						"User " + telegramId + " has not introduced any avoid band yet");
 				}
 				else{ // if there are avoid bands
@@ -435,7 +438,7 @@ bot.onText(/\/avoid/, function (message) {
 								bandsInfo[bands[b].lowercase] = bands[b];
 							}
 
-							var messageAvoidBands = "Your avoid bands are:\n\n";
+							var messageAvoidBands = "These are the bands you want to AVOID:\n\n";
 							for(b in user.avoidBands){
 								messageAvoidBands += "- " + bandsInfo[user.avoidBands[b]].uppercase + "\n";
 							}
@@ -485,7 +488,6 @@ bot.onText(/\/addAvoid/, function (message) {
 			});
 		});
 	}
-
 });
 
 // Matches /addAvoid bandName
@@ -497,7 +499,6 @@ bot.onText(/\/addAvoid (.+)/, function (message, match){
 	serverLog('User ' + telegramId + ' wants to add the avoid band ' + bandName);
 
 	manageAddAvoid(telegramId, message, bandName);
-
 });
 
 function manageAddAvoid(telegramId, message, bandName){
@@ -533,7 +534,7 @@ function manageAddAvoid(telegramId, message, bandName){
 							if(user.avoidBands.indexOf(band.lowercase) != -1){
 
 								notify(message.chat.id, 
-									"You already marked '" + band.uppercase + "' as a avoid band!", 
+									band.uppercase + " is already in the list of bands to /avoid!", 
 									"Band " + band.uppercase + " already in list of avoid bands");
 
 							}
@@ -543,14 +544,14 @@ function manageAddAvoid(telegramId, message, bandName){
 								// if it is a must band
 								if(user.mustBands.indexOf(band.lowercase) != -1){
 									notify(message.chat.id, 
-										"You cannot avoid '" + band.uppercase + "'... It is one of your /must bands!", 
+										"What? You cannot /avoid " + band.uppercase + " band because it is a /must band...",
 										"Band " + band.uppercase + " is a must band");
 								}
 								else{
 									avoidBandsCntrl.addAvoidBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
-										"'" + band.uppercase + "' was added to your list of /avoid bands!", 
+										"Done! I added " + band.uppercase + " to the list of your bands to /avoid.", 
 										"User " + telegramId + " added avoid band: " + band.uppercase);
 								}
 
@@ -566,7 +567,6 @@ function manageAddAvoid(telegramId, message, bandName){
 				notifyBandNotFound(telegramId, message.chat.id, bandName);
 			}
 	});
-
 }
 
 // Matches /removeAvoid
@@ -606,7 +606,6 @@ bot.onText(/\/removeAvoid (.+)/, function (message, match){
 	serverLog('User ' + telegramId + ' wants to remove the avoid band ' + bandName);
 
 	manageRemoveAvoid(telegramId, message, bandName);
-
 });
 
 function manageRemoveAvoid(telegramId, message, bandName){
@@ -642,16 +641,15 @@ function manageRemoveAvoid(telegramId, message, bandName){
 
 								avoidBandsCntrl.removeAvoidBandForUser(telegramId, band.lowercase);
 
-								bot.sendMessage(message.chat.id, "'" + band.uppercase + "' was removed from your list of /avoid!")
-								.then(function () {});
-
-								console.log('[BOT] User ' + telegramId + ' removed avoid band: ' + band.uppercase);
+								notify(message.chat.id, 
+									"Done! I removed" + band.uppercase + "from the list of your /must bands.", 
+									"User " + telegramId + " removed avoid band: " + band.uppercase);
 
 							}
 							else{
 								notify(message.chat.id, 
-									"'" + band.uppercase + "' is not one of your avoid bands...", 
-									"Band " + band.uppercase + " not in list of avoid bands");
+									"Done! I removed" + band.uppercase + "' is not one of your bands o /avoid...", 
+									band.uppercase + " is not one of your bands to /avoid...");
 
 							}
 						}
@@ -665,8 +663,6 @@ function manageRemoveAvoid(telegramId, message, bandName){
 				notifyBandNotFound(telegramId, message.chat.id, bandName);
 			}
 		});
-
-
 }
 
 
@@ -718,7 +714,7 @@ bot.onText(/\/schedule/, function (message) {
 							}
 							else{
 								notify(message.chat.id, 
-									"There is no festival in " + festivalDay + " :(", 
+									"There is no festival on " + festivalDay + " :(", 
 									"User " + telegramId + " entered a wrong festival day : " + festivalDay);
 							}
 
@@ -727,7 +723,7 @@ bot.onText(/\/schedule/, function (message) {
 				}
 				else{
 					notify(message.chat.id, 
-						"I first need to know a little bit about your musical taste. Tell me which bands you don't want to miss in /addMust.", 
+						"Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me which bands you don't want to miss typing /addMust.", 
 						"User " + telegramId + " asks for the schedule but withou must bands set");
 
 				}
@@ -737,6 +733,31 @@ bot.onText(/\/schedule/, function (message) {
 				notifyUserNotFound(telegramId, message.chat.id);
 			}
 	});
+});
+
+
+/// ----- NON COMMAND TEXT ----- ///
+
+bot.on('message', function (msg) {
+
+
+	var message = msg.text;
+	var isCommand = commands.indexOf(message.split(" ")[0]) >= 0;
+	var isReply = typeof msg.reply_to_message !== 'undefined';
+
+	if(!isCommand && !isReply){ // not a command and not a reply
+
+		var telegramId = msg.from.id;
+
+		serverLog("Received message '" + message + "' from user " + telegramId);
+
+		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
+			bot.sendMessage(msg.chat.id, replyMessage)
+			.then(function () {
+				serverLog("Sent message to user " + telegramId);
+			});
+		});
+	}
 });
 
 
@@ -769,7 +790,6 @@ function notifyHelp(telegramId, telegramChatId){
 	notify(telegramChatId, 
 		helpMessage, 
 		"Help provided to user " + telegramId);
-
 }
 
 function notify(telegramChatId, userMessage, logMessage){

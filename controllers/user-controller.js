@@ -6,7 +6,7 @@ var mustBandsCntrl = require('../controllers/mustBands-controller');
 
 /// ---------- USER MANAGEMENT ---------- ///
 
-exports.createUser = function(telegramId, telegramFirstName, telegramLastName){
+exports.createUser = function(telegramId, telegramFirstName, telegramLastName, done){
 
 	User.findOne(
 		{
@@ -21,23 +21,29 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName){
 				var newUser = new User({
 					telegramId: telegramId,
 					telegramFirstName: telegramFirstName,
-					telegramLastName: telegramLastName
+					telegramLastName: telegramLastName,
+					botFsmState: "Welcome"
 				});
 
-				// Attempt to save the band into DB
+				// Attempt to save into DB
 				newUser.save(function(err, user) {
 					if (err) throw err;
 
 					console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
 
 					mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
+
+					done();
 				});
 
 			}
 			else{
-
-				console.log("[USER] User with telegramId " + telegramId + " already exists");
-
+				user.update({
+					botFsmState: "Welcome"
+				}, function(updated){
+					console.log("[USER] Reset of user with telegramId " + telegramId);
+					done();
+				});
 			}
 		}
 	)
