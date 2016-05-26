@@ -54,9 +54,10 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 
 			onSaidYes: function(event, from, to) {
 				message = "Cool!\n\n"+
-					"Now add your favourite bands typing /addMust. Easy peasy!\n\n"+
+					"Now add your favourite bands typing /addmust. Easy peasy!\n\n"+
 					"When you are done type /schedule to see the magic.\n\n"+
-					"And remember that you can always type /help if you get lost.";
+					"And remember that you can always type /help if you get lost.\n\n" +
+					"Btw, tap into any highlighted command starting with a '/' and avoid typing it :).";
 				sendOutgoingMessage(message);
 				this.SaidYesToWaitCommand();
 			},
@@ -79,7 +80,7 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 
 			onThirdNo: function(event, from, to) {
 				var message = "Argof**kyourself!\n\n"+
-					"Want to add a MUST band? Type /addMust. \n"+
+					"Want to add a MUST band? Type /addmust. \n"+
 					"Want the schedule? Type /schedule.";
 				sendOutgoingMessage(message);
 			},

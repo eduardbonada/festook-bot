@@ -32,7 +32,7 @@ bot.getMe().then(function (me) {
 	console.log('[BOT] %s is ready!', me.username);
 });
 
-var commands = ["/start", "/help", "/bands", "/must", "/addMust", "/removeMust", "/avoid", "/addAvoid", "/removeAvoid", "/schedule", "/now"]
+var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now"]
 
 /// ----- START & HELP ----- ///
 
@@ -46,10 +46,9 @@ bot.onText(/\/start/, function (message) {
 
 	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(){
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
-			bot.sendMessage(message.chat.id, replyMessage)
-			.then(function () {
-				serverLog("Sent message to user " + telegramId);
-			});
+			notify(message.chat.id, 
+				replyMessage, 
+				"Sent message to user " + telegramId);
 		});
 	});
 });
@@ -150,7 +149,7 @@ bot.onText(/\/must/, function (message) {
 
 				if(!user.mustBands.length){ // if there are no must bands
 					notify(message.chat.id, 
-						"I don't find your MUST bands. Did you add any? Do it now with /addMust.", 
+						"I don't find your MUST bands. Did you add any? Do it now with /addmust.", 
 						"User " + telegramId + " has not introduced any must band yet");
 				}
 				else{ // if there are must bands
@@ -171,7 +170,7 @@ bot.onText(/\/must/, function (message) {
 							for(b in user.mustBands){
 								messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
 							}
-							messageMustBands += "\nRemeber that you can edit them typing /addMust or /removeMust.";
+							messageMustBands += "\nRemeber that you can edit them typing /addmust or /removemust.";
 
 							notify(message.chat.id, 
 								messageMustBands, 
@@ -191,13 +190,13 @@ bot.onText(/\/must/, function (message) {
 		});
 });
 
-// Matches /addMust
-bot.onText(/\/addMust/, function (message) {
+// Matches /addmust
+bot.onText(/\/addmust/, function (message) {
 
 	var telegramId = message.from.id;
 
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
-	if(message.text == "/addMust"){
+	if(message.text == "/addmust"){
 
 		serverLog('User ' + telegramId + ' wants to add a must band');
 
@@ -220,8 +219,8 @@ bot.onText(/\/addMust/, function (message) {
 
 });
 
-// Matches /addMust bandName
-bot.onText(/\/addMust (.+)/, function (message, match) {
+// Matches /addmust bandName
+bot.onText(/\/addmust (.+)/, function (message, match) {
 
 	var telegramId = message.from.id;
 	var bandName = match[1];
@@ -280,7 +279,7 @@ function manageAddMust(telegramId, message, bandName){
 								}
 								else{
 
-									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
+									mustBandsCntrl.addmustBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
 										"Done! I added " + band.uppercase + " to your /must bands.", 
@@ -302,13 +301,13 @@ function manageAddMust(telegramId, message, bandName){
 
 }
 
-// Matches /removeMust
-bot.onText(/\/removeMust/, function (message) {
+// Matches /removemust
+bot.onText(/\/removemust/, function (message) {
 
 	var telegramId = message.from.id;
 
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
-	if(message.text == "/removeMust"){
+	if(message.text == "/removemust"){
 
 		serverLog('User ' + telegramId + ' wants to remove a must band');
 
@@ -330,8 +329,8 @@ bot.onText(/\/removeMust/, function (message) {
 	}
 });
 
-// Matches /removeMust bandName
-bot.onText(/\/removeMust (.+)/, function (message, match) {
+// Matches /removemust bandName
+bot.onText(/\/removemust (.+)/, function (message, match) {
 
 	var telegramId = message.from.id;
 	var bandName = match[1];
@@ -372,7 +371,7 @@ function manageRemoveMust(telegramId, message, bandName){
 
 							if(user.mustBands.indexOf(band.lowercase) != -1){
 
-								mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
+								mustBandsCntrl.removemustBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
 									"Done. I removed " + band.uppercase + " from your /must bands.", 
@@ -420,7 +419,7 @@ bot.onText(/\/avoid/, function (message) {
 
 				if(!user.avoidBands.length){ // if there are no avoid bands
 					notify(message.chat.id, 
-						"I don't find your bands to AVOID. Did you add any? Do it now with /addAvoid.", 
+						"I don't find your bands to AVOID. Did you add any? Do it now with /addavoid.", 
 						"User " + telegramId + " has not introduced any avoid band yet");
 				}
 				else{ // if there are avoid bands
@@ -441,7 +440,7 @@ bot.onText(/\/avoid/, function (message) {
 							for(b in user.avoidBands){
 								messageAvoidBands += "- " + bandsInfo[user.avoidBands[b]].uppercase + "\n";
 							}
-							messageAvoidBands += "\nEdit them with /addAvoid or /removeAvoid.";
+							messageAvoidBands += "\nEdit them with /addavoid or /removeavoid.";
 
 							notify(message.chat.id, 
 								messageAvoidBands, 
@@ -461,13 +460,13 @@ bot.onText(/\/avoid/, function (message) {
 		});
 });
 
-// Matches /addAvoid
-bot.onText(/\/addAvoid/, function (message) {
+// Matches /addavoid
+bot.onText(/\/addavoid/, function (message) {
 
 	var telegramId = message.from.id;
 
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
-	if(message.text == "/addAvoid"){
+	if(message.text == "/addavoid"){
 
 		serverLog('User ' + telegramId + ' wants to add an avoid band');
 
@@ -489,8 +488,8 @@ bot.onText(/\/addAvoid/, function (message) {
 	}
 });
 
-// Matches /addAvoid bandName
-bot.onText(/\/addAvoid (.+)/, function (message, match){
+// Matches /addavoid bandName
+bot.onText(/\/addavoid (.+)/, function (message, match){
 
 	var telegramId = message.from.id;
 	var bandName = match[1];
@@ -547,7 +546,7 @@ function manageAddAvoid(telegramId, message, bandName){
 										"Band " + band.uppercase + " is a must band");
 								}
 								else{
-									avoidBandsCntrl.addAvoidBandForUser(telegramId, band.lowercase);
+									avoidBandsCntrl.addavoidBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
 										"Done! I added " + band.uppercase + " to the list of your bands to /avoid.", 
@@ -568,13 +567,13 @@ function manageAddAvoid(telegramId, message, bandName){
 	});
 }
 
-// Matches /removeAvoid
-bot.onText(/\/removeAvoid/, function (message) {
+// Matches /removeavoid
+bot.onText(/\/removeavoid/, function (message) {
 
 	var telegramId = message.from.id;
 
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
-	if(message.text == "/removeAvoid"){
+	if(message.text == "/removeavoid"){
 
 		serverLog('User ' + telegramId + ' wants to remove a avoid band');
 
@@ -596,8 +595,8 @@ bot.onText(/\/removeAvoid/, function (message) {
 	}
 });
 
-// Matches /removeAvoid bandName
-bot.onText(/\/removeAvoid (.+)/, function (message, match){
+// Matches /removeavoid bandName
+bot.onText(/\/removeavoid (.+)/, function (message, match){
 
 	var telegramId = message.from.id;
 	var bandName = match[1];
@@ -638,7 +637,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 
 							if(user.avoidBands.indexOf(band.lowercase) != -1){
 
-								avoidBandsCntrl.removeAvoidBandForUser(telegramId, band.lowercase);
+								avoidBandsCntrl.removeavoidBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
 									"Done! I removed" + band.uppercase + " from the list of your /must bands.", 
@@ -690,7 +689,7 @@ bot.onText(/\/schedule/, function (message) {
 					for (d in config.festivalInfo.humanDays){
 						daysQuestion += config.festivalInfo.humanDays[d] + ', ';
 					}
-					daysQuestion.slice(0, -2);; // remove last ', '
+					daysQuestion = daysQuestion.slice(0, -2);; // remove last ', '
 					daysQuestion += ")";
 
 					bot.sendMessage(
@@ -718,7 +717,7 @@ bot.onText(/\/schedule/, function (message) {
 
 
 								scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
-									var scheduleMessage = "This is your schedule for day " + festivalDay + ": \n\n";
+									var scheduleMessage = "Done! I recommend you this plan for day " + festivalDay + ": \n\n";
 									scheduleMessage += textSchedule;
 									scheduleMessage += "\nEnjoy!";
 
@@ -740,7 +739,7 @@ bot.onText(/\/schedule/, function (message) {
 				}
 				else{
 					notify(message.chat.id, 
-						"Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me which bands you don't want to miss typing /addMust.", 
+						"Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me which bands you don't want to miss typing /addmust.", 
 						"User " + telegramId + " asks for the schedule but withou must bands set");
 
 				}
@@ -811,10 +810,9 @@ bot.on('message', function (msg) {
 		serverLog("Received message '" + message + "' from user " + telegramId);
 
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
-			bot.sendMessage(msg.chat.id, replyMessage)
-			.then(function () {
-				serverLog("Sent message to user " + telegramId);
-			});
+			notify(msg.chat.id, 
+				replyMessage, 
+				"Sent message to user " + telegramId);
 		});
 	}
 });
@@ -848,11 +846,11 @@ function notifyHelp(telegramId, telegramChatId){
 	var helpMessage = "What do you want to do?\n\n" + 
 			"See all /bands\n\n" + 
 			"See my /must bands\n" +
-			"- /addMust band\n" + 
-			"- /removeMust band\n\n" + 
+			"- /addmust band\n" + 
+			"- /removemust band\n\n" + 
 			"See my /avoid bands\n" + 
-			"- /addAvoid band\n" + 
-			"- /removeAvoid band\n\n" + 
+			"- /addavoid band\n" + 
+			"- /removeavoid band\n\n" + 
 			"See my /schedule\n"
 
 	notify(telegramChatId, 
@@ -861,9 +859,16 @@ function notifyHelp(telegramId, telegramChatId){
 }
 
 function notify(telegramChatId, userMessage, logMessage){
-	bot.sendMessage(telegramChatId, userMessage, {"parse_mode": "HTML"})
-	.then(function () {});
-	console.log("[BOT] " + logMessage);
+
+	setTimeout(function () {
+		
+		bot.sendMessage(telegramChatId, userMessage, {"parse_mode": "HTML"})
+		.then(function () {});
+		
+		console.log("[BOT] " + logMessage);
+
+	}, 1000);
+
 }
 
 function serverLog(logMessage){
@@ -984,7 +989,18 @@ function removeDiacritics (str) {
 }
 
 
-
+/*
+help - Get help
+bands - See all bands
+must - See your must bands
+addmust - Add a must band
+removemust - Remove a must band
+schedule - Get your schedule
+now - Now playing
+avoid - See your bands to avoid
+addavoid - Add a band to avoid
+removeavoid - Remove a band to avoid
+*/
 
 
 /****************************************/
