@@ -193,7 +193,9 @@ var nowPlaying = function(telegramId, callback) {
 
 	console.log("[SCHEDCTRL] Gathering now playing bands for user " + telegramId);
 
-	var now = moment('28/05/2015 21:14', 'DD/MM/YYYY HH:mm').format();
+	var now = moment();
+	//var now = moment().subtract(1, 'years').add(3, 'days').add(8, 'hours');
+	console.log(now.format('DD/MM/YYYY HH:mm'));
 
 	var nowPlayingBands = [];
 	
@@ -215,23 +217,29 @@ var nowPlaying = function(telegramId, callback) {
 				}
 			}
 
-			// sort by remaining time
-			var sortedNowPlayingBands = nowPlayingBands.sort(function(a,b) {
-				if(a.remaining > b.remaining) return 1;
-				else if(a.remaining < b.remaining) return -1;
-				else return 0;
-			});
+			if(nowPlayingBands.length == 0){
+				nowPlayingText = "";
+			}
+			else{
 
-			// construct now playing text
-			var nowPlayingText = "";
-			for (b in sortedNowPlayingBands){
-				var bandName = sortedNowPlayingBands[b].bandName;
-				var stage = sortedNowPlayingBands[b].stage;
-				var remaining = sortedNowPlayingBands[b].remaining;
-				var remainingString = "";
-				if(remaining<15) remainingString = " (finishing)";
+				// sort by remaining time
+				var sortedNowPlayingBands = nowPlayingBands.sort(function(a,b) {
+					if(a.remaining > b.remaining) return 1;
+					else if(a.remaining < b.remaining) return -1;
+					else return 0;
+				});
 
-				nowPlayingText += "<strong>" + bandName + "</strong> "+remainingString+"\n\t<i>" + stage + "</i>\n"
+				// construct now playing text
+				var nowPlayingText = "";
+				for (b in sortedNowPlayingBands){
+					var bandName = sortedNowPlayingBands[b].bandName;
+					var stage = sortedNowPlayingBands[b].stage;
+					var remaining = sortedNowPlayingBands[b].remaining;
+					var remainingString = "";
+					if(remaining<15) remainingString = " (finishing)";
+
+					nowPlayingText += "<strong>" + bandName + "</strong> "+remainingString+"\n\t<i>" + stage + "</i>\n"
+				}
 			}
 			callback(nowPlayingText);
 		}

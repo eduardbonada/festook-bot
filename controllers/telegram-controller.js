@@ -768,17 +768,22 @@ bot.onText(/\/now/, function (message) {
 
 			if(user){
 				scheduleCntrl.nowPlaying(telegramId, function(nowPlaying){
-					if(typeof nowPlaying !== undefined){
+					if(typeof nowPlaying === undefined){
+						notifyNoBands(telegramId, message.chat.id);
+					}
+					else if(nowPlaying == ""){
+						notify(message.chat.id, 
+							"No one playing now... Relax and go grab a drink!",
+							"User " + telegramId + " asked for now playing but there is noone playing");						
+					}
+					else{
 						var nowPlayingMessage = "Now playing:\n\n";
 						nowPlayingMessage += nowPlaying;
-						nowPlayingMessage += "\nEnjoy!";
+						nowPlayingMessage += "\nRun, you fools!";
 
 						notify(message.chat.id, 
 							nowPlayingMessage, 
 							"User " + telegramId + " got the now playing list");
-					}
-					else{
-						notifyNoBands(telegramId, message.chat.id);
 					}
 
 				});
