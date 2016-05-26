@@ -56,7 +56,6 @@ bot.onText(/\/start/, function (message) {
 
 // Matches /help
 bot.onText(/\/help/, function (message) {
-
 	var telegramId = message.from.id;
 
 	serverLog('User ' + telegramId + ' asks for help');
@@ -648,7 +647,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 							}
 							else{
 								notify(message.chat.id, 
-									"Done! I removed" + band.uppercase + "' is not one of your bands o /avoid...", 
+									"Done! I removed" + band.uppercase + " is not one of your bands o /avoid...", 
 									band.uppercase + " is not one of your bands to /avoid...");
 
 							}
@@ -686,19 +685,37 @@ bot.onText(/\/schedule/, function (message) {
 
 				if(user.mustBands.length > 0){
 
+					// construct inline_keyboard with festival days
+					var daysQuestion = "Which day? (";
+					for (d in config.festivalInfo.humanDays){
+						daysQuestion += config.festivalInfo.humanDays[d] + ', ';
+					}
+					daysQuestion.slice(0, -2);; // remove last ', '
+					daysQuestion += ")";
+
 					bot.sendMessage(
 						message.chat.id,
-						'Which day (dd/mm/yyyy)?',
+						daysQuestion,
 						{
-							reply_markup: JSON.stringify({force_reply: true})
+							reply_markup: JSON.stringify(
+								{
+									force_reply: true,
+									//keyboard: daysKeyboard,
+									//resize_keyboard:true,
+									//one_time_keyboard: true
+								}
+							)
 						}
 					)
 					.then(function (sent) {
 						bot.onReplyToMessage(sent.chat.id, sent.message_id, function (message) {
 
-							var festivalDay = message.text;
+							var dayIndex = config.festivalInfo.humanDays.indexOf(message.text);
 
-							if(config.festivalInfo.days.indexOf(festivalDay)){ // if the day entered is one of the days of the festival
+							if( dayIndex >= 0){ // if the day entered is one of the days of the festival
+
+								var festivalDay = config.festivalInfo.calendarDays[dayIndex];
+
 
 								scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
 									var scheduleMessage = "This is your schedule for day " + festivalDay + ": \n\n";
@@ -714,7 +731,7 @@ bot.onText(/\/schedule/, function (message) {
 							}
 							else{
 								notify(message.chat.id, 
-									"There is no festival on " + festivalDay + " :(", 
+									"There is no festival on " + message.text + " :(", 
 									"User " + telegramId + " entered a wrong festival day : " + festivalDay);
 							}
 
@@ -761,23 +778,41 @@ bot.on('message', function (msg) {
 });
 
 
+/// ----- PROCESS CALLBACK QUERIES ----- ///
+
+bot.on('callback_query', function(msg) {
+    var user = msg.from.id;
+    var data = msg.data;
+    bot.sendMessage(msg.from.id, "You clicked button with data '"+ data +"'");
+});
+
+
 /// ----- NOTIFICATIONS & LOG ----- ///
 
 function notifyNoBands(telegramId, telegramChatId){
-	notify(telegramChatId, "There was an error looking for bands. Please try again later.", "No bands found while trying to to list all bands for user " + telegramId)
+	notify(telegramChatId, 
+		"I'm sorry but I messed up my papers. Please try again later. :(",
+		"No bands found while trying to to list all bands for user " + telegramId
+		);
 }
 
 function notifyUserNotFound(telegramId, telegramChatId){
-	notify(telegramChatId, "I did not find you in my user list! /start using Festook now!", "User " + telegramId + " not found.")
+	notify(telegramChatId, 
+		"Who are you? Do you want to /start using Festook?", 
+		"User " + telegramId + " not found."
+		);
 }
 
 function notifyBandNotFound(telegramId, telegramChatId, bandName){
-	notify(telegramChatId, "Are you sure '" + bandName  + "' is playing?", "User " + telegramId + " provided band " + bandName + " but not found in the list of bands.")
+	notify(telegramChatId, 
+		"McFly! Are you sure " + bandName  + " is playing? I don't see it the list of /bands.", 
+		"User " + telegramId + " provided band " + bandName + " but not found in the list of bands."
+		);
 }
 
 function notifyHelp(telegramId, telegramChatId){
 
-	var helpMessage = "What do you want?\n\
+	var helpMessage = "What do you want to do?\n\
 			- All /bands\n\
 			- My /must bands\n\
 			\t- /addMust band\n\
@@ -945,3 +980,24 @@ function removeDiacritics (str) {
 // // reply sent!
 // });
 // });
+
+/*
+https://github.com/yagop/node-telegram-bot-api/issues/109
+
+var options = {
+  reply_markup: JSON.stringify({
+    inline_keyboard: [
+      [{ text: 'Some button text 1', callback_data: '1' }],
+      [{ text: 'Some button text 2', callback_data: '2' }],
+      [{ text: 'Some button text 3', callback_data: '3' }]
+    ]
+  })
+};
+bot.sendMessage(msg.chat.id, 'Some text giving three inline buttons', options).then(function (sended) {
+  // `sended` is the sent message.
+});
+
+inline keyboard: [
+  [{ text: 'Some button text 1', callback_data: '1' }, { text: 'Some button text 2', callback_data: '2' }, { text: 'Some button text 3', callback_data: '3' }]
+]
+*/

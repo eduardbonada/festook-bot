@@ -47,7 +47,12 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 		callbacks: {
 
             onWelcome: function(event, from, to) {                 
-            	var message = "Hi " + user.telegramFirstName + "!\n\nThis is Festook and I am here to help you plan your schedule for " + config.festivalInfo.name + ".\n\nLet me explain you how this works:\n - First you tell me which bands you must see.\n- Then you sit back while I build up your schedule.\n\nGot it?";
+            	var message = "Hi " + user.telegramFirstName + "!\n\n" + 
+            		"This is Festook and I am here to help you plan your schedule for " + config.festivalInfo.name + ".\n\n" + 
+            		"Let me explain you how this works:\n"+
+            		" - First you tell me which bands you must see.\n"+
+            		"- Then you sit back while I build up your schedule.\n\n"+
+            		"Got it?";
 
 				sendOutgoingMessage(message);
 
@@ -59,23 +64,34 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			},
 
 			onSaidYes: function(event, from, to) {
-				message = "Cool!\n\nNow add your favourite bands typing /addMust. Easy peasy!\n\nWhen you are done type /schedule to see the magic.\n\nAnd remember that you can always type /help if you get lost.";
+				message = "Cool!\n\n"+
+					"Now add your favourite bands typing /addMust. Easy peasy!\n\n"+
+					"When you are done type /schedule to see the magic.\n\n"+
+					"And remember that you can always type /help if you get lost.";
 				sendOutgoingMessage(message);
 				this.SaidYesToWaitCommand();
 			},
 
 			onFirstNo: function(event, from, to) {
-				var message = "Come on, it is not that difficult...\n- First you tell me which bands you must see.\n- Then you sit back while I build up your schedule.\n\nGot it?";
+				var message = "Come on, it is not that difficult...\n"+
+					"- First you tell me which bands you must see.\n"+
+					"- Then you sit back while I build up your schedule.\n\n"+
+					"Got it?";
 				sendOutgoingMessage(message);
 			},
 
 			onSecondNo: function(event, from, to) {
-				var message = "Are you kidding me?\n- First you tell me which bands you must see.\n- Then you sit back while I build up your schedule.\n\nGot it?";
+				var message = "Are you kidding me?\n"+
+					"- First you tell me which bands you must see.\n"+
+					"- Then you sit back while I build up your schedule.\n\n"+
+					"Got it?";
 				sendOutgoingMessage(message);
 			},
 
 			onThirdNo: function(event, from, to) {
-				var message = "Argof**kyourself!\n\nWant to add a MUST band? Type /addMust. \nWant the schedule? Type /schedule.";
+				var message = "Argof**kyourself!\n\n"+
+					"Want to add a MUST band? Type /addMust. \n"+
+					"Want the schedule? Type /schedule.";
 				sendOutgoingMessage(message);
 			},
 
@@ -159,7 +175,7 @@ var wakeUpBot = function(userId, message, outgoingMessageCallback){
 }
 
 function isYes(message){
-	var validYes = ["yes"];
+	var validYes = ["yes", "sure", "ok"];
 	return ( validYes.indexOf(message.toLowerCase()) >= 0 );	
 }
 
