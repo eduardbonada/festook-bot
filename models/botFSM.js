@@ -1,22 +1,11 @@
-var config = require('../config');
 
 // Import JS State MAchine Library
 var StateMachine = require("../libs/state-machine.js") // https://github.com/jakesgordon/javascript-state-machine
 
-// Import db
+// Import modules
+var config = require('../config');
 var User = require('../db/user');
-
-var backToTheFutureSentences = [
-	"Roads? Where we're going, we don't need roads.",
-	"Great Scott!",
-	"1.21 gigawatts?! 1.21 gigawatts?! Great Scott!",
-	"If my calculations are correct, when this baby hits eighty-eight miles per hour...",
-	"Next Saturday night, we're sending you back to the future!",
-	"This is heavy.",
-	"Why do you keep calling me Calvin?",
-	"Are you telling me that you built a time machine... out of a DeLorean?", 
-	"Chuck. Chuck. It's Marvin - your cousin, Marvin BERRY. You know that new sound you're looking for? Well, listen to this." 
-];
+var botReplier = require('./botReplier');
 
 function setupFsm(user, initialState, sendOutgoingMessage){
 
@@ -96,15 +85,13 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			},
 
 			onUnknownAnswer: function(event, from, to) {
-				sendOutgoingMessage("I did not understand");
+				if(from == "WaitYes" || from == "WaitYesAfter1stNo"  || from == "WaitYesAfter2ndNo" ){
+					sendOutgoingMessage(botReplier.toUnknownAnswer() + " Yes or no?");
+				}
 			},
 
-			onAsyncMessage: function(event, from, to) {
-				// send message with random answer
-				var sentence = backToTheFutureSentences[Math.floor(Math.random()*backToTheFutureSentences.length)];
-				setTimeout(function() {
-					sendOutgoingMessage(sentence);
-				}, 1000);
+			onAsyncMessage: function(event, from, to, message) {
+				sendOutgoingMessage(botReplier.toAsyncComment(message));
 			},
 
 			onafterevent: function(event, from, to) { // fired after all events
@@ -165,7 +152,7 @@ var wakeUpBot = function(userId, message, outgoingMessageCallback){
 
 				case "WaitCommand":
 					if( fsm.can("AsyncMessage") ){
-						fsm.AsyncMessage();
+						fsm.AsyncMessage(message);
 					}
 
 				default: break;

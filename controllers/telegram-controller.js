@@ -753,7 +753,6 @@ bot.onText(/\/schedule/, function (message) {
 });
 
 
-
 /// ----- NON COMMAND TEXT ----- ///
 
 bot.on('message', function (msg) {
@@ -804,15 +803,15 @@ function notifyBandNotFound(telegramId, telegramChatId, bandName){
 
 function notifyHelp(telegramId, telegramChatId){
 
-	var helpMessage = "What do you want to do?\n\
-			- All /bands\n\
-			- My /must bands\n\
-			\t- /addMust band\n\
-			\t- /removeMust band\n\
-			- My /avoid bands\n\
-			\t- /addAvoid band\n\
-			\t- /removeAvoid band\n\
-			- My /schedule\n"
+	var helpMessage = "What do you want to do?\n\n" + 
+			"See all /bands\n\n" + 
+			"See my /must bands\n" +
+			"- /addMust band\n" + 
+			"- /removeMust band\n\n" + 
+			"See my /avoid bands\n" + 
+			"- /addAvoid band\n" + 
+			"- /removeAvoid band\n\n" + 
+			"See my /schedule\n"
 
 	notify(telegramChatId, 
 		helpMessage, 
