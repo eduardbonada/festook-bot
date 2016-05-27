@@ -1,26 +1,27 @@
+// import configuration file
+var config = require('./config');
+
+
 /// ---------- LOAD DEPENDECIES ---------- ///
 
 var express  	= require('express');
 var http 		= require('http');
 var mongoose 	= require('mongoose');
 var bodyParser 	= require('body-parser');
+var app = express();
+var server = http.createServer(app);
 
-// import configuration file
-var config = require('./config');
 
-// import controllers files
+/// ---------- IMPORT CONTROLLERS ---------- ///
+
 var files2db 		= require('./controllers/files2db-controller');
 var userCntrl 		= require('./controllers/user-controller');
 var mustBandsCntrl 	= require('./controllers/mustBands-controller');
 var scheduleCntrl 	= require('./controllers/schedule-controller');
-var telegramCntrl 	= require('./controllers/telegram-controller');
+var telegramCntrl 	= require('./controllers/telegram-controller')(app);
 
 
-/// ---------- SERVER SETUP ---------- ///
-var app = express();
-var server = http.createServer(app);
-
-app.use(bodyParser.json());
+/// ---------- SERVER SETUP & RUN ---------- ///
 
 app.get('/', function(req, res){
 	res.send("Great Scott!");
@@ -32,8 +33,6 @@ app.get('/loadFestivalInfo', function(req, res){
 	});
 });
 
-
-/// ---------- SERVER RUN ---------- ///
 var localIP;
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 	console.log("[SERV] Local IP is " + add);
@@ -73,13 +72,6 @@ OPENSHIFT
 	https://github.com/ilbonte/node-telegram-bot-starter-kit
 	https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
 
-http://stackoverflow.com/questions/12657168/can-i-use-my-existing-git-repo-with-openshift/12669112#12669112
-[local git init + git commit] 
-[create app in openshift]
-- git remote add openshift -f ssh://5742e11d0c1e66b329000106@test-festook.rhcloud.com/~/git/test.git/
-- git merge openshift/master -s recursive -X ours
-- git push openshift master
-[check logs in ssh]
 */
 
 
