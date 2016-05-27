@@ -19,7 +19,7 @@ var Band = require('../db/band');
 
 module.exports = function(app) {
 
-var bot = setupBotConnection("polling", app); // "polling" or "webhook"
+var bot = setupBotConnection("webhook", app); // "polling" or "webhook"
 // clear a webhook => https://api.telegram.org/bot237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo/setWebhook?url=
 
 // Test bot
