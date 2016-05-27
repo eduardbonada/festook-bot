@@ -1,7 +1,7 @@
 var asyncCommentPatterns = [
 
 	{ 
-		patterns  : ["fuck"], 
+		patterns  : ["fuck", "suck", "sex"], 
 		sentences : [
 			"Argof**uckyourself!", 
 			"Don't ever say that again!", 
@@ -27,6 +27,11 @@ var asyncCommentPatterns = [
 	{
 		patterns : ["schedule", "plan", "day", "today", "tomorrow", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
 		sentences : ["To see your plan just type /schedule!"]
+	},
+
+	{
+		patterns : ["must"],
+		sentences : ["Do you want to see your /must bands?"]
 	}
 
 ];

@@ -279,7 +279,7 @@ function manageAddMust(telegramId, message, bandName){
 								}
 								else{
 
-									mustBandsCntrl.addmustBandForUser(telegramId, band.lowercase);
+									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
 										"Done! I added " + band.uppercase + " to your /must bands.", 
@@ -371,7 +371,7 @@ function manageRemoveMust(telegramId, message, bandName){
 
 							if(user.mustBands.indexOf(band.lowercase) != -1){
 
-								mustBandsCntrl.removemustBandForUser(telegramId, band.lowercase);
+								mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
 									"Done. I removed " + band.uppercase + " from your /must bands.", 
@@ -546,7 +546,7 @@ function manageAddAvoid(telegramId, message, bandName){
 										"Band " + band.uppercase + " is a must band");
 								}
 								else{
-									avoidBandsCntrl.addavoidBandForUser(telegramId, band.lowercase);
+									avoidBandsCntrl.addAvoidBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
 										"Done! I added " + band.uppercase + " to the list of your bands to /avoid.", 
@@ -637,7 +637,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 
 							if(user.avoidBands.indexOf(band.lowercase) != -1){
 
-								avoidBandsCntrl.removeavoidBandForUser(telegramId, band.lowercase);
+								avoidBandsCntrl.removeAvoidBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
 									"Done! I removed" + band.uppercase + " from the list of your /must bands.", 
@@ -717,7 +717,7 @@ bot.onText(/\/schedule/, function (message) {
 
 
 								scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
-									var scheduleMessage = "Done! I recommend you this plan for day " + festivalDay + ": \n\n";
+									var scheduleMessage = "Done! I recommend you this plan for " + festivalDay + ": \n\n";
 									scheduleMessage += textSchedule;
 									scheduleMessage += "\nEnjoy!";
 
@@ -845,13 +845,13 @@ function notifyHelp(telegramId, telegramChatId){
 
 	var helpMessage = "What do you want to do?\n\n" + 
 			"See all /bands\n\n" + 
-			"See my /must bands\n" +
+			"See your /must bands\n" +
 			"- /addmust band\n" + 
 			"- /removemust band\n\n" + 
-			"See my /avoid bands\n" + 
+			"See your /avoid bands\n" + 
 			"- /addavoid band\n" + 
 			"- /removeavoid band\n\n" + 
-			"See my /schedule\n"
+			"See your /schedule\n"
 
 	notify(telegramChatId, 
 		helpMessage, 
