@@ -11,12 +11,10 @@ var UserSchema = new mongoose.Schema({
 
 	telegramFirstName: {
 		type: String,
-		required: true
 	},
 
 	telegramLastName: {
 		type: String,
-		required: true
 	},
 	
 	// array of lowercase names 
