@@ -24,7 +24,8 @@ var Band = require('../db/band');
 var TelegramBot = require('node-telegram-bot-api');
 var bot = new TelegramBot(config.telegramBotToken);
 app.post('/' + bot.token, function (req, res) {
-	console.log("REQ:\n" + req.body);
+	console.log("bot.token:\n" + bot.token);
+	console.log("REQ:\n" + JSON.stringify(req));
 	bot.processUpdate(req.body);
 	res.sendStatus(200);
 });
