@@ -23,9 +23,8 @@ var Band = require('../db/band');
 // Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
 var TelegramBot = require('node-telegram-bot-api');
 var bot = new TelegramBot(config.telegramBotToken);
+app.use(bodyParser.json());
 app.post('/' + bot.token, function (req, res) {
-	console.log("bot.token:\n" + bot.token);
-	console.log("REQ:\n" + JSON.stringify(req));
 	bot.processUpdate(req.body);
 	res.sendStatus(200);
 });
