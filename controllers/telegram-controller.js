@@ -89,20 +89,28 @@ bot.onText(/\/bands/, function (message) {
 
 						var listBandsMessage = "";
 
-						if(!user.simToMust){ // if no similarities yet, print the list of all bands in festival
-							listBandsMessage += "These are all the bands playing in " + config.festivalInfo.name + ": \n\n";
-							for (b in bandsInfo){
-								listBandsMessage += bandsInfo[b].uppercase + ', ';
+						if(user.mustBands.length == 0){// if no must bands yet, print some bands in festival
+							var numBandsToShow = 10;
+							var remainingBandsToShow = Object.keys(bandsInfo);
+
+							listBandsMessage += "These are " + numBandsToShow + " random bands playing: \n\n";
+							for (b=0; b<numBandsToShow; b++){
+								var randomIndex = Math.floor(Math.random()*remainingBandsToShow.length);
+								listBandsMessage += bandsInfo[remainingBandsToShow[randomIndex]].uppercase + ', ';
+								remainingBandsToShow.splice(randomIndex, 1);
 							}
-							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '						
+							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
+							listBandsMessage += "\n\n Want more random /bands?"
 						}
-						else{ // if similarities set, print the list of bands sorted by similarity
-							listBandsMessage += "These are all the bands playing in " + config.festivalInfo.name + " and sorted according to your taste: \n\n";
+						else{ // if must bands are set, print the list of some bands sorted by similarity
+							var numBandsToShow = 20;
+							listBandsMessage += "These are the " + numBandsToShow + " that I think you will like most: \n\n";
 							var sortedBandNames = getSortedKeys(user.simToMust, "descending");
-							for (b in sortedBandNames){
+							for (b=0; b<numBandsToShow; b++){
 								listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
 							}
 							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
+							listBandsMessage += "\n\n Want to /addmust any of them?"
 						}
 
 						notify(message.chat.id, 
