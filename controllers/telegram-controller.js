@@ -1,4 +1,6 @@
+// Import dependencies
 var bodyParser 	= require('body-parser');
+var TelegramBot = require('node-telegram-bot-api');
 
 var config = require('../config');
 
@@ -17,28 +19,7 @@ var Band = require('../db/band');
 
 module.exports = function(app) {
 
-// Setup Telegram connection - LONG POLLING
-//var TelegramBot = require('node-telegram-bot-api');
-//var options = { polling: true };
-//var bot = new TelegramBot(config.telegramBotToken, options);
-
-// Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
-var TelegramBot = require('node-telegram-bot-api');
-var bot = new TelegramBot(config.telegramBotToken);
-app.use(bodyParser.json());
-app.post('/' + bot.token, function (req, res) {
-	bot.processUpdate(req.body);
-	res.sendStatus(200);
-});
-bot.setWebHook('https://primavera2016-festook.rhcloud.com/' + bot.token);
-
-// Setup Telegram connection - OPENSHIFT WEBHOOK - https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
-// var TelegramBot = require('node-telegram-bot-api');
-// var port = process.env.OPENSHIFT_NODEJS_PORT;
-// var host = process.env.OPENSHIFT_NODEJS_IP;
-// var domain = process.env.OPENSHIFT_APP_DNS;
-// var bot = new TelegramBot(token, {webHook: {port: port, host: host}});
-// bot.setWebHook(domain+':443/bot'+token); // OpenShift enroutes :443 request to OPENSHIFT_NODEJS_PORT
+var bot = setupBotConnection("webhook", app); // "polling" or "webhook"
 
 // Test bot
 bot.getMe().then(function (me) {
@@ -1001,20 +982,45 @@ function removeDiacritics (str) {
 	return str;
 }
 
-} // end of module-exports
+function setupBotConnection(style, app){
 
-/*
-help - Get help
-bands - See all bands
-must - See your must bands
-addmust - Add a must band
-removemust - Remove a must band
-schedule - Get your schedule
-now - Now playing
-avoid - See your bands to avoid
-addavoid - Add a band to avoid
-removeavoid - Remove a band to avoid
-*/
+	switch(style){
+
+		var bot = {};
+
+		case "webhook":
+			// Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
+			bot = new TelegramBot(config.telegramBotToken);
+			app.use(bodyParser.json());
+			app.post('/' + bot.token, function (req, res) {
+				bot.processUpdate(req.body);
+				res.sendStatus(200);
+			});
+			bot.setWebHook('https://primavera2016-festook.rhcloud.com/' + bot.token);
+			break;
+
+
+		case "polling":
+			// Setup Telegram connection - LONG POLLING
+			bot = new TelegramBot(config.telegramBotToken, { polling: true });
+			break;
+
+		default: break;
+
+	}
+
+	return bot;
+
+	// Setup Telegram connection - OPENSHIFT WEBHOOK - https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
+	// var port = process.env.OPENSHIFT_NODEJS_PORT;
+	// var host = process.env.OPENSHIFT_NODEJS_IP;
+	// var domain = process.env.OPENSHIFT_APP_DNS;
+	// var bot = new TelegramBot(token, {webHook: {port: port, host: host}});
+	// bot.setWebHook(domain+':443/bot'+token); // OpenShift enroutes :443 request to OPENSHIFT_NODEJS_PORT
+
+}
+
+} // end of module-exports
 
 
 /****************************************/
