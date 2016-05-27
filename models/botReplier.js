@@ -3,10 +3,10 @@ var asyncCommentPatterns = [
 	{ 
 		patterns  : ["fuck", "suck", "sex"], 
 		sentences : [
-			"Argof**uckyourself!", 
 			"Don't ever say that again!", 
 			"Do I like you?",
-			"I would prefer some flowers"
+			"I would prefer some flowers",
+			"Just like honey"
 			] 
 	},
 	{ 

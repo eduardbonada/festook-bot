@@ -79,7 +79,7 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			},
 
 			onThirdNo: function(event, from, to) {
-				var message = "Argof**kyourself!\n\n"+
+				var message = "That's enough!\n\n"+
 					"Want to add a MUST band? Type /addmust. \n"+
 					"Want the schedule? Type /schedule.";
 				sendOutgoingMessage(message);
