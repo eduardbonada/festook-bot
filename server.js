@@ -22,7 +22,7 @@ var telegramCntrl 	= require('./controllers/telegram-controller');
 var app = express();
 var server = http.createServer(app);
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 app.get('/', function(req, res){
 	res.send("Great Scott!");
