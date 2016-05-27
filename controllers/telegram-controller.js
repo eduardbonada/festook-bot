@@ -21,11 +21,11 @@ var Band = require('../db/band');
 //var bot = new TelegramBot(config.telegramBotToken, options);
 
 // Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
-app.post('/' + token, function (req, res) {
+var TelegramBot = require('node-telegram-bot-api');
+app.post('/' + TelegramBot.token, function (req, res) {
   bot.processUpdate(req.body);
   res.sendStatus(200);
 });
-var TelegramBot = require('node-telegram-bot-api');
 TelegramBot.setWebHook('https://primavera2016-festook.rhcloud.com/' + TelegramBot.token);
 
 // Setup Telegram connection - OPENSHIFT WEBHOOK - https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
