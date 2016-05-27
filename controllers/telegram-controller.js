@@ -1,4 +1,4 @@
-module.exports = function(app) {
+var bodyParser 	= require('body-parser');
 
 var config = require('../config');
 
@@ -14,6 +14,8 @@ var botFSM = require('../models/botFSM');
 // import db schemas
 var User = require('../db/user');
 var Band = require('../db/band');
+
+module.exports = function(app) {
 
 // Setup Telegram connection - LONG POLLING
 //var TelegramBot = require('node-telegram-bot-api');
