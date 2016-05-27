@@ -5,8 +5,6 @@ var http 		= require('http');
 var mongoose 	= require('mongoose');
 var bodyParser 	= require('body-parser');
 
-app.use(bodyParser.json());
-
 // import configuration file
 var config = require('./config');
 
@@ -22,7 +20,7 @@ var telegramCntrl 	= require('./controllers/telegram-controller');
 var app = express();
 var server = http.createServer(app);
 
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
 	res.send("Great Scott!");
