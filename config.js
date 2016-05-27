@@ -1,7 +1,9 @@
 module.exports = {
 
 	'database': 'mongodb://localhost/festook-bot',
+
 	'telegramBotToken': '237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo',
+	
 	'festivalInfo': {
 		'name': 'Primavera Sound 2015',
 		'start': '2015-05-27T00:00:00+02:00',

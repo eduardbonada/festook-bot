@@ -170,7 +170,7 @@ bot.onText(/\/must/, function (message) {
 							for(b in user.mustBands){
 								messageMustBands += "- " + bandsInfo[user.mustBands[b]].uppercase + "\n";
 							}
-							messageMustBands += "\nRemeber that you can edit them typing /addmust or /removemust.";
+							messageMustBands += "\nRemember that you can edit them typing /addmust or /removemust.";
 
 							notify(message.chat.id, 
 								messageMustBands, 
