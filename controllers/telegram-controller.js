@@ -24,8 +24,9 @@ var Band = require('../db/band');
 var TelegramBot = require('node-telegram-bot-api');
 var bot = new TelegramBot(config.telegramBotToken);
 app.post('/' + bot.token, function (req, res) {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
+	console.log("REQ:\n" + req.body);
+	bot.processUpdate(req.body);
+	res.sendStatus(200);
 });
 bot.setWebHook('https://primavera2016-festook.rhcloud.com/' + bot.token);
 
