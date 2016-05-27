@@ -70,7 +70,7 @@ HEROKU
 OPENSHIFT
 	https://blog.openshift.com/run-your-nodejs-projects-on-openshift-in-two-simple-steps/
 	https://github.com/ilbonte/node-telegram-bot-starter-kit
-	https://github.com/yagop/node-telegram-bot-api/blob/master/examples/openShiftWebHook.js
+	
 
 */
 
