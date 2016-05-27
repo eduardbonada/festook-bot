@@ -1,0 +1,9 @@
+rhc setup -l eduard.bonada@gmail.com
+
+rhc set-env DEBUG=* -a primavera2016
+
+rhc port-forward -a primavera2016
+
+rhc start-app primavera2016
+rhc stop-app primavera2016
+rhc restart-app primavera2016
