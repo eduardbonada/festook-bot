@@ -984,10 +984,9 @@ function removeDiacritics (str) {
 
 function setupBotConnection(style, app){
 
+	var bot = {};
 	switch(style){
-
-		var bot = {};
-
+		
 		case "webhook":
 			// Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
 			bot = new TelegramBot(config.telegramBotToken);
