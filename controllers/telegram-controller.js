@@ -19,7 +19,7 @@ var Band = require('../db/band');
 
 module.exports = function(app) {
 
-var bot = setupBotConnection("webhook", app); // "polling" or "webhook"
+var bot = setupBotConnection("polling", app); // "polling" or "webhook"
 // clear a webhook => https://api.telegram.org/bot237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo/setWebhook?url=
 
 // Test bot
@@ -27,7 +27,7 @@ bot.getMe().then(function (me) {
 	console.log('[BOT] %s is ready!', me.username);
 });
 
-var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now"]
+var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now", "/users"]
 
 /// ----- START & HELP ----- ///
 
@@ -93,7 +93,7 @@ bot.onText(/\/bands/, function (message) {
 							var numBandsToShow = 10;
 							var remainingBandsToShow = Object.keys(bandsInfo);
 
-							listBandsMessage += "These are " + numBandsToShow + " random bands playing: \n\n";
+							listBandsMessage += "These are " + numBandsToShow + " random bands: \n\n";
 							for (b=0; b<numBandsToShow; b++){
 								var randomIndex = Math.floor(Math.random()*remainingBandsToShow.length);
 								listBandsMessage += bandsInfo[remainingBandsToShow[randomIndex]].uppercase + ', ';
@@ -104,7 +104,7 @@ bot.onText(/\/bands/, function (message) {
 						}
 						else{ // if must bands are set, print the list of some bands sorted by similarity
 							var numBandsToShow = 20;
-							listBandsMessage += "These are the " + numBandsToShow + " that I think you will like most: \n\n";
+							listBandsMessage += "These are the " + numBandsToShow + " bands that I think you will like most: \n\n";
 							var sortedBandNames = getSortedKeys(user.simToMust, "descending");
 							for (b=0; b<numBandsToShow; b++){
 								listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
@@ -776,7 +776,7 @@ bot.onText(/\/now/, function (message) {
 					else if(nowPlaying == ""){
 						notify(message.chat.id, 
 							"No one playing now... Relax and go grab a drink!",
-							"User " + telegramId + " asked for now playing but there is noone playing");						
+							"User " + telegramId + " asked for now playing but there is no one playing");						
 					}
 					else{
 						var nowPlayingMessage = "Now playing:\n\n";
@@ -816,6 +816,23 @@ bot.on('message', function (msg) {
 			notify(msg.chat.id, 
 				replyMessage, 
 				"Sent message to user " + telegramId);
+		});
+	}
+});
+
+/// ----- ADMIN COMMANDS ----- ///
+bot.onText(/\/users/, function (msg) {
+
+	var telegramId = msg.from.id;
+
+	serverLog('User ' + telegramId + ' wants the list of users');
+
+	if(telegramId == 217793301){ // only me...
+
+		userCntrl.listUsers(function(message){
+			notify(msg.chat.id, 
+				message,
+				"User " + telegramId + " got the list of users");
 		});
 	}
 });

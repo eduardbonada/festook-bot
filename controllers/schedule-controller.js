@@ -195,7 +195,7 @@ var nowPlaying = function(telegramId, callback) {
 
 	var now = moment();
 	//var now = moment().subtract(1, 'years').add(3, 'days').add(8, 'hours');
-	console.log(now.format('DD/MM/YYYY HH:mm'));
+	//console.log(now.format('DD/MM/YYYY HH:mm'));
 
 	var nowPlayingBands = [];
 	
