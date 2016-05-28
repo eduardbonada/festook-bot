@@ -5,7 +5,6 @@ var moment  	= require('moment');
 var User = require('../db/user');
 var Band = require('../db/band');
 
-
 /// ---------- COMPUTE SCHEDULE ---------- ///
 	
 var computeScheduleForDay = function(telegramId, day, callback) {

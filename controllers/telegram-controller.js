@@ -17,6 +17,8 @@ var botFSM = require('../models/botFSM');
 var User = require('../db/user');
 var Band = require('../db/band');
 
+var adminChatId = "217793301"; // chat id of the admin user where admin notifications are sent
+
 module.exports = function(app) {
 
 var bot = setupBotConnection("polling", app); // "polling" or "webhook"
@@ -41,9 +43,13 @@ bot.onText(/\/start/, function (message) {
 
 	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(){
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
+			
 			notify(message.chat.id, 
 				replyMessage, 
 				"Sent message to user " + telegramId);
+
+			notifyAdmin("New user! " + telegramFirstName + " " + telegramLastName);
+
 		});
 	});
 });
@@ -825,9 +831,11 @@ bot.onText(/\/users/, function (msg) {
 
 	var telegramId = msg.from.id;
 
+	console.log(msg);
+
 	serverLog('User ' + telegramId + ' wants the list of users');
 
-	if(telegramId == 217793301){ // only me...
+	if(telegramId == adminChatId){ // only admin...
 
 		userCntrl.listUsers(function(message){
 			notify(msg.chat.id, 
@@ -876,6 +884,15 @@ function notifyHelp(telegramId, telegramChatId){
 	notify(telegramChatId, 
 		helpMessage, 
 		"Help provided to user " + telegramId);
+}
+
+function notifyAdmin(userMessage){
+
+	bot.sendMessage(adminChatId, userMessage, {"parse_mode": "HTML"})
+	.then(function () {});
+		
+	console.log("[BOT] Admin notified");
+	
 }
 
 function notify(telegramChatId, userMessage, logMessage){
