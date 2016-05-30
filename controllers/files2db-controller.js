@@ -1,9 +1,9 @@
 
 //// ---------- ARGUMENTS ---------- ////
 
-var festival 		= 'ps2015';
+var festival 		= 'ps2016';
 var listBandsFile 	= './festivals-info/' + festival + '_listBands.txt';
-var matrixFile 		= './festivals-info/' + festival + '_echonestDB12-lastfmDB12_bandDistance.txt';
+var matrixFile 		= './festivals-info/' + festival + '_echonestDB24_bandDistance.txt';
 
 //// ---------- DEPENDECIES ---------- ////
 
@@ -112,6 +112,34 @@ function loadBandSimilarityMatrix(doneCallback){
 module.exports = {
 	loadFestivalInfo : loadFestivalInfo,
 }
+
+/*
+console.log(bandNames.length + " found in list of bands");
+console.log(JSON.stringify(bandNames))
+for(b in bandNames){
+
+	if(bandNamesMatrix.indexOf(bandNames[b]) >= 0){
+		//console.log("Band " + bandNames[b] + " found in both lists" );
+	}else{
+		console.log("Band " + bandNames[b] + " NOT found in both lists" );
+	}
+
+}
+
+console.log("-----");
+
+console.log(bandNamesMatrix.length + " found in matrix of bands");
+console.log(JSON.stringify(bandNamesMatrix))
+for(b in bandNamesMatrix){
+
+	if(bandNames.indexOf(bandNamesMatrix[b]) >= 0){
+		//console.log("Band " + bandNames[b] + " found in both lists" );
+	}else{
+		console.log("Band " + bandNamesMatrix[b] + " NOT found in both lists" );
+	}
+
+}
+*/
 
 
 

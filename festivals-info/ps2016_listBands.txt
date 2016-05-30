@@ -1,0 +1,1640 @@
+{
+	"actionbronson": {
+		"bandId": "2",
+		"endTime": "05/06/2016 00:45",
+		"infoText": "The secret hip hop recipe",
+		"lowercaseName": "actionbronson",
+		"stage": "Primavera",
+		"startTime": "04/06/2016 23:45",
+		"uppercaseName": "Action Bronson"
+	},
+	"air": {
+		"bandId": "3",
+		"endTime": "02/06/2016 22:10",
+		"infoText": "Pop as a work of art",
+		"lowercaseName": "air",
+		"stage": "H&M",
+		"startTime": "02/06/2016 21:10",
+		"uppercaseName": "Air"
+	},
+	"albertomontero": {
+		"bandId": "4",
+		"endTime": "02/06/2016 18:10",
+		"infoText": "The mediterranean in folk key",
+		"lowercaseName": "albertomontero",
+		"stage": "Adidas",
+		"startTime": "02/06/2016 17:30",
+		"uppercaseName": "Alberto Montero"
+	},
+	"alessandrocortini": {
+		"bandId": "5",
+		"endTime": "02/06/2016 17:00",
+		"infoText": "Electronic and industrial darkness",
+		"lowercaseName": "alessandrocortini",
+		"stage": "Auditori",
+		"startTime": "02/06/2016 16:00",
+		"uppercaseName": "Alessandro Cortini"
+	},
+	"alexg": {
+		"bandId": "6",
+		"endTime": "03/06/2016 19:40",
+		"infoText": "Exquisite lo-fi folk",
+		"lowercaseName": "alexg",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 18:55",
+		"uppercaseName": "Alex G"
+	},
+	"algiers": {
+		"bandId": "7",
+		"endTime": "02/06/2016 18:45",
+		"infoText": "Revolution by gospel",
+		"lowercaseName": "algiers",
+		"stage": "Heineken",
+		"startTime": "02/06/2016 18:00",
+		"uppercaseName": "Algiers"
+	},
+	"aliment": {
+		"bandId": "8",
+		"endTime": "03/06/2016 18:25",
+		"infoText": "Punk punches from Girona",
+		"lowercaseName": "aliment",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 17:30",
+		"uppercaseName": "Aliment"
+	},
+	"aliment2": {
+		"bandId": "9",
+		"endTime": "03/06/2016 21:35",
+		"infoText": "Punk punches from Girona",
+		"lowercaseName": "aliment2",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "03/06/2016 21:00",
+		"uppercaseName": "Aliment"
+	},
+	"andyshauf": {
+		"bandId": "10",
+		"endTime": "02/06/2016 18:30",
+		"infoText": "The pleasures of folk",
+		"lowercaseName": "andyshauf",
+		"stage": "Auditori",
+		"startTime": "02/06/2016 17:30",
+		"uppercaseName": "Andy Shauf"
+	},
+	"angelwitch": {
+		"bandId": "11",
+		"endTime": "04/06/2016 19:45",
+		"infoText": "The memory of metal",
+		"lowercaseName": "angelwitch",
+		"stage": "Auditori",
+		"startTime": "04/06/2016 18:45",
+		"uppercaseName": "Angel Witch"
+	},
+	"animalcollective": {
+		"bandId": "12",
+		"endTime": "04/06/2016 01:35",
+		"infoText": "The future was this",
+		"lowercaseName": "animalcollective",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 00:35",
+		"uppercaseName": "Animal Collective"
+	},
+	"architectural": {
+		"bandId": "13",
+		"endTime": "03/06/2016 02:30",
+		"infoText": "From the techno of Detroit to jazz",
+		"lowercaseName": "architectural",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 01:00",
+		"uppercaseName": "Architectural"
+	},
+	"arkane": {
+		"bandId": "1",
+		"endTime": "02/06/2016 22:25",
+		"infoText": "Dancing through the eighties",
+		"lowercaseName": "arkane",
+		"stage": "Adidas",
+		"startTime": "02/06/2016 21:30",
+		"uppercaseName": "A.R. Kane"
+	},
+	"autolux": {
+		"bandId": "14",
+		"endTime": "04/06/2016 20:20",
+		"infoText": "Latest incarnation of dream pop",
+		"lowercaseName": "autolux",
+		"stage": "Primavera",
+		"startTime": "04/06/2016 19:30",
+		"uppercaseName": "Autolux"
+	},
+	"autumncomets": {
+		"bandId": "15",
+		"endTime": "02/06/2016 17:35",
+		"infoText": "On the path of shoegaze",
+		"lowercaseName": "autumncomets",
+		"stage": "Ray-Ban",
+		"startTime": "02/06/2016 17:00",
+		"uppercaseName": "Autumn Comets"
+	},
+	"babydee": {
+		"bandId": "16",
+		"endTime": "04/06/2016 16:45",
+		"infoText": "Cabaret pop",
+		"lowercaseName": "babydee",
+		"stage": "Auditori",
+		"startTime": "04/06/2016 16:00",
+		"uppercaseName": "Baby Dee"
+	},
+	"battles": {
+		"bandId": "17",
+		"endTime": "03/06/2016 03:50",
+		"infoText": "Instrumental and minimalist power",
+		"lowercaseName": "battles",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 02:50",
+		"uppercaseName": "Battles"
+	},
+	"beachhouse": {
+		"bandId": "18",
+		"endTime": "04/06/2016 03:00",
+		"infoText": "From the summit of dream-pop",
+		"lowercaseName": "beachhouse",
+		"stage": "Heineken",
+		"startTime": "04/06/2016 02:00",
+		"uppercaseName": "Beach House"
+	},
+	"beachslang": {
+		"bandId": "19",
+		"endTime": "03/06/2016 02:15",
+		"infoText": "Ferocious punk rock",
+		"lowercaseName": "beachslang",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 01:15",
+		"uppercaseName": "Beach Slang"
+	},
+	"beak": {
+		"bandId": "20",
+		"endTime": "02/06/2016 20:20",
+		"infoText": "Experimentation outside Portishead",
+		"lowercaseName": "beak",
+		"stage": "Primavera",
+		"startTime": "02/06/2016 19:30",
+		"uppercaseName": "BEAK>"
+	},
+	"bearoid": {
+		"bandId": "21",
+		"endTime": "03/06/2016 18:35",
+		"infoText": "Rythm in the body",
+		"lowercaseName": "bearoid",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "03/06/2016 18:00",
+		"uppercaseName": "Bearoid"
+	},
+	"begun": {
+		"bandId": "22",
+		"endTime": "03/06/2016 22:30",
+		"infoText": "Electronic globetrotters",
+		"lowercaseName": "begun",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 21:30",
+		"uppercaseName": "Begun"
+	},
+	"beirut": {
+		"bandId": "23",
+		"endTime": "03/06/2016 22:00",
+		"infoText": "Zach Condon’s globetrotter pop",
+		"lowercaseName": "beirut",
+		"stage": "H&M",
+		"startTime": "03/06/2016 21:00",
+		"uppercaseName": "Beirut"
+	},
+	"benwattbandfeatbernardbutler": {
+		"bandId": "24",
+		"endTime": "03/06/2016 19:15",
+		"infoText": "Tying the knot of success",
+		"lowercaseName": "benwattbandfeatbernardbutler",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 18:30",
+		"uppercaseName": "Ben Watt Band feat. Bernard Butler"
+	},
+	"blackdevildiscoclublive": {
+		"bandId": "25",
+		"endTime": "04/06/2016 02:00",
+		"infoText": "Ahead of his times",
+		"lowercaseName": "blackdevildiscoclublive",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 01:00",
+		"uppercaseName": "Black Devil Disco Club (live)"
+	},
+	"blacklipsdjs": {
+		"bandId": "26",
+		"endTime": "03/06/2016 20:00",
+		"infoText": "The garage party",
+		"lowercaseName": "blacklipsdjs",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 19:00",
+		"uppercaseName": "Black Lips Djs"
+	},
+	"bobmould": {
+		"bandId": "27",
+		"endTime": "04/06/2016 13:00",
+		"infoText": "The guiding light of American indie",
+		"lowercaseName": "bobmould",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 12:00",
+		"uppercaseName": "Bob Mould"
+	},
+	"bobmouldsolo": {
+		"bandId": "28",
+		"endTime": "04/06/2016 17:45",
+		"infoText": "The guiding light of American indie",
+		"lowercaseName": "bobmouldsolo",
+		"stage": "Hidden Stage",
+		"startTime": "04/06/2016 17:00",
+		"uppercaseName": "Bob Mould (solo)"
+	},
+	"boredoms": {
+		"bandId": "29",
+		"endTime": "04/06/2016 18:35",
+		"infoText": "Japanese noise freedom",
+		"lowercaseName": "boredoms",
+		"stage": "Primavera",
+		"startTime": "04/06/2016 17:40",
+		"uppercaseName": "Boredoms"
+	},
+	"bradfordcox": {
+		"bandId": "30",
+		"endTime": "03/06/2016 19:00",
+		"infoText": "Indie star",
+		"lowercaseName": "bradfordcox",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 18:00",
+		"uppercaseName": "Bradford Cox"
+	},
+	"brianwilsonperformingpetsounds": {
+		"bandId": "31",
+		"endTime": "04/06/2016 21:15",
+		"infoText": "The great cathedral of pop",
+		"lowercaseName": "brianwilsonperformingpetsounds",
+		"stage": "Heineken",
+		"startTime": "04/06/2016 20:00",
+		"uppercaseName": "Brian Wilson performing Pet Sounds"
+	},
+	"brokenenglishclublive": {
+		"bandId": "32",
+		"endTime": "03/06/2016 01:00",
+		"infoText": "Experimental anguish",
+		"lowercaseName": "brokenenglishclublive",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 00:00",
+		"uppercaseName": "Broken English Club (live)"
+	},
+	"cabaretvoltaire": {
+		"bandId": "35",
+		"endTime": "03/06/2016 20:15",
+		"infoText": "Industrial avant-garde",
+		"lowercaseName": "cabaretvoltaire",
+		"stage": "Auditori",
+		"startTime": "03/06/2016 19:15",
+		"uppercaseName": "Cabaret Voltaire"
+	},
+	"carseatheadrest": {
+		"bandId": "36",
+		"endTime": "02/06/2016 20:00",
+		"infoText": "The new genius of homemade indie",
+		"lowercaseName": "carseatheadrest",
+		"stage": "Pitchfork",
+		"startTime": "02/06/2016 19:00",
+		"uppercaseName": "Car Seat Headrest"
+	},
+	"cassmccombs": {
+		"bandId": "37",
+		"endTime": "02/06/2016 19:20",
+		"infoText": "The most restless side of American folk",
+		"lowercaseName": "cassmccombs",
+		"stage": "Ray-Ban",
+		"startTime": "02/06/2016 18:30",
+		"uppercaseName": "Cass McCombs"
+	},
+	"catseyes": {
+		"bandId": "38",
+		"endTime": "04/06/2016 20:30",
+		"infoText": "Velvety elegance",
+		"lowercaseName": "catseyes",
+		"stage": "Hidden Stage",
+		"startTime": "04/06/2016 19:30",
+		"uppercaseName": "Cat's Eyes"
+	},
+	"cavernofantimatter": {
+		"bandId": "39",
+		"endTime": "03/06/2016 22:35",
+		"infoText": "The other side of Stereolab",
+		"lowercaseName": "cavernofantimatter",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 21:35",
+		"uppercaseName": "Cavern Of Anti-Matter"
+	},
+	"ccmaxigross": {
+		"bandId": "34",
+		"endTime": "02/06/2016 21:00",
+		"infoText": "Psychedelic Italy",
+		"lowercaseName": "ccmaxigross",
+		"stage": "Adidas",
+		"startTime": "02/06/2016 20:05",
+		"uppercaseName": "C+C=Maxigross"
+	},
+	"chairlift": {
+		"bandId": "40",
+		"endTime": "05/06/2016 00:30",
+		"infoText": "Pop heterodoxy from the Brooklyn factory",
+		"lowercaseName": "chairlift",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 23:30",
+		"uppercaseName": "Chairlift"
+	},
+	"chicagotoys": {
+		"bandId": "41",
+		"endTime": "03/06/2016 23:05",
+		"infoText": "90s British shoegaze",
+		"lowercaseName": "chicagotoys",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "03/06/2016 22:30",
+		"uppercaseName": "Chicago Toys"
+	},
+	"clevelandlive": {
+		"bandId": "42",
+		"endTime": "05/06/2016 00:00",
+		"infoText": "Elegance in key of house",
+		"lowercaseName": "clevelandlive",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 23:00",
+		"uppercaseName": "Cleveland (live)"
+	},
+	"ctangana": {
+		"bandId": "33",
+		"endTime": "04/06/2016 01:35",
+		"infoText": "The future of rap in Spanish",
+		"lowercaseName": "ctangana",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 00:40",
+		"uppercaseName": "C. Tangana"
+	},
+	"current93": {
+		"bandId": "43",
+		"endTime": "04/06/2016 21:45",
+		"infoText": "Hallucinatory rock group",
+		"lowercaseName": "current93",
+		"stage": "Auditori",
+		"startTime": "04/06/2016 20:15",
+		"uppercaseName": "Current 93"
+	},
+	"dacmfunk": {
+		"bandId": "44",
+		"endTime": "04/06/2016 20:00",
+		"infoText": "Boogie nights",
+		"lowercaseName": "dacmfunk",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 19:00",
+		"uppercaseName": "DâM-FunK"
+	},
+	"danielbaughman": {
+		"bandId": "45",
+		"endTime": "04/06/2016 23:00",
+		"infoText": "Hivern Discs’ talent seeker",
+		"lowercaseName": "danielbaughman",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 21:30",
+		"uppercaseName": "Daniel Baughman"
+	},
+	"danielkyo": {
+		"bandId": "46",
+		"endTime": "04/06/2016 01:00",
+		"infoText": "Underground and resistance",
+		"lowercaseName": "danielkyo",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 23:30",
+		"uppercaseName": "Daniel Kyo"
+	},
+	"daughter": {
+		"bandId": "47",
+		"endTime": "02/06/2016 21:00",
+		"infoText": "The great dreamers of pop",
+		"lowercaseName": "daughter",
+		"stage": "Heineken",
+		"startTime": "02/06/2016 20:00",
+		"uppercaseName": "Daughter"
+	},
+	"davep": {
+		"bandId": "48",
+		"endTime": "04/06/2016 19:00",
+		"infoText": "Electronic reliability",
+		"lowercaseName": "davep",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 18:00",
+		"uppercaseName": "Dave P"
+	},
+	"deerhunter": {
+		"bandId": "49",
+		"endTime": "04/06/2016 22:25",
+		"infoText": "Bradford Cox’s the endless journey",
+		"lowercaseName": "deerhunter",
+		"stage": "H&M",
+		"startTime": "04/06/2016 21:25",
+		"uppercaseName": "Deerhunter"
+	},
+	"destroyer": {
+		"bandId": "50",
+		"endTime": "02/06/2016 21:25",
+		"infoText": "Dan Bejar, at his best",
+		"lowercaseName": "destroyer",
+		"stage": "Ray-Ban",
+		"startTime": "02/06/2016 20:30",
+		"uppercaseName": "Destroyer"
+	},
+	"diekatapult": {
+		"bandId": "51",
+		"endTime": "04/06/2016 18:35",
+		"infoText": "Mediterranean krautrock",
+		"lowercaseName": "diekatapult",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "04/06/2016 18:00",
+		"uppercaseName": "Die Katapult"
+	},
+	"dinosaurjr": {
+		"bandId": "52",
+		"endTime": "03/06/2016 23:15",
+		"infoText": "Gimme indie rock",
+		"lowercaseName": "dinosaurjr",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 22:15",
+		"uppercaseName": "Dinosaur Jr."
+	},
+	"discofinale": {
+		"bandId": "53",
+		"endTime": "05/06/2016 05:30",
+		"infoText": "The end of it all",
+		"lowercaseName": "discofinale",
+		"stage": "Bower & Wilkins",
+		"startTime": "05/06/2016 04:00",
+		"uppercaseName": "Disco Finale"
+	},
+	"djcoco": {
+		"bandId": "54",
+		"endTime": "05/06/2016 06:00",
+		"infoText": "Encyclopaedic end of party",
+		"lowercaseName": "djcoco",
+		"stage": "Ray-Ban",
+		"startTime": "05/06/2016 04:00",
+		"uppercaseName": "Dj Coco"
+	},
+	"djkoze": {
+		"bandId": "56",
+		"endTime": "04/06/2016 06:00",
+		"infoText": "Anarchy on the dance floor",
+		"lowercaseName": "djkoze",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 04:00",
+		"uppercaseName": "Dj Koze"
+	},
+	"djkoze2": {
+		"bandId": "55",
+		"endTime": "03/06/2016 21:30",
+		"infoText": "Anarchy on the dance floor",
+		"lowercaseName": "djkoze2",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 20:30",
+		"uppercaseName": "Dj Koze"
+	},
+	"djrichard": {
+		"bandId": "58",
+		"endTime": "05/06/2016 06:00",
+		"infoText": "The new techno rhythm",
+		"lowercaseName": "djrichard",
+		"stage": "Pitchfork",
+		"startTime": "05/06/2016 04:00",
+		"uppercaseName": "Dj Richard"
+	},
+	"djrichard2": {
+		"bandId": "57",
+		"endTime": "04/06/2016 21:30",
+		"infoText": "The new techno rhythm",
+		"lowercaseName": "djrichard2",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 20:30",
+		"uppercaseName": "Dj Richard"
+	},
+	"djsupermarkt": {
+		"bandId": "59",
+		"endTime": "03/06/2016 18:00",
+		"infoText": "Electronic music on a low flame",
+		"lowercaseName": "djsupermarkt",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 17:00",
+		"uppercaseName": "Dj Supermarkt"
+	},
+	"doblepletina": {
+		"bandId": "60",
+		"endTime": "01/06/2016 17:35",
+		"infoText": "Art house pop",
+		"lowercaseName": "doblepletina",
+		"stage": "Primavera",
+		"startTime": "01/06/2016 17:00",
+		"uppercaseName": "Doble Pletina"
+	},
+	"dorisburglive": {
+		"bandId": "61",
+		"endTime": "05/06/2016 02:30",
+		"infoText": "Imagination at the service of techno",
+		"lowercaseName": "dorisburglive",
+		"stage": "Bower & Wilkins",
+		"startTime": "05/06/2016 01:30",
+		"uppercaseName": "Dorisburg (live)"
+	},
+	"drivelikejehu": {
+		"bandId": "62",
+		"endTime": "04/06/2016 22:35",
+		"infoText": "Hardcore before hardcore",
+		"lowercaseName": "drivelikejehu",
+		"stage": "Primavera",
+		"startTime": "04/06/2016 21:35",
+		"uppercaseName": "Drive Like Jehu"
+	},
+	"dungen": {
+		"bandId": "63",
+		"endTime": "03/06/2016 18:40",
+		"infoText": "Pioneers of the psych-rock renaissance",
+		"lowercaseName": "dungen",
+		"stage": "H&M",
+		"startTime": "03/06/2016 18:00",
+		"uppercaseName": "Dungen"
+	},
+	"eduardodelacalle": {
+		"bandId": "64",
+		"endTime": "03/06/2016 00:00",
+		"infoText": "Analog Passion",
+		"lowercaseName": "eduardodelacalle",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 22:30",
+		"uppercaseName": "Eduardo De La Calle"
+	},
+	"elaltimovecino": {
+		"bandId": "65",
+		"endTime": "01/06/2016 18:35",
+		"infoText": "Dark anthems",
+		"lowercaseName": "elaltimovecino",
+		"stage": "Primavera",
+		"startTime": "01/06/2016 18:00",
+		"uppercaseName": "El Último Vecino"
+	},
+	"elaltimovecino2": {
+		"bandId": "66",
+		"endTime": "02/06/2016 21:35",
+		"infoText": "Dark anthems",
+		"lowercaseName": "elaltimovecino2",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "02/06/2016 21:00",
+		"uppercaseName": "El Último Vecino"
+	},
+	"empressof": {
+		"bandId": "67",
+		"endTime": "02/06/2016 21:25",
+		"infoText": "The empire of synthesised pop",
+		"lowercaseName": "empressof",
+		"stage": "Pitchfork",
+		"startTime": "02/06/2016 20:25",
+		"uppercaseName": "Empress Of"
+	},
+	"erolalkan": {
+		"bandId": "68",
+		"endTime": "02/06/2016 16:00",
+		"infoText": "The infallible disc jockey",
+		"lowercaseName": "erolalkan",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 14:00",
+		"uppercaseName": "Erol Alkan"
+	},
+	"evianchrist": {
+		"bandId": "69",
+		"endTime": "04/06/2016 03:50",
+		"infoText": "Beats with an eye on the future",
+		"lowercaseName": "evianchrist",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 02:30",
+		"uppercaseName": "Evian Christ"
+	},
+	"explosionsinthesky": {
+		"bandId": "70",
+		"endTime": "02/06/2016 23:20",
+		"infoText": "Instrumental intensity from Austin",
+		"lowercaseName": "explosionsinthesky",
+		"stage": "Heineken",
+		"startTime": "02/06/2016 22:20",
+		"uppercaseName": "Explosions In The Sky"
+	},
+	"farisbadwanthehorrors": {
+		"bandId": "71",
+		"endTime": "04/06/2016 18:00",
+		"infoText": "Life after post-punk",
+		"lowercaseName": "farisbadwanthehorrors",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 17:00",
+		"uppercaseName": "Faris Badwan (The Horrors)"
+	},
+	"fasenuova": {
+		"bandId": "72",
+		"endTime": "03/06/2016 03:20",
+		"infoText": "Industrial darkness from Asturias",
+		"lowercaseName": "fasenuova",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 02:20",
+		"uppercaseName": "Fasenuova"
+	},
+	"floatingpoints": {
+		"bandId": "73",
+		"endTime": "02/06/2016 14:00",
+		"infoText": "The science of rhythm",
+		"lowercaseName": "floatingpoints",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 13:00",
+		"uppercaseName": "Floating Points"
+	},
+	"floatingpointslive": {
+		"bandId": "74",
+		"endTime": "02/06/2016 23:40",
+		"infoText": "The science of rhythm",
+		"lowercaseName": "floatingpointslive",
+		"stage": "Ray-Ban",
+		"startTime": "02/06/2016 22:40",
+		"uppercaseName": "Floating Points (live)"
+	},
+	"freddiegibbs": {
+		"bandId": "75",
+		"endTime": "03/06/2016 22:20",
+		"infoText": "At the peak of rap",
+		"lowercaseName": "freddiegibbs",
+		"stage": "Primavera",
+		"startTime": "03/06/2016 21:20",
+		"uppercaseName": "Freddie Gibbs"
+	},
+	"gangofyouths": {
+		"bandId": "76",
+		"endTime": "02/06/2016 20:05",
+		"infoText": "Australian phenomenon",
+		"lowercaseName": "gangofyouths",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "02/06/2016 19:30",
+		"uppercaseName": "Gang of Youths"
+	},
+	"goat": {
+		"bandId": "77",
+		"endTime": "01/06/2016 21:30",
+		"infoText": "The commune of hallucinogenic psychedelia",
+		"lowercaseName": "goat",
+		"stage": "Primavera",
+		"startTime": "01/06/2016 20:30",
+		"uppercaseName": "Goat"
+	},
+	"harmarsuperstar": {
+		"bandId": "78",
+		"endTime": "03/06/2016 00:10",
+		"infoText": "Soul power",
+		"lowercaseName": "harmarsuperstar",
+		"stage": "Adidas",
+		"startTime": "02/06/2016 23:10",
+		"uppercaseName": "Har Mar Superstar"
+	},
+	"harmarsuperstardj": {
+		"bandId": "79",
+		"endTime": "02/06/2016 20:00",
+		"infoText": "Soul power",
+		"lowercaseName": "harmarsuperstardj",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 18:30",
+		"uppercaseName": "Har Mar Superstar dj"
+	},
+	"helenahauff": {
+		"bandId": "80",
+		"endTime": "03/06/2016 05:30",
+		"infoText": "Darkness and power from Hamburg",
+		"lowercaseName": "helenahauff",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 03:30",
+		"uppercaseName": "Helena Hauff"
+	},
+	"ho99o9": {
+		"bandId": "81",
+		"endTime": "05/06/2016 03:15",
+		"infoText": "Aggro rap",
+		"lowercaseName": "ho99o9",
+		"stage": "Adidas",
+		"startTime": "05/06/2016 02:15",
+		"uppercaseName": "Ho99o9"
+	},
+	"holapgrama": {
+		"bandId": "83",
+		"endTime": "03/06/2016 01:50",
+		"infoText": "The conquest of the electronic galaxy",
+		"lowercaseName": "holapgrama",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 00:50",
+		"uppercaseName": "Holögrama"
+	},
+	"hollyherndon": {
+		"bandId": "82",
+		"endTime": "04/06/2016 02:00",
+		"infoText": "Tech-topia diva",
+		"lowercaseName": "hollyherndon",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 01:00",
+		"uppercaseName": "Holly Herndon"
+	},
+	"hudsonmohawkedjset": {
+		"bandId": "84",
+		"endTime": "03/06/2016 05:45",
+		"infoText": "Electronic music from the future",
+		"lowercaseName": "hudsonmohawkedjset",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 04:10",
+		"uppercaseName": "Hudson Mohawke (dj set)"
+	},
+	"if": {
+		"bandId": "85",
+		"endTime": "05/06/2016 04:00",
+		"infoText": "Electro clash patrol",
+		"lowercaseName": "if",
+		"stage": "Bower & Wilkins",
+		"startTime": "05/06/2016 02:30",
+		"uppercaseName": "I-F"
+	},
+	"inspira": {
+		"bandId": "86",
+		"endTime": "03/06/2016 17:35",
+		"infoText": "The ambition of new Catalan pop",
+		"lowercaseName": "inspira",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 17:00",
+		"uppercaseName": "Inspira"
+	},
+	"islamchipsyandeek": {
+		"bandId": "87",
+		"endTime": "05/06/2016 05:00",
+		"infoText": "A soundtrack for the Arab Spring",
+		"lowercaseName": "islamchipsyandeek",
+		"stage": "Adidas",
+		"startTime": "05/06/2016 03:50",
+		"uppercaseName": "Islam Chipsy and EEK"
+	},
+	"jackcarty": {
+		"bandId": "88",
+		"endTime": "03/06/2016 20:05",
+		"infoText": "Honest folk",
+		"lowercaseName": "jackcarty",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "03/06/2016 19:30",
+		"uppercaseName": "Jack Carty"
+	},
+	"jayrock": {
+		"bandId": "89",
+		"endTime": "03/06/2016 23:10",
+		"infoText": "New rap from Los Angeles",
+		"lowercaseName": "jayrock",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 22:15",
+		"uppercaseName": "Jay Rock"
+	},
+	"jennyhval": {
+		"bandId": "90",
+		"endTime": "04/06/2016 21:30",
+		"infoText": "Commitment made song",
+		"lowercaseName": "jennyhval",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 20:30",
+		"uppercaseName": "Jenny Hval"
+	},
+	"jessylanza": {
+		"bandId": "91",
+		"endTime": "02/06/2016 23:05",
+		"infoText": "Synthetic heaven",
+		"lowercaseName": "jessylanza",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "02/06/2016 22:30",
+		"uppercaseName": "Jessy Lanza"
+	},
+	"jessylanzadj": {
+		"bandId": "92",
+		"endTime": "02/06/2016 18:30",
+		"infoText": "Synthetic heaven",
+		"lowercaseName": "jessylanzadj",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 17:00",
+		"uppercaseName": "Jessy Lanza dj"
+	},
+	"joanaserrat": {
+		"bandId": "93",
+		"endTime": "04/06/2016 17:35",
+		"infoText": "Catalan folk with an international profile",
+		"lowercaseName": "joanaserrat",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 17:00",
+		"uppercaseName": "Joana Serrat"
+	},
+	"johncarpenter": {
+		"bandId": "94",
+		"endTime": "03/06/2016 00:50",
+		"infoText": "The father of modern terror gets on stage",
+		"lowercaseName": "johncarpenter",
+		"stage": "Primavera",
+		"startTime": "02/06/2016 23:50",
+		"uppercaseName": "John Carpenter"
+	},
+	"juliaholter": {
+		"bandId": "95",
+		"endTime": "05/06/2016 01:45",
+		"infoText": "Pop intimacy",
+		"lowercaseName": "juliaholter",
+		"stage": "Ray-Ban",
+		"startTime": "05/06/2016 00:50",
+		"uppercaseName": "Julia Holter"
+	},
+	"julienbaker": {
+		"bandId": "96",
+		"endTime": "02/06/2016 19:30",
+		"infoText": "The age of innocence",
+		"lowercaseName": "julienbaker",
+		"stage": "Adidas",
+		"startTime": "02/06/2016 18:40",
+		"uppercaseName": "Julien Baker"
+	},
+	"kamasiwashington": {
+		"bandId": "97",
+		"endTime": "02/06/2016 22:00",
+		"infoText": "The most epic face of jazz",
+		"lowercaseName": "kamasiwashington",
+		"stage": "Auditori",
+		"startTime": "02/06/2016 21:00",
+		"uppercaseName": "Kamasi Washington"
+	},
+	"kiasmos": {
+		"bandId": "98",
+		"endTime": "04/06/2016 02:40",
+		"infoText": "Glacial electronic music",
+		"lowercaseName": "kiasmos",
+		"stage": "Primavera",
+		"startTime": "04/06/2016 01:45",
+		"uppercaseName": "Kiasmos"
+	},
+	"klavikonlive": {
+		"bandId": "99",
+		"endTime": "02/06/2016 20:45",
+		"infoText": "Techno without electronic and with a piano",
+		"lowercaseName": "klavikonlive",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 20:00",
+		"uppercaseName": "Klavikon (live)"
+	},
+	"lastshadowpuppets": {
+		"bandId": "100",
+		"endTime": "04/06/2016 01:55",
+		"infoText": "Two ride together",
+		"lowercaseName": "lastshadowpuppets",
+		"stage": "H&M",
+		"startTime": "04/06/2016 00:25",
+		"uppercaseName": "Last Shadow Puppets"
+	},
+	"lcdsoundsystem": {
+		"bandId": "101",
+		"endTime": "03/06/2016 02:45",
+		"infoText": "Dance-floor fever",
+		"lowercaseName": "lcdsoundsystem",
+		"stage": "Heineken",
+		"startTime": "03/06/2016 01:10",
+		"uppercaseName": "LCD Soundsystem"
+	},
+	"leeranaldoandelrayo": {
+		"bandId": "102",
+		"endTime": "02/06/2016 18:45",
+		"infoText": "Acoustic/electric trio format",
+		"lowercaseName": "leeranaldoandelrayo",
+		"stage": "Hidden Stage",
+		"startTime": "02/06/2016 18:00",
+		"uppercaseName": "Lee Ranaldo and El Rayo"
+	},
+	"lenawillikens": {
+		"bandId": "103",
+		"endTime": "05/06/2016 01:30",
+		"infoText": "Techno with views on drone",
+		"lowercaseName": "lenawillikens",
+		"stage": "Bower & Wilkins",
+		"startTime": "05/06/2016 00:00",
+		"uppercaseName": "Lena Willikens"
+	},
+	"leonvynehall": {
+		"bandId": "104",
+		"endTime": "04/06/2016 16:00",
+		"infoText": "The renovation of urban sounds",
+		"lowercaseName": "leonvynehall",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 14:30",
+		"uppercaseName": "Leon Vynehall"
+	},
+	"loschichos": {
+		"bandId": "105",
+		"endTime": "04/06/2016 22:35",
+		"infoText": "The kings of rumba",
+		"lowercaseName": "loschichos",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 21:35",
+		"uppercaseName": "Los Chichos"
+	},
+	"loshermanoscubero": {
+		"bandId": "106",
+		"endTime": "03/06/2016 17:45",
+		"infoText": "Tradition renovators",
+		"lowercaseName": "loshermanoscubero",
+		"stage": "Hidden Stage",
+		"startTime": "03/06/2016 17:00",
+		"uppercaseName": "Los Hermanos Cubero"
+	},
+	"lubomyrmelnyk": {
+		"bandId": "107",
+		"endTime": "03/06/2016 17:00",
+		"infoText": "A seconding coming for the fastest pianist",
+		"lowercaseName": "lubomyrmelnyk",
+		"stage": "Auditori",
+		"startTime": "03/06/2016 16:00",
+		"uppercaseName": "Lubomyr Melnyk"
+	},
+	"lush": {
+		"bandId": "108",
+		"endTime": "03/06/2016 20:30",
+		"infoText": "The shoegaze legend",
+		"lowercaseName": "lush",
+		"stage": "Hidden Stage",
+		"startTime": "03/06/2016 19:30",
+		"uppercaseName": "Lush"
+	},
+	"maceoplex": {
+		"bandId": "109",
+		"endTime": "04/06/2016 06:00",
+		"infoText": "The house alchemist",
+		"lowercaseName": "maceoplex",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 04:00",
+		"uppercaseName": "Maceo Plex"
+	},
+	"maceoplexb2bmaars": {
+		"bandId": "110",
+		"endTime": "03/06/2016 17:00",
+		"infoText": "Electronic four-handed feast",
+		"lowercaseName": "maceoplexb2bmaars",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 16:00",
+		"uppercaseName": "Maceo Plex b2b Maars"
+	},
+	"manel": {
+		"bandId": "111",
+		"endTime": "04/06/2016 19:50",
+		"infoText": "Reference of Catalan pop",
+		"lowercaseName": "manel",
+		"stage": "H&M",
+		"startTime": "04/06/2016 18:55",
+		"uppercaseName": "Manel"
+	},
+	"manoletough": {
+		"bandId": "112",
+		"endTime": "03/06/2016 15:00",
+		"infoText": "Instinctive dance",
+		"lowercaseName": "manoletough",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 13:30",
+		"uppercaseName": "Mano Le Tough"
+	},
+	"matthewdear": {
+		"bandId": "113",
+		"endTime": "04/06/2016 14:30",
+		"infoText": "The link hinge between pop and electronic music",
+		"lowercaseName": "matthewdear",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 13:00",
+		"uppercaseName": "Matthew Dear"
+	},
+	"mbongwanastar": {
+		"bandId": "114",
+		"endTime": "03/06/2016 01:45",
+		"infoText": "The Congolese beat",
+		"lowercaseName": "mbongwanastar",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 00:55",
+		"uppercaseName": "Mbongwana Star"
+	},
+	"moderat": {
+		"bandId": "115",
+		"endTime": "05/06/2016 03:00",
+		"infoText": "Strength through unity",
+		"lowercaseName": "moderat",
+		"stage": "Heineken",
+		"startTime": "05/06/2016 01:40",
+		"uppercaseName": "Moderat"
+	},
+	"moneyforrope": {
+		"bandId": "116",
+		"endTime": "04/06/2016 21:35",
+		"infoText": "Surf/soul/rock/garage band",
+		"lowercaseName": "moneyforrope",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "04/06/2016 21:00",
+		"uppercaseName": "Money For Rope"
+	},
+	"mosessumney": {
+		"bandId": "117",
+		"endTime": "03/06/2016 20:00",
+		"infoText": "High quality folk-soul",
+		"lowercaseName": "mosessumney",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 19:00",
+		"uppercaseName": "Moses Sumney"
+	},
+	"mueranhumanos": {
+		"bandId": "118",
+		"endTime": "02/06/2016 18:25",
+		"infoText": "The most extreme and agonising side of the eighties",
+		"lowercaseName": "mueranhumanos",
+		"stage": "Primavera",
+		"startTime": "02/06/2016 17:40",
+		"uppercaseName": "Mueran Humanos"
+	},
+	"mueranhumanos2": {
+		"bandId": "119",
+		"endTime": "04/06/2016 20:05",
+		"infoText": "The most extreme and agonising side of the eighties",
+		"lowercaseName": "mueranhumanos2",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "04/06/2016 19:30",
+		"uppercaseName": "Mueran Humanos"
+	},
+	"nao": {
+		"bandId": "120",
+		"endTime": "03/06/2016 21:30",
+		"infoText": "The new voice of R&B",
+		"lowercaseName": "nao",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 20:30",
+		"uppercaseName": "NAO"
+	},
+	"neilmichaelhagerty": {
+		"bandId": "121",
+		"endTime": "03/06/2016 20:10",
+		"infoText": "Rock’n’roll attitude",
+		"lowercaseName": "neilmichaelhagerty",
+		"stage": "Primavera",
+		"startTime": "03/06/2016 19:20",
+		"uppercaseName": "Neil Michael Hagerty"
+	},
+	"neonindian": {
+		"bandId": "122",
+		"endTime": "03/06/2016 04:00",
+		"infoText": "Hedonistic marathon",
+		"lowercaseName": "neonindian",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 02:45",
+		"uppercaseName": "Neon Indian"
+	},
+	"nothingplaces": {
+		"bandId": "123",
+		"endTime": "02/06/2016 18:25",
+		"infoText": "Avant garde pop in first person",
+		"lowercaseName": "nothingplaces",
+		"stage": "Pitchfork",
+		"startTime": "02/06/2016 17:30",
+		"uppercaseName": "Nothing Places"
+	},
+	"optimoespacio": {
+		"bandId": "124",
+		"endTime": "03/06/2016 06:00",
+		"infoText": "Pop shaken and well stirred",
+		"lowercaseName": "optimoespacio",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 04:00",
+		"uppercaseName": "Optimo (Espacio)"
+	},
+	"orchestrabaobab": {
+		"bandId": "125",
+		"endTime": "04/06/2016 23:40",
+		"infoText": "From Senegal to Cuba and back",
+		"lowercaseName": "orchestrabaobab",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 22:45",
+		"uppercaseName": "Orchestra Baobab"
+	},
+	"pajarojack": {
+		"bandId": "126",
+		"endTime": "04/06/2016 18:30",
+		"infoText": "Granada connection",
+		"lowercaseName": "pajarojack",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 17:45",
+		"uppercaseName": "Pájaro Jack"
+	},
+	"panthaduprince": {
+		"bandId": "127",
+		"endTime": "05/06/2016 03:50",
+		"infoText": "presents The Triad",
+		"lowercaseName": "panthaduprince",
+		"stage": "Ray-Ban",
+		"startTime": "05/06/2016 02:50",
+		"uppercaseName": "Pantha du Prince"
+	},
+	"parquetcourts": {
+		"bandId": "128",
+		"endTime": "05/06/2016 02:00",
+		"infoText": "Indie charisma",
+		"lowercaseName": "parquetcourts",
+		"stage": "Pitchfork",
+		"startTime": "05/06/2016 01:00",
+		"uppercaseName": "Parquet Courts"
+	},
+	"peaches": {
+		"bandId": "129",
+		"endTime": "02/06/2016 21:30",
+		"infoText": "Foul-mouthed electronic music",
+		"lowercaseName": "peaches",
+		"stage": "Hidden Stage",
+		"startTime": "02/06/2016 20:30",
+		"uppercaseName": "Peaches"
+	},
+	"pinalive": {
+		"bandId": "130",
+		"endTime": "02/06/2016 22:30",
+		"infoText": "Digital Minimalism",
+		"lowercaseName": "pinalive",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 21:45",
+		"uppercaseName": "Pina (live)"
+	},
+	"pjharvey": {
+		"bandId": "131",
+		"endTime": "04/06/2016 23:50",
+		"infoText": "Ungovernable career in rock history",
+		"lowercaseName": "pjharvey",
+		"stage": "Heineken",
+		"startTime": "04/06/2016 22:35",
+		"uppercaseName": "PJ Harvey"
+	},
+	"powelllive": {
+		"bandId": "132",
+		"endTime": "03/06/2016 03:30",
+		"infoText": "Challenging and radical techno",
+		"lowercaseName": "powelllive",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 02:30",
+		"uppercaseName": "Powell (live)"
+	},
+	"protomartyr": {
+		"bandId": "133",
+		"endTime": "03/06/2016 00:45",
+		"infoText": "Post-punk amidst urban decay",
+		"lowercaseName": "protomartyr",
+		"stage": "Pitchfork",
+		"startTime": "02/06/2016 23:45",
+		"uppercaseName": "Protomartyr"
+	},
+	"pushat": {
+		"bandId": "134",
+		"endTime": "04/06/2016 23:00",
+		"infoText": "High-flying rap",
+		"lowercaseName": "pushat",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 22:00",
+		"uppercaseName": "Pusha T"
+	},
+	"pxxrgvng": {
+		"bandId": "135",
+		"endTime": "04/06/2016 21:05",
+		"infoText": "The rhythm mafia",
+		"lowercaseName": "pxxrgvng",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 20:05",
+		"uppercaseName": "PXXR GVNG"
+	},
+	"radiohead": {
+		"bandId": "136",
+		"endTime": "04/06/2016 00:15",
+		"infoText": "The contemporary rock pathfinder",
+		"lowercaseName": "radiohead",
+		"stage": "Heineken",
+		"startTime": "03/06/2016 22:15",
+		"uppercaseName": "Radiohead"
+	},
+	"raudive": {
+		"bandId": "137",
+		"endTime": "02/06/2016 21:45",
+		"infoText": "Electronic minimalism",
+		"lowercaseName": "raudive",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 20:45",
+		"uppercaseName": "Raudive"
+	},
+	"richarddawson": {
+		"bandId": "138",
+		"endTime": "03/06/2016 18:30",
+		"infoText": "Untameable heterodoxy",
+		"lowercaseName": "richarddawson",
+		"stage": "Auditori",
+		"startTime": "03/06/2016 17:30",
+		"uppercaseName": "Richard Dawson"
+	},
+	"richardhawley": {
+		"bandId": "139",
+		"endTime": "04/06/2016 21:30",
+		"infoText": "The crooner with a rock and roll soul",
+		"lowercaseName": "richardhawley",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 20:30",
+		"uppercaseName": "Richard Hawley"
+	},
+	"robertforster": {
+		"bandId": "140",
+		"endTime": "03/06/2016 21:45",
+		"infoText": "The elegance of pop incarnate",
+		"lowercaseName": "robertforster",
+		"stage": "Auditori",
+		"startTime": "03/06/2016 20:45",
+		"uppercaseName": "Robert Forster"
+	},
+	"roosevelt": {
+		"bandId": "141",
+		"endTime": "05/06/2016 03:45",
+		"infoText": "Elegance in synth key",
+		"lowercaseName": "roosevelt",
+		"stage": "Pitchfork",
+		"startTime": "05/06/2016 02:35",
+		"uppercaseName": "Roosevelt"
+	},
+	"roryphillips": {
+		"bandId": "142",
+		"endTime": "02/06/2016 13:00",
+		"infoText": "Disco doyen",
+		"lowercaseName": "roryphillips",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 12:00",
+		"uppercaseName": "Rory Phillips"
+	},
+	"royalheadache": {
+		"bandId": "143",
+		"endTime": "04/06/2016 00:30",
+		"infoText": "When punk rhymes with soul",
+		"lowercaseName": "royalheadache",
+		"stage": "Pitchfork",
+		"startTime": "03/06/2016 23:35",
+		"uppercaseName": "Royal Headache"
+	},
+	"savages": {
+		"bandId": "144",
+		"endTime": "03/06/2016 20:50",
+		"infoText": "Unforgiving post-punk",
+		"lowercaseName": "savages",
+		"stage": "Heineken",
+		"startTime": "03/06/2016 20:00",
+		"uppercaseName": "Savages"
+	},
+	"scharre": {
+		"bandId": "145",
+		"endTime": "03/06/2016 13:30",
+		"infoText": "The depths of techno wisdom",
+		"lowercaseName": "scharre",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 12:00",
+		"uppercaseName": "Scharre"
+	},
+	"seldabaacanandboompam": {
+		"bandId": "146",
+		"endTime": "03/06/2016 21:15",
+		"infoText": "Voice and memory of Anatolian rock",
+		"lowercaseName": "seldabaacanandboompam",
+		"stage": "Ray-Ban",
+		"startTime": "03/06/2016 20:15",
+		"uppercaseName": "Selda Bağcan and Boom Pam"
+	},
+	"sheermag": {
+		"bandId": "147",
+		"endTime": "04/06/2016 04:50",
+		"infoText": "Punk with no hang-ups about seventies’ rock",
+		"lowercaseName": "sheermag",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 03:50",
+		"uppercaseName": "Sheer Mag"
+	},
+	"shellac": {
+		"bandId": "148",
+		"endTime": "04/06/2016 00:15",
+		"infoText": "Devastating precision",
+		"lowercaseName": "shellac",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 23:15",
+		"uppercaseName": "Shellac"
+	},
+	"shura": {
+		"bandId": "149",
+		"endTime": "04/06/2016 03:05",
+		"infoText": "Ambitious pop in from the cold",
+		"lowercaseName": "shura",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 02:05",
+		"uppercaseName": "Shura"
+	},
+	"sigurra3s": {
+		"bandId": "150",
+		"endTime": "05/06/2016 01:30",
+		"infoText": "Arctic epiphanies",
+		"lowercaseName": "sigurra3s",
+		"stage": "H&M",
+		"startTime": "05/06/2016 00:00",
+		"uppercaseName": "Sigur Rós"
+	},
+	"simianmobilediscodj": {
+		"bandId": "151",
+		"endTime": "03/06/2016 16:00",
+		"infoText": "The dance locomotive",
+		"lowercaseName": "simianmobilediscodj",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 15:00",
+		"uppercaseName": "Simian Mobile Disco Dj"
+	},
+	"sixorgansofadmittance": {
+		"bandId": "152",
+		"endTime": "04/06/2016 18:00",
+		"infoText": "At the avant garde of experimental psychedelia",
+		"lowercaseName": "sixorgansofadmittance",
+		"stage": "Auditori",
+		"startTime": "04/06/2016 17:15",
+		"uppercaseName": "Six Organs of Admittance"
+	},
+	"sophie": {
+		"bandId": "153",
+		"endTime": "03/06/2016 23:30",
+		"infoText": "The great alchemist of electronic pop",
+		"lowercaseName": "sophie",
+		"stage": "Bower & Wilkins",
+		"startTime": "03/06/2016 22:30",
+		"uppercaseName": "Sophie"
+	},
+	"srchinarro": {
+		"bandId": "154",
+		"endTime": "01/06/2016 20:00",
+		"infoText": "The voice of iconoclastic indie",
+		"lowercaseName": "srchinarro",
+		"stage": "Primavera",
+		"startTime": "01/06/2016 19:00",
+		"uppercaseName": "Sr. Chinarro"
+	},
+	"stevegunn": {
+		"bandId": "155",
+		"endTime": "03/06/2016 21:05",
+		"infoText": "Virtuosity without stridency",
+		"lowercaseName": "stevegunn",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 20:05",
+		"uppercaseName": "Steve Gunn"
+	},
+	"suede": {
+		"bandId": "156",
+		"endTime": "01/06/2016 23:30",
+		"infoText": "The bright flame of Brit pop",
+		"lowercaseName": "suede",
+		"stage": "Primavera",
+		"startTime": "01/06/2016 22:00",
+		"uppercaseName": "Suede"
+	},
+	"suedeanightthoughtsa": {
+		"bandId": "157",
+		"endTime": "02/06/2016 20:30",
+		"infoText": "Tragedy in two acts",
+		"lowercaseName": "suedeanightthoughtsa",
+		"stage": "Auditori",
+		"startTime": "02/06/2016 19:30",
+		"uppercaseName": "Suede “Night Thoughts”"
+	},
+	"suuns": {
+		"bandId": "158",
+		"endTime": "02/06/2016 22:30",
+		"infoText": "Experimental scars",
+		"lowercaseName": "suuns",
+		"stage": "Primavera",
+		"startTime": "02/06/2016 21:35",
+		"uppercaseName": "Suuns"
+	},
+	"suzannekraft": {
+		"bandId": "159",
+		"endTime": "04/06/2016 20:30",
+		"infoText": "Sythn Versatility",
+		"lowercaseName": "suzannekraft",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 19:00",
+		"uppercaseName": "Suzanne Kraft"
+	},
+	"tameimpala": {
+		"bandId": "160",
+		"endTime": "03/06/2016 01:00",
+		"infoText": "Psychedelia at its best",
+		"lowercaseName": "tameimpala",
+		"stage": "H&M",
+		"startTime": "02/06/2016 23:30",
+		"uppercaseName": "Tame Impala"
+	},
+	"theavalanches": {
+		"bandId": "161",
+		"endTime": "04/06/2016 03:50",
+		"infoText": "Australian sampledelia and filigree",
+		"lowercaseName": "theavalanches",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 02:50",
+		"uppercaseName": "The Avalanches"
+	},
+	"thechills": {
+		"bandId": "162",
+		"endTime": "04/06/2016 19:25",
+		"infoText": "The legendary southern pop",
+		"lowercaseName": "thechills",
+		"stage": "Ray-Ban",
+		"startTime": "04/06/2016 18:40",
+		"uppercaseName": "The Chills"
+	},
+	"theeohsees": {
+		"bandId": "167",
+		"endTime": "03/06/2016 02:45",
+		"infoText": "Psychedelic hyperactivity",
+		"lowercaseName": "theeohsees",
+		"stage": "Primavera",
+		"startTime": "03/06/2016 01:50",
+		"uppercaseName": "Thee Oh Sees"
+	},
+	"thejameshuntersix": {
+		"bandId": "163",
+		"endTime": "02/06/2016 19:50",
+		"infoText": "A whirlwind of classical soul",
+		"lowercaseName": "thejameshuntersix",
+		"stage": "H&M",
+		"startTime": "02/06/2016 18:55",
+		"uppercaseName": "The James Hunter Six"
+	},
+	"themaghreban": {
+		"bandId": "164",
+		"endTime": "04/06/2016 03:45",
+		"infoText": "For the love of funk and EDM",
+		"lowercaseName": "themaghreban",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 02:00",
+		"uppercaseName": "The Maghreban"
+	},
+	"themeanies": {
+		"bandId": "165",
+		"endTime": "04/06/2016 23:05",
+		"infoText": "Australian punk rock band",
+		"lowercaseName": "themeanies",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "04/06/2016 22:30",
+		"uppercaseName": "The Meanies"
+	},
+	"thesaurs": {
+		"bandId": "166",
+		"endTime": "04/06/2016 18:25",
+		"infoText": "Youth, the divine treasure",
+		"lowercaseName": "thesaurs",
+		"stage": "Pitchfork",
+		"startTime": "04/06/2016 17:30",
+		"uppercaseName": "The Saurs"
+	},
+	"tigerandwoods": {
+		"bandId": "168",
+		"endTime": "04/06/2016 05:30",
+		"infoText": "Groove ambassadors",
+		"lowercaseName": "tigerandwoods",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 03:45",
+		"uppercaseName": "Tiger and Woods"
+	},
+	"titusandronicus": {
+		"bandId": "169",
+		"endTime": "03/06/2016 19:50",
+		"infoText": "The wildest punk-opera in the world",
+		"lowercaseName": "titusandronicus",
+		"stage": "H&M",
+		"startTime": "03/06/2016 19:05",
+		"uppercaseName": "Titus Andronicus"
+	},
+	"toddterje": {
+		"bandId": "170",
+		"endTime": "02/06/2016 17:00",
+		"infoText": "The Scandinavian connection",
+		"lowercaseName": "toddterje",
+		"stage": "Bower & Wilkins",
+		"startTime": "02/06/2016 16:00",
+		"uppercaseName": "Todd Terje"
+	},
+	"tortoise": {
+		"bandId": "171",
+		"endTime": "04/06/2016 00:25",
+		"infoText": "Via Chicago",
+		"lowercaseName": "tortoise",
+		"stage": "Primavera",
+		"startTime": "03/06/2016 23:25",
+		"uppercaseName": "Tortoise"
+	},
+	"trevorjackson": {
+		"bandId": "172",
+		"endTime": "04/06/2016 17:00",
+		"infoText": "Those dark eighties",
+		"lowercaseName": "trevorjackson",
+		"stage": "Bower & Wilkins",
+		"startTime": "04/06/2016 16:00",
+		"uppercaseName": "Trevor Jackson"
+	},
+	"tysegallandthemuggers": {
+		"bandId": "173",
+		"endTime": "05/06/2016 02:45",
+		"infoText": "Long live the King of unchained lo-fi",
+		"lowercaseName": "tysegallandthemuggers",
+		"stage": "Primavera",
+		"startTime": "05/06/2016 01:50",
+		"uppercaseName": "Ty Segall and The Muggers"
+	},
+	"unsane": {
+		"bandId": "175",
+		"endTime": "05/06/2016 01:45",
+		"infoText": "The historical scream of hardcore",
+		"lowercaseName": "unsane",
+		"stage": "Adidas",
+		"startTime": "05/06/2016 00:45",
+		"uppercaseName": "Unsane"
+	},
+	"usgirls": {
+		"bandId": "174",
+		"endTime": "04/06/2016 19:40",
+		"infoText": "The experimental diva",
+		"lowercaseName": "usgirls",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 18:55",
+		"uppercaseName": "U.S. Girls"
+	},
+	"venom": {
+		"bandId": "176",
+		"endTime": "05/06/2016 00:05",
+		"infoText": "Ambassadors of extreme metal",
+		"lowercaseName": "venom",
+		"stage": "Adidas",
+		"startTime": "04/06/2016 23:05",
+		"uppercaseName": "Venom"
+	},
+	"vincestaples": {
+		"bandId": "177",
+		"endTime": "02/06/2016 23:10",
+		"infoText": "High voltage rap to regenerate hip hop",
+		"lowercaseName": "vincestaples",
+		"stage": "Pitchfork",
+		"startTime": "02/06/2016 22:10",
+		"uppercaseName": "Vince Staples"
+	},
+	"vivabelgrado": {
+		"bandId": "178",
+		"endTime": "03/06/2016 18:30",
+		"infoText": "Biting hardcore and screamo",
+		"lowercaseName": "vivabelgrado",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 17:45",
+		"uppercaseName": "Viva Belgrado"
+	},
+	"whitefence": {
+		"bandId": "179",
+		"endTime": "03/06/2016 18:25",
+		"infoText": "Fascinating psychedelia",
+		"lowercaseName": "whitefence",
+		"stage": "Primavera",
+		"startTime": "03/06/2016 17:40",
+		"uppercaseName": "White Fence"
+	},
+	"whitereaper": {
+		"bandId": "180",
+		"endTime": "03/06/2016 05:00",
+		"infoText": "Tribute to radiant punk-pop",
+		"lowercaseName": "whitereaper",
+		"stage": "Adidas",
+		"startTime": "03/06/2016 04:05",
+		"uppercaseName": "White Reaper"
+	},
+	"whitereaper2": {
+		"bandId": "181",
+		"endTime": "02/06/2016 18:35",
+		"infoText": "Tribute to radiant punk-pop",
+		"lowercaseName": "whitereaper2",
+		"stage": "Ray-Ban Unplugged",
+		"startTime": "02/06/2016 18:00",
+		"uppercaseName": "White Reaper"
+	},
+	"wildnothing": {
+		"bandId": "182",
+		"endTime": "04/06/2016 18:45",
+		"infoText": "Pop honesty",
+		"lowercaseName": "wildnothing",
+		"stage": "Heineken",
+		"startTime": "04/06/2016 18:00",
+		"uppercaseName": "Wild Nothing"
+	}
+}

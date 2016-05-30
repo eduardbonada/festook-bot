@@ -5,6 +5,7 @@ var _ 		= require('underscore');
 var User = require('../db/user');
 var Band = require('../db/band');
 
+deepDebug = false;
 
 exports.computeBandSimilarityToMustBands = function(user){
 	
@@ -56,6 +57,8 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 
 			simToMust[allBands[band].lowercase] = 1; // store into temp array
 
+			if(deepDebug) console.log("Setting similarity to must of band " + allBands[band].lowercase + " : 1");
+
 		}
 		// not a must band
 		else{
@@ -71,10 +74,15 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 			var minDist 		= 0;
 			var sumInvDist 	 	= invDistToMust.reduce(function(a, b){ return  a+b}); // sum values in invDistToMust
 			var harmMean 	 	= mustBands.length / sumInvDist;
-			var normharmMean 	= (harmMean - maxDist) / (minDist - maxDist)
+			var normHarmMean 	= (harmMean - maxDist) / (minDist - maxDist)
+
+			if(deepDebug) console.log("Computing similarity to must of band " + allBands[band].lowercase);
+			if(deepDebug) console.log("- sumInvDist   : " + sumInvDist);
+			if(deepDebug) console.log("- harmMean     : " + harmMean);
+			if(deepDebug) console.log("- normHarmMean : " + normHarmMean);
 
 			// store into temp array
-			simToMust[allBands[band].lowercase] = normharmMean;
+			simToMust[allBands[band].lowercase] = normHarmMean;
 
 		}
 
