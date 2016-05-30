@@ -1,6 +1,7 @@
 // Import dependencies
 var bodyParser 	= require('body-parser');
 var TelegramBot = require('node-telegram-bot-api');
+var moment = require('moment');
 
 var config = require('../config');
 
@@ -724,10 +725,10 @@ bot.onText(/\/schedule/, function (message) {
 							if( dayIndex >= 0){ // if the day entered is one of the days of the festival
 
 								var festivalDay = config.festivalInfo.calendarDays[dayIndex];
-
+								var weekday = (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])[moment(festivalDay,"D(MM/YYYY").day()];
 
 								scheduleCntrl.computeScheduleForDay(telegramId, festivalDay, function(textSchedule){
-									var scheduleMessage = "Done! I recommend you this plan for " + festivalDay + ": \n\n";
+									var scheduleMessage = "Done! I recommend you this plan for " + weekday + " " + message.text + ": \n\n";
 									scheduleMessage += textSchedule;
 									scheduleMessage += "\nEnjoy!";
 
