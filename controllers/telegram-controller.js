@@ -824,8 +824,6 @@ bot.onText(/\/now/, function (message) {
 
 bot.onText(/[\s\S]*/, function (msg) {
 
-	console.log("Anything");
-
 	var message = msg.text;
 	var isCommand = commands.indexOf(message.split(" ")[0]) >= 0;
 	var isReply = typeof msg.reply_to_message !== 'undefined';
@@ -843,6 +841,7 @@ bot.onText(/[\s\S]*/, function (msg) {
 		});
 	}
 });
+
 
 /// ----- ADMIN COMMANDS ----- ///
 
@@ -891,15 +890,15 @@ function notifyBandNotFound(telegramId, telegramChatId, bandName){
 function notifyHelp(telegramId, telegramChatId){
 
 	var helpMessage = "What do you want to do?\n\n" + 
-			"See all /bands\n\n" + 
+			"See all /bands\n" + 
 			"See your /must bands\n" +
-			"- /addmust band\n" + 
-			"- /removemust band\n\n" + 
+			" · /addmust band\n" + 
+			" · /removemust band\n" + 
 			"See your /avoid bands\n" + 
-			"- /addavoid band\n" + 
-			"- /removeavoid band\n\n" + 
-			"See your /schedule\n\n" +
-			"/reset at your own risk\n"
+			" · /addavoid band\n" + 
+			" · /removeavoid band\n" + 
+			"See your /schedule\n" +
+			"Or /reset at your own risk"
 
 	notify(telegramChatId, 
 		helpMessage, 

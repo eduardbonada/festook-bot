@@ -49,23 +49,6 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 	)
 }
 
-exports.listUsers = function(doneCallback){
-
-	var listOfUsers = "";
-
-	User.find({}, function (err, users) {
-		if (err) throw err;
-
-		if(users.length){
-			for (u in users){
-				listOfUsers += users[u].telegramFirstName + " " + users[u].telegramLastName + ": " + 
-								"<i>m:" + users[u].mustBands.length + " | a:" + users[u].avoidBands.length + "</i>";
-			}
-			doneCallback(listOfUsers);
-		}
-	});
-}
-
 exports.clearUser = function(telegramId, doneCallback){
 
 	User.findOne(
@@ -113,4 +96,21 @@ exports.clearUser = function(telegramId, doneCallback){
 			}
 		}
 	)
+}
+
+exports.listUsers = function(doneCallback){
+
+	var listOfUsers = "";
+
+	User.find({}, function (err, users) {
+		if (err) throw err;
+
+		if(users.length){
+			for (u in users){
+				listOfUsers += users[u].telegramFirstName + " " + users[u].telegramLastName + ": " + 
+								"<i>m:" + users[u].mustBands.length + " | a:" + users[u].avoidBands.length + "</i>\n";
+			}
+			doneCallback(listOfUsers);
+		}
+	});
 }
