@@ -21,7 +21,9 @@ var adminChatId = "217793301"; // chat id of the admin user where admin notifica
 
 module.exports = function(app) {
 
-var bot = setupBotConnection("polling", app); // "polling" or "webhook"
+
+connectionType = process.env.OPENSHIFT_NODEJS_IP ? "webhook" : "polling";
+var bot = setupBotConnection(connectionType, app);
 // clear a webhook => https://api.telegram.org/bot237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo/setWebhook?url=
 
 // Test bot
@@ -1025,6 +1027,8 @@ function removeDiacritics (str) {
 }
 
 function setupBotConnection(style, app){
+
+	serverLog("Setup bot " + style + " connection");
 
 	var bot = {};
 	switch(style){
