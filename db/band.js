@@ -26,7 +26,10 @@ var BandSchema = new mongoose.Schema({
 	},
 	similarities:{
 		type: Object
-	}	
+	},
+	infoText:{
+		type: String
+	}
 });
 
 // BandSchema.pre('save', function(next) {};

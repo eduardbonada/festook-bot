@@ -47,7 +47,7 @@ function loadListOfBands(doneCallback){
 		bandCount ++;
 
 		// pick only the field we want to store
-		var bandClean = _.pick(bands[bandName], 'lowercaseName', 'uppercaseName', 'startTime', 'endTime', 'stage');
+		var bandClean = _.pick(bands[bandName], 'lowercaseName', 'uppercaseName', 'startTime', 'endTime', 'stage', 'infoText');
 		
 		//console.log('[FILE2DB] Saving band "' + bandClean.uppercaseName + '" into DB (' + bandCount + ' of ' + Object.keys(bands).length + ')');
 
@@ -57,7 +57,8 @@ function loadListOfBands(doneCallback){
 			uppercase: bandClean.uppercaseName,
 			startTime: moment(bandClean.startTime, 'DD/MM/YYYY HH:mm').format(),
 			endTime:   moment(bandClean.endTime, 'DD/MM/YYYY HH:mm').format(),
-			stage:     bandClean.stage
+			stage:     bandClean.stage,
+			infoText:  bandClean.infoText
 		});
 
 		// Attempt to save the band into DB

@@ -33,7 +33,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 
 					mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
 
-					done();
+					done(true);
 				});
 
 			}
@@ -42,7 +42,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 					botFsmState: "Welcome"
 				}, function(updated){
 					console.log("[USER] Reset of user with telegramId " + telegramId);
-					done();
+					done(false);
 				});
 			}
 		}

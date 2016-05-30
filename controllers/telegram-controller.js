@@ -41,14 +41,14 @@ bot.onText(/\/start/, function (message) {
 	
 	serverLog('New user connected: ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
 
-	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(){
+	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(created){
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
 			
 			notify(message.chat.id, 
 				replyMessage, 
 				"Sent message to user " + telegramId);
 
-			notifyAdmin("New user! " + telegramFirstName + " " + telegramLastName);
+			if(created) notifyAdmin("New user! " + telegramFirstName + " " + telegramLastName);
 
 		});
 	});

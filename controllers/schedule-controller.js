@@ -75,56 +75,52 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 			if(user){
 
 				// get bands info
-				Band.find(
-					{}, // where filter
-					'lowercase uppercase startTime endTime stage',	// fields to return
-					function (err, bands) {
-						if (err) throw err;
+				Band.find({}, function (err, bands) {
+					if (err) throw err;
 
-						if(bands.length){
+					if(bands.length){
 
-							var bandsDict = {};
-							for(b in bands){
-								bandsDict[bands[b].lowercase] = bands[b];
-							}
-							
-							// generate schedule getting list of lowercase bands to attend
-							var bandsToAttend = schedule.generateSchedule(user, bandsDict);
-							
-							// convert list of bands into an object with all bands info (name, stage, start, end)
-							var objectSchedule = objectRepresentationOfSchedule(
-													bandsToAttend, 
-													bandsDict);
+						var bandsDict = {};
+						for(b in bands){
+							bandsDict[bands[b].lowercase] = bands[b];
+						}
+						
+						// generate schedule getting list of lowercase bands to attend
+						var bandsToAttend = schedule.generateSchedule(user, bandsDict);
+						
+						// convert list of bands into an object with all bands info (name, stage, start, end)
+						var objectSchedule = objectRepresentationOfSchedule(
+												bandsToAttend, 
+												bandsDict);
 
-							// store schedule object into DB
-							User.findOneAndUpdate(
-								{ 
-									telegramId: telegramId
-								}, 
-								{
-									$set: { 
-										schedule: objectSchedule,
-										upToDateSchedule: true
-									}
-								}, 
-								function(err, user){
-									if (err) throw err;
-
-									console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
-
-									callback();
+						// store schedule object into DB
+						User.findOneAndUpdate(
+							{ 
+								telegramId: telegramId
+							}, 
+							{
+								$set: { 
+									schedule: objectSchedule,
+									upToDateSchedule: true
 								}
-							);
+							}, 
+							function(err, user){
+								if (err) throw err;
 
-						}
-						else{
+								console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
 
-							console.log("[SCHEDCTRL] No bands found while trying to compute schedule for day " + day);
-
-						}
+								callback();
+							}
+						);
 
 					}
-				);
+					else{
+
+						console.log("[SCHEDCTRL] No bands found while trying to compute schedule for day " + day);
+
+					}
+
+				});
 			
 			}
 			else{
@@ -145,12 +141,15 @@ function objectRepresentationOfSchedule(bandsToAttend, bandsInfo){
 
 		var bandName = bandsToAttend[b];
 
+		//console.log(JSON.stringify(bandsInfo[bandName]));
+
 		var bandObj = {
-			lowercase: bandsInfo[bandName]["lowercase"],
-			uppercase: bandsInfo[bandName]["uppercase"],
-			start: bandsInfo[bandName]["startTime"],
-			end: bandsInfo[bandName]["endTime"],
-			stage: bandsInfo[bandName]["stage"]	
+			lowercase: bandsInfo[bandName].lowercase,
+			uppercase: bandsInfo[bandName].uppercase,
+			start: bandsInfo[bandName].startTime,
+			end: bandsInfo[bandName].endTime,
+			stage: bandsInfo[bandName].stage,	
+			infoText: bandsInfo[bandName].infoText
 		};
 
 		scheduleObject.push(bandObj);
@@ -173,11 +172,13 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 	for(b in objectSchedule){
 
-		var bandStart = objectSchedule[b]["start"];
+		var bandStart = objectSchedule[b].start;
 
 		if( moment(bandStart).isAfter(momentsRange.start) && moment(bandStart).isBefore(momentsRange.end) ) {
 
-			textSchedule += "<strong>" + objectSchedule[b]["uppercase"] + "</strong>\n\t<i>" + moment(objectSchedule[b]["start"]).format("HH:mm") + " | " + objectSchedule[b]["stage"] + "</i>\n";
+			textSchedule += "<strong>" + objectSchedule[b].uppercase + "</strong>\n" +
+							"\t<i>" + objectSchedule[b].infoText + "</i>\n" +
+							"\t" + moment(objectSchedule[b].start).format("HH:mm") + " | " + objectSchedule[b].stage + "\n";
 		}
 
 	}
