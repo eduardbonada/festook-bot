@@ -104,11 +104,11 @@ exports.clearUser = function(telegramId, doneCallback){
 					avoidBands: [],
 					simToMust: {},
 					schedule: {},
-					upToDateSchedule: false
+					upToDateSchedule: false,
 					botFsmState: "Welcome"
 				}, function(updated){
 					console.log("[USER] Clear info of user with telegramId " + telegramId);
-					done(false);
+					doneCallback(false);
 				});
 			}
 		}

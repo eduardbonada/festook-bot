@@ -32,7 +32,7 @@ bot.getMe().then(function (me) {
 	console.log('[BOT] %s is ready!', me.username);
 });
 
-var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now", "/users"]
+var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now", "/users", "/reset"]
 
 /// ----- START & HELP ----- ///
 
@@ -897,7 +897,8 @@ function notifyHelp(telegramId, telegramChatId){
 			"See your /avoid bands\n" + 
 			"- /addavoid band\n" + 
 			"- /removeavoid band\n\n" + 
-			"See your /schedule\n"
+			"See your /schedule\n\n" +
+			"/reset at your own risk\n"
 
 	notify(telegramChatId, 
 		helpMessage, 
