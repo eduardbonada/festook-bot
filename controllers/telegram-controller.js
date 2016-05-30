@@ -822,8 +822,9 @@ bot.onText(/\/now/, function (message) {
 
 /// ----- NON COMMAND TEXT ----- ///
 
-bot.on('message', function (msg) {
+bot.onText(/[\s\S]*/, function (msg) {
 
+	console.log("Anything");
 
 	var message = msg.text;
 	var isCommand = commands.indexOf(message.split(" ")[0]) >= 0;
