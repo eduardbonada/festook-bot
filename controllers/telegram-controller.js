@@ -66,6 +66,21 @@ bot.onText(/\/help/, function (message) {
 	notifyHelp(telegramId, message.chat.id);
 });
 
+bot.onText(/\/reset/, function (message) {
+
+	var telegramId = message.from.id;
+	
+	serverLog('User' + telegramId + ' wants to reset');
+
+	userCntrl.clearUser(telegramId, function(created){
+		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
+			notify(message.chat.id, 
+				replyMessage, 
+				"Sent message to user " + telegramId);
+		});
+	});
+});
+
 
 /// ----- ALL BANDS ----- ///
 
@@ -829,6 +844,7 @@ bot.on('message', function (msg) {
 });
 
 /// ----- ADMIN COMMANDS ----- ///
+
 bot.onText(/\/users/, function (msg) {
 
 	var telegramId = msg.from.id;

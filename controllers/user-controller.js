@@ -65,3 +65,52 @@ exports.listUsers = function(doneCallback){
 		}
 	});
 }
+
+exports.clearUser = function(telegramId, doneCallback){
+
+	User.findOne(
+		{
+			telegramId: telegramId
+		},
+		function(err, user){
+			if (err) throw err;
+			
+			if (!user){
+
+				// // create new user
+				// var newUser = new User({
+				// 	telegramId: telegramId,
+				// 	telegramFirstName: telegramFirstName,
+				// 	telegramLastName: telegramLastName,
+				// 	botFsmState: "Welcome"
+				// });
+
+				// // Attempt to save into DB
+				// newUser.save(function(err, user) {
+				// 	if (err) throw err;
+
+				// 	console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
+
+				// 	mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
+
+				// 	done(true);
+				// });
+
+			}
+			else{
+				user.update({
+					telegramId: telegramId,
+					mustBands: [],
+					avoidBands: [],
+					simToMust: {},
+					schedule: {},
+					upToDateSchedule: false
+					botFsmState: "Welcome"
+				}, function(updated){
+					console.log("[USER] Clear info of user with telegramId " + telegramId);
+					done(false);
+				});
+			}
+		}
+	)
+}
