@@ -40,7 +40,11 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 	app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
 	app.set('ip', process.env.OPENSHIFT_NODEJS_IP || localIP);
 
-	var mongoUrl = config.database;
+
+	var mongoUrl = 'mongodb://localhost/festook-bot';
+	if(process.env.OPENSHIFT_MONGODB_DB_URL){
+		mongoUrl = process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME;
+	}
 	mongoose.connect(mongoUrl, function(err) {
 		if (err) throw err;
 		console.log('[SERV] Succesfully connected to DB');

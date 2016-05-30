@@ -1,7 +1,5 @@
 module.exports = {
 
-	'database': process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/festook-bot',
-
 	'telegramBotToken': '237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo',
 
 	'festivalInfo': {
