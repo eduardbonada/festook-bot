@@ -1061,12 +1061,12 @@ function toTitleCase(str){
 
 function setupBotConnection(style, app){
 
-	serverLog("Setup bot " + style + " connection");
+	serverLog("Setup bot in " + style );
 
 	var bot = {};
 	switch(style){
 		
-		case "openhift":
+		case "openshift":
 			// Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
 			bot = new TelegramBot(config.telegramBotToken);
 			app.use(bodyParser.json());
