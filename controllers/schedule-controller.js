@@ -193,8 +193,8 @@ var nowPlaying = function(telegramId, callback) {
 
 	console.log("[SCHEDCTRL] Gathering now playing bands for user " + telegramId);
 
-	//var now = moment();
-	var now = moment().add(3, 'days'); //.add(8, 'hours');
+	var now = moment();
+	//var now = moment().add(3, 'days'); //.add(8, 'hours');
 	//console.log(now.format('DD/MM/YYYY HH:mm'));
 
 	var nowPlayingBands = [];

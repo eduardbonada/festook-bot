@@ -177,7 +177,7 @@
 		"lowercaseName": "beak",
 		"stage": "Primavera",
 		"startTime": "02/06/2016 19:30",
-		"uppercaseName": "BEAK>"
+		"uppercaseName": "BEAK"
 	},
 	"bearoid": {
 		"bandId": "21",
@@ -213,16 +213,16 @@
 		"lowercaseName": "benwattbandfeatbernardbutler",
 		"stage": "Ray-Ban",
 		"startTime": "03/06/2016 18:30",
-		"uppercaseName": "Ben Watt Band feat. Bernard Butler"
+		"uppercaseName": "Ben Watt Band"
 	},
-	"blackdevildiscoclublive": {
+	"blackdevildiscoclub": {
 		"bandId": "25",
 		"endTime": "04/06/2016 02:00",
 		"infoText": "Ahead of his times",
-		"lowercaseName": "blackdevildiscoclublive",
+		"lowercaseName": "blackdevildiscoclub",
 		"stage": "Bower & Wilkins",
 		"startTime": "04/06/2016 01:00",
-		"uppercaseName": "Black Devil Disco Club (live)"
+		"uppercaseName": "Black Devil Disco Club"
 	},
 	"blacklipsdjs": {
 		"bandId": "26",
@@ -249,7 +249,7 @@
 		"lowercaseName": "bobmouldsolo",
 		"stage": "Hidden Stage",
 		"startTime": "04/06/2016 17:00",
-		"uppercaseName": "Bob Mould (solo)"
+		"uppercaseName": "Bob Mould Solo"
 	},
 	"boredoms": {
 		"bandId": "29",
@@ -269,23 +269,23 @@
 		"startTime": "03/06/2016 18:00",
 		"uppercaseName": "Bradford Cox"
 	},
-	"brianwilsonperformingpetsounds": {
+	"brianwilson": {
 		"bandId": "31",
 		"endTime": "04/06/2016 21:15",
 		"infoText": "The great cathedral of pop",
-		"lowercaseName": "brianwilsonperformingpetsounds",
+		"lowercaseName": "brianwilson",
 		"stage": "Heineken",
 		"startTime": "04/06/2016 20:00",
-		"uppercaseName": "Brian Wilson performing Pet Sounds"
+		"uppercaseName": "Brian Wilson"
 	},
-	"brokenenglishclublive": {
+	"brokenenglishclub": {
 		"bandId": "32",
 		"endTime": "03/06/2016 01:00",
 		"infoText": "Experimental anguish",
-		"lowercaseName": "brokenenglishclublive",
+		"lowercaseName": "brokenenglishclub",
 		"stage": "Bower & Wilkins",
 		"startTime": "03/06/2016 00:00",
-		"uppercaseName": "Broken English Club (live)"
+		"uppercaseName": "Broken English Club"
 	},
 	"cabaretvoltaire": {
 		"bandId": "35",
@@ -359,14 +359,14 @@
 		"startTime": "03/06/2016 22:30",
 		"uppercaseName": "Chicago Toys"
 	},
-	"clevelandlive": {
+	"cleveland": {
 		"bandId": "42",
 		"endTime": "05/06/2016 00:00",
 		"infoText": "Elegance in key of house",
-		"lowercaseName": "clevelandlive",
+		"lowercaseName": "cleveland",
 		"stage": "Bower & Wilkins",
 		"startTime": "04/06/2016 23:00",
-		"uppercaseName": "Cleveland (live)"
+		"uppercaseName": "Cleveland"
 	},
 	"ctangana": {
 		"bandId": "33",
@@ -386,14 +386,14 @@
 		"startTime": "04/06/2016 20:15",
 		"uppercaseName": "Current 93"
 	},
-	"dacmfunk": {
+	"damfunk": {
 		"bandId": "44",
 		"endTime": "04/06/2016 20:00",
 		"infoText": "Boogie nights",
-		"lowercaseName": "dacmfunk",
+		"lowercaseName": "damfunk",
 		"stage": "Pitchfork",
 		"startTime": "04/06/2016 19:00",
-		"uppercaseName": "DâM-FunK"
+		"uppercaseName": "DaM-FunK"
 	},
 	"danielbaughman": {
 		"bandId": "45",
@@ -539,14 +539,14 @@
 		"startTime": "01/06/2016 17:00",
 		"uppercaseName": "Doble Pletina"
 	},
-	"dorisburglive": {
+	"dorisburg": {
 		"bandId": "61",
 		"endTime": "05/06/2016 02:30",
 		"infoText": "Techno Imagination",
-		"lowercaseName": "dorisburglive",
+		"lowercaseName": "dorisburg",
 		"stage": "Bower & Wilkins",
 		"startTime": "05/06/2016 01:30",
-		"uppercaseName": "Dorisburg (live)"
+		"uppercaseName": "Dorisburg"
 	},
 	"drivelikejehu": {
 		"bandId": "62",
@@ -575,23 +575,23 @@
 		"startTime": "02/06/2016 22:30",
 		"uppercaseName": "Eduardo De La Calle"
 	},
-	"elaltimovecino": {
+	"elultimovecino": {
 		"bandId": "65",
 		"endTime": "01/06/2016 18:35",
 		"infoText": "Dark anthems",
-		"lowercaseName": "elaltimovecino",
+		"lowercaseName": "elultimovecino",
 		"stage": "Primavera",
 		"startTime": "01/06/2016 18:00",
-		"uppercaseName": "El Último Vecino"
+		"uppercaseName": "El Ultimo Vecino"
 	},
-	"elaltimovecino2": {
+	"elultimovecino2": {
 		"bandId": "66",
 		"endTime": "02/06/2016 21:35",
 		"infoText": "Dark anthems",
-		"lowercaseName": "elaltimovecino2",
+		"lowercaseName": "elultimovecino2",
 		"stage": "Ray-Ban Unplugged",
 		"startTime": "02/06/2016 21:00",
-		"uppercaseName": "El Último Vecino"
+		"uppercaseName": "El Ultimo Vecino"
 	},
 	"empressof": {
 		"bandId": "67",
@@ -636,7 +636,7 @@
 		"lowercaseName": "farisbadwanthehorrors",
 		"stage": "Bower & Wilkins",
 		"startTime": "04/06/2016 17:00",
-		"uppercaseName": "Faris Badwan (The Horrors)"
+		"uppercaseName": "Faris Badwan"
 	},
 	"fasenuova": {
 		"bandId": "72",
@@ -656,14 +656,14 @@
 		"startTime": "02/06/2016 13:00",
 		"uppercaseName": "Floating Points"
 	},
-	"floatingpointslive": {
+	"floatingpoints2": {
 		"bandId": "74",
 		"endTime": "02/06/2016 23:40",
 		"infoText": "The science of rhythm",
-		"lowercaseName": "floatingpointslive",
+		"lowercaseName": "floatingpoints2",
 		"stage": "Ray-Ban",
 		"startTime": "02/06/2016 22:40",
-		"uppercaseName": "Floating Points (live)"
+		"uppercaseName": "Floating Points"
 	},
 	"freddiegibbs": {
 		"bandId": "75",
@@ -728,14 +728,14 @@
 		"startTime": "05/06/2016 02:15",
 		"uppercaseName": "Ho99o9"
 	},
-	"holapgrama": {
+	"holograma": {
 		"bandId": "83",
 		"endTime": "03/06/2016 01:50",
 		"infoText": "Electronic galaxy",
-		"lowercaseName": "holapgrama",
+		"lowercaseName": "holograma",
 		"stage": "Adidas",
 		"startTime": "03/06/2016 00:50",
-		"uppercaseName": "Holögrama"
+		"uppercaseName": "Holograma"
 	},
 	"hollyherndon": {
 		"bandId": "82",
@@ -746,14 +746,14 @@
 		"startTime": "04/06/2016 01:00",
 		"uppercaseName": "Holly Herndon"
 	},
-	"hudsonmohawkedjset": {
+	"hudsonmohawke": {
 		"bandId": "84",
 		"endTime": "03/06/2016 05:45",
 		"infoText": "Electronic from the future",
-		"lowercaseName": "hudsonmohawkedjset",
+		"lowercaseName": "hudsonmohawke",
 		"stage": "Pitchfork",
 		"startTime": "03/06/2016 04:10",
-		"uppercaseName": "Hudson Mohawke (dj set)"
+		"uppercaseName": "Hudson Mohawke"
 	},
 	"if": {
 		"bandId": "85",
@@ -881,14 +881,14 @@
 		"startTime": "04/06/2016 01:45",
 		"uppercaseName": "Kiasmos"
 	},
-	"klavikonlive": {
+	"klavikon": {
 		"bandId": "99",
 		"endTime": "02/06/2016 20:45",
 		"infoText": "Piano Techno",
-		"lowercaseName": "klavikonlive",
+		"lowercaseName": "klavikon",
 		"stage": "Bower & Wilkins",
 		"startTime": "02/06/2016 20:00",
-		"uppercaseName": "Klavikon (live)"
+		"uppercaseName": "Klavikon"
 	},
 	"lastshadowpuppets": {
 		"bandId": "100",
@@ -1131,7 +1131,7 @@
 		"lowercaseName": "pajarojack",
 		"stage": "Adidas",
 		"startTime": "04/06/2016 17:45",
-		"uppercaseName": "Pájaro Jack"
+		"uppercaseName": "Pajaro Jack"
 	},
 	"panthaduprince": {
 		"bandId": "127",
@@ -1160,14 +1160,14 @@
 		"startTime": "02/06/2016 20:30",
 		"uppercaseName": "Peaches"
 	},
-	"pinalive": {
+	"pina": {
 		"bandId": "130",
 		"endTime": "02/06/2016 22:30",
 		"infoText": "Digital Minimalism",
-		"lowercaseName": "pinalive",
+		"lowercaseName": "pina",
 		"stage": "Bower & Wilkins",
 		"startTime": "02/06/2016 21:45",
-		"uppercaseName": "Pina (live)"
+		"uppercaseName": "Pina"
 	},
 	"pjharvey": {
 		"bandId": "131",
@@ -1178,14 +1178,14 @@
 		"startTime": "04/06/2016 22:35",
 		"uppercaseName": "PJ Harvey"
 	},
-	"powelllive": {
+	"powell": {
 		"bandId": "132",
 		"endTime": "03/06/2016 03:30",
 		"infoText": "Challenging techno",
-		"lowercaseName": "powelllive",
+		"lowercaseName": "powell",
 		"stage": "Bower & Wilkins",
 		"startTime": "03/06/2016 02:30",
-		"uppercaseName": "Powell (live)"
+		"uppercaseName": "Powell"
 	},
 	"protomartyr": {
 		"bandId": "133",
@@ -1311,7 +1311,7 @@
 		"lowercaseName": "seldabaacanandboompam",
 		"stage": "Ray-Ban",
 		"startTime": "03/06/2016 20:15",
-		"uppercaseName": "Selda Bağcan and Boom Pam"
+		"uppercaseName": "Selda Bagcan"
 	},
 	"sheermag": {
 		"bandId": "147",
@@ -1340,14 +1340,14 @@
 		"startTime": "04/06/2016 02:05",
 		"uppercaseName": "Shura"
 	},
-	"sigurra3s": {
+	"sigurros": {
 		"bandId": "150",
 		"endTime": "05/06/2016 01:30",
 		"infoText": "Arctic epiphanies",
-		"lowercaseName": "sigurra3s",
+		"lowercaseName": "sigurros",
 		"stage": "H&M",
 		"startTime": "05/06/2016 00:00",
-		"uppercaseName": "Sigur Rós"
+		"uppercaseName": "Sigur Ros"
 	},
 	"simianmobilediscodj": {
 		"bandId": "151",
@@ -1403,14 +1403,14 @@
 		"startTime": "01/06/2016 22:00",
 		"uppercaseName": "Suede"
 	},
-	"suedeanightthoughtsa": {
+	"suedenightthoughts": {
 		"bandId": "157",
 		"endTime": "02/06/2016 20:30",
 		"infoText": "Tragedy in two acts",
-		"lowercaseName": "suedeanightthoughtsa",
+		"lowercaseName": "suedenightthoughts",
 		"stage": "Auditori",
 		"startTime": "02/06/2016 19:30",
-		"uppercaseName": "Suede “Night Thoughts”"
+		"uppercaseName": "Suede Night Thoughts"
 	},
 	"suuns": {
 		"bandId": "158",

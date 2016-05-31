@@ -1,6 +1,7 @@
 module.exports = {
 
 	'telegramBotToken': '237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo',
+	'telegramBotTokenDev': '226294552:AAENulMufcOQNrzcme-C7-hyVt8cTWLRJdg',
 
 	'festivalInfo': {
 		'name': 'Primavera Sound 2016',

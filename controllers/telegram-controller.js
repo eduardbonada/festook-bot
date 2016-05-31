@@ -23,7 +23,7 @@ var adminChatId = "217793301"; // chat id of the admin user where admin notifica
 module.exports = function(app) {
 
 
-connectionType = process.env.OPENSHIFT_NODEJS_IP ? "webhook" : "polling";
+connectionType = process.env.OPENSHIFT_NODEJS_IP ? "openshift" : "local";
 var bot = setupBotConnection(connectionType, app);
 // clear a webhook => https://api.telegram.org/bot237227781:AAH_6OJd58mK8sO5EWwHfaIq2ObqpisTQjo/setWebhook?url=
 
@@ -130,6 +130,7 @@ bot.onText(/\/bands/, function (message) {
 
 						// create the message
 						for (b=nextBand ; b<Math.min(nextBand+bandsPerPage, numBands-1) ; b++){
+							console.log(bandNames[b]);
 							listBandsMessage += bandsInfo[bandNames[b]].uppercase + ', ';
 						}
 						listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
@@ -273,7 +274,9 @@ function manageAddMust(telegramId, message, bandName){
 		{
 			$or : [
 				{ lowercase : mustBandToAdd }, 
-				{ uppercase : message.text }
+				{ lowercase : message.text }, 
+				{ uppercase : message.text },
+				{ uppercase : toTitleCase(message.text) }
 			]
 		},
 		function(err, band){
@@ -382,7 +385,9 @@ function manageRemoveMust(telegramId, message, bandName){
 		{
 			$or : [
 				{ lowercase : mustBandToRemove }, 
-				{ uppercase : message.text }
+				{ lowercase : message.text }, 
+				{ uppercase : message.text },
+				{ uppercase : toTitleCase(message.text) }
 			]
 		},
 		function(err, band){
@@ -541,7 +546,9 @@ function manageAddAvoid(telegramId, message, bandName){
 		{
 			$or : [
 				{ lowercase : avoidBandToAdd }, 
-				{ uppercase : message.text }
+				{ lowercase : message.text }, 
+				{ uppercase : message.text },
+				{ uppercase : toTitleCase(message.text) }
 			]
 		},
 		function(err, band){
@@ -648,7 +655,9 @@ function manageRemoveAvoid(telegramId, message, bandName){
 		{
 			$or : [
 				{ lowercase : avoidBandToRemove }, 
-				{ uppercase : message.text }
+				{ lowercase : message.text }, 
+				{ uppercase : message.text },
+				{ uppercase : toTitleCase(message.text) }
 			]
 		},
 		function(err, band){
@@ -853,8 +862,6 @@ bot.onText(/\/users/, function (msg) {
 
 	var telegramId = msg.from.id;
 
-	console.log(msg);
-
 	serverLog('User ' + telegramId + ' wants the list of users');
 
 	if(telegramId == adminChatId){ // only admin...
@@ -1048,6 +1055,10 @@ function removeDiacritics (str) {
 	return str;
 }
 
+function toTitleCase(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 function setupBotConnection(style, app){
 
 	serverLog("Setup bot " + style + " connection");
@@ -1055,7 +1066,7 @@ function setupBotConnection(style, app){
 	var bot = {};
 	switch(style){
 		
-		case "webhook":
+		case "openhift":
 			// Setup Telegram connection - OPENSHIFT WEBHOOK - http://mvalipour.github.io/node.js/2015/12/06/telegram-bot-webhook-existing-express/
 			bot = new TelegramBot(config.telegramBotToken);
 			app.use(bodyParser.json());
@@ -1067,9 +1078,9 @@ function setupBotConnection(style, app){
 			break;
 
 
-		case "polling":
-			// Setup Telegram connection - LONG POLLING
-			bot = new TelegramBot(config.telegramBotToken, { polling: true });
+		case "local":
+			// Setup Telegram connection - LONG POLLING - local
+			bot = new TelegramBot(config.telegramBotTokenDev, { polling: true });
 			break;
 
 		default: break;
