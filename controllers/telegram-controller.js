@@ -106,36 +106,40 @@ bot.onText(/\/bands/, function (message) {
 
 					if(bands.length){
 
+						// gather band info
 						var bandsInfo = {};
 						for(b in bands){
 							bandsInfo[bands[b].lowercase] = bands[b];
 						}
 
+						// setup variables needed to loop the bands
 						var listBandsMessage = "";
-
+						var bandsPerPage = 50;
+						var nextBand = user.nextBandToList;
+						var numBands = bands.length;
+						var currentPage = Math.floor(nextBand/bandsPerPage) + 1;
+						var numPages = Math.ceil(numBands/bandsPerPage);
 						if(user.mustBands.length == 0){// if no must bands yet, print some bands in festival
-							var numBandsToShow = 10;
-							var remainingBandsToShow = Object.keys(bandsInfo);
-
-							listBandsMessage += "These are " + numBandsToShow + " random bands: \n\n";
-							for (b=0; b<numBandsToShow; b++){
-								var randomIndex = Math.floor(Math.random()*remainingBandsToShow.length);
-								listBandsMessage += bandsInfo[remainingBandsToShow[randomIndex]].uppercase + ', ';
-								remainingBandsToShow.splice(randomIndex, 1);
-							}
-							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
-							listBandsMessage += "\n\n Want more random /bands?"
+							var bandNames = Object.keys(bandsInfo);
+							listBandsMessage += "All bands playing (" + currentPage + "/" + numPages + "): \n\n";
 						}
 						else{ // if must bands are set, print the list of some bands sorted by similarity
-							var numBandsToShow = 20;
-							listBandsMessage += "These are the " + numBandsToShow + " bands that I think you will like most: \n\n";
-							var sortedBandNames = getSortedKeys(user.simToMust, "descending");
-							for (b=0; b<numBandsToShow; b++){
-								listBandsMessage += bandsInfo[sortedBandNames[b]].uppercase + ', ';
-							}
-							listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
-							listBandsMessage += "\n\n Want to /addmust any of them?"
+							var bandNames = getSortedKeys(user.simToMust, "descending");
+							listBandsMessage += "The bands I think you will like most (" + currentPage + "/" + numPages + "): \n\n";
 						}
+
+						// create the message
+						for (b=nextBand ; b<Math.min(nextBand+bandsPerPage, numBands-1) ; b++){
+							listBandsMessage += bandsInfo[bandNames[b]].uppercase + ', ';
+						}
+						listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
+						listBandsMessage += "\n\n Want next page of /bands?"
+
+						//update nextBand (nextBand + bandsPerPage)
+						var nextBandNextRound = (nextBand+bandsPerPage)<(numBands-1) ? nextBand+bandsPerPage : 0;
+						user.update({ nextBandToList: nextBandNextRound }, function(updated){
+							serverLog("Updated next band for user " + telegramId);
+						});
 
 						notify(message.chat.id, 
 							listBandsMessage, 
@@ -890,7 +894,7 @@ function notifyBandNotFound(telegramId, telegramChatId, bandName){
 function notifyHelp(telegramId, telegramChatId){
 
 	var helpMessage = "What do you want to do?\n\n" + 
-			"See all /bands\n" + 
+			"See all /bands playing\n" + 
 			"See your /must bands\n" +
 			" · /addmust band\n" + 
 			" · /removemust band\n" + 
@@ -923,7 +927,7 @@ function notify(telegramChatId, userMessage, logMessage){
 		
 		console.log("[BOT] " + logMessage);
 
-	}, 1000);
+	}, 500);
 
 }
 

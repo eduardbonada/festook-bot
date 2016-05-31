@@ -45,6 +45,12 @@ var UserSchema = new mongoose.Schema({
 	// state of the FSM dealing with the bot sequence
 	botFsmState:{
 		type: String
+	},
+
+	// next band index to show when listing /bands (to paginate)
+	nextBandToList:{
+		type: Number,
+		defaultValue: 0
 	}
 
 });

@@ -22,7 +22,8 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 					telegramId: telegramId,
 					telegramFirstName: telegramFirstName,
 					telegramLastName: telegramLastName,
-					botFsmState: "Welcome"
+					botFsmState: "Welcome",
+					nextBandToList: 0
 				});
 
 				// Attempt to save into DB
@@ -88,7 +89,8 @@ exports.clearUser = function(telegramId, doneCallback){
 					simToMust: {},
 					schedule: {},
 					upToDateSchedule: false,
-					botFsmState: "Welcome"
+					botFsmState: "Welcome",
+					nextBandToList: 0
 				}, function(updated){
 					console.log("[USER] Clear info of user with telegramId " + telegramId);
 					doneCallback(false);
