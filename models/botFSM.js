@@ -55,6 +55,7 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			onSaidYes: function(event, from, to) {
 				message = "Cool!\n\n"+
 					"Now add your favourite bands typing /addmust.\n\n"+
+					"If you have no idea, check all playing /bands.\n\n"+
 					"When you are done type /schedule to see the magic.\n\n"+
 					"And remember that you can always type /help if you get lost.\n\n" +
 					"Btw, tap into any highlighted command starting with a '/' and avoid typing it :).";

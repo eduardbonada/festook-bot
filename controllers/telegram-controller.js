@@ -130,7 +130,6 @@ bot.onText(/\/bands/, function (message) {
 
 						// create the message
 						for (b=nextBand ; b<Math.min(nextBand+bandsPerPage, numBands-1) ; b++){
-							console.log(bandNames[b]);
 							listBandsMessage += bandsInfo[bandNames[b]].uppercase + ', ';
 						}
 						listBandsMessage = listBandsMessage.slice(0, -2); // remove last ', '
@@ -316,7 +315,7 @@ function manageAddMust(telegramId, message, bandName){
 									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
-										"Done! I added " + band.uppercase + " to your /must bands.\nLet's see your updated /schedule now!", 
+										"Done! I added " + band.uppercase + " to your /must bands.\nAnother /addmust?", 
 										"User " + telegramId + " added must band: " + band.uppercase);
 
 								}
@@ -410,7 +409,7 @@ function manageRemoveMust(telegramId, message, bandName){
 								mustBandsCntrl.removeMustBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
-									"Done. I removed " + band.uppercase + " from your /must bands.\nLet's see your updated /schedule now!", 
+									"Done. I removed " + band.uppercase + " from your /must bands.", 
 									"User " + telegramId + " removed must band: " + band.uppercase);
 
 							}
@@ -587,7 +586,7 @@ function manageAddAvoid(telegramId, message, bandName){
 									avoidBandsCntrl.addAvoidBandForUser(telegramId, band.lowercase);
 
 									notify(message.chat.id, 
-										"Done! I added " + band.uppercase + " to the list of your bands to /avoid.\nLet's see your updated /schedule now!", 
+										"Done! I added " + band.uppercase + " to the list of your bands to /avoid.", 
 										"User " + telegramId + " added avoid band: " + band.uppercase);
 								}
 
@@ -680,7 +679,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 								avoidBandsCntrl.removeAvoidBandForUser(telegramId, band.lowercase);
 
 								notify(message.chat.id, 
-									"Done! I removed" + band.uppercase + " from the list of bands to /avoid.\nLet's see your updated /schedule now!", 
+									"Done! I removed" + band.uppercase + " from the list of bands to /avoid.", 
 									"User " + telegramId + " removed avoid band: " + band.uppercase);
 
 							}

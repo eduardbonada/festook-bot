@@ -5,7 +5,7 @@ var _ 		= require('underscore');
 var User = require('../db/user');
 var Band = require('../db/band');
 
-deepDebug = true;
+deepDebug = false;
 
 exports.computeBandSimilarityToMustBands = function(user){
 	
