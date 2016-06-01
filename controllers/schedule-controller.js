@@ -9,7 +9,7 @@ var Band = require('../db/band');
 	
 var computeScheduleForDay = function(telegramId, day, callback) {
 
-	console.log("[SCHEDCTRL] Constructing schedule for user " + telegramId + ' for day '+ day);
+	global.log.debug("SchedCtrl: Constructing schedule for user " + telegramId + ' for day '+ day);
 	
 	// get schedule object from DB
 	User.findOne(
@@ -49,7 +49,7 @@ var computeScheduleForDay = function(telegramId, day, callback) {
 				}
 			}
 			else{
-				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute schedule for day " + day);
+				global.log.warn("SchedCtrl: User " + telegramId + " not found while trying to compute schedule for day " + day);
 			}
 
 		}
@@ -60,7 +60,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 
 	// day in the format 'dd/mm/yyyy'
 
-	console.log("[SCHEDCTRL] Computing entire schedule for user " + telegramId);
+	global.log.debug("SchedCtrl:Computing entire schedule for user " + telegramId);
 
 	var schedule = require('../models/schedule')
 
@@ -107,7 +107,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 							function(err, user){
 								if (err) throw err;
 
-								console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
+								global.log.debug("SchedCtrl: Schedule object succesfully stored for user " + telegramId);
 
 								callback();
 							}
@@ -116,7 +116,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 					}
 					else{
 
-						console.log("[SCHEDCTRL] No bands found while trying to compute schedule for day " + day);
+						global.log.warn("SchedCtrl: No bands found while trying to compute schedule for day " + day);
 
 					}
 
@@ -124,7 +124,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 			
 			}
 			else{
-				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute entire schedule");
+				global.log.warn("SchedCtrl: User " + telegramId + " not found while trying to compute entire schedule");
 			}
 
 
@@ -191,7 +191,7 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 var nowPlaying = function(telegramId, callback) {
 
-	console.log("[SCHEDCTRL] Gathering now playing bands for user " + telegramId);
+	global.log.debug("SchedCtrl: Gathering now playing bands for user " + telegramId);
 
 	var now = moment();
 	//var now = moment().add(3, 'days'); //.add(8, 'hours');

@@ -1,12 +1,17 @@
 // import configuration file
 var config = require('./config');
 
+/// ---------- SETUP LOGGER ---------- ///
+
+global.log = require('simple-node-logger').createSimpleLogger(); // only console
+global.log.setLevel('info');
+
 
 /// ---------- LOAD DEPENDECIES ---------- ///
 
-var express  	= require('express');
-var http 		= require('http');
-var mongoose 	= require('mongoose');
+var express = require('express');
+var http = require('http');
+var mongoose = require('mongoose');
 var app = express();
 var server = http.createServer(app);
 
@@ -34,7 +39,7 @@ app.get('/loadFestivalInfo', function(req, res){
 
 var localIP;
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-	console.log("[SERV] Local IP is " + add);
+	global.log.info("Server: Local IP is " + add);
 	localIP = add;
 	
 	app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
@@ -46,14 +51,15 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 	}
 	mongoose.connect(mongoUrl, function(err) {
 		if (err) throw err;
-		console.log('[SERV] Succesfully connected to DB');
+		global.log.info('Server: Succesfully connects to DB');
 
 			// start the server once the db has been succesfully set
 			server.listen(app.get('port'), app.get('ip'), function() {
-				console.log('[SERV] Server listening at ' + app.get('ip') + ":" + app.get('port'));
+				global.log.info('Server: Listening at ' + app.get('ip') + ":" + app.get('port'));
 			});
 		});
 });
+
 
 /*
 MongoDB 2.4 database added.  Please make note of these credentials:

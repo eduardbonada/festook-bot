@@ -5,13 +5,11 @@ var _ 		= require('underscore');
 var User = require('../db/user');
 var Band = require('../db/band');
 
-deepDebug = false;
-
 exports.computeBandSimilarityToMustBands = function(user){
 	
 	mustBands = user.mustBands
 
-	console.log("[SIM2MUST] Computing similarity to Must bands of user " + user.telegramId);
+	global.log.debug("Sim2Must: Computing similarity to Must bands of user " + user.telegramId);
 
 	var bandsSimToMust = {}
 
@@ -28,7 +26,7 @@ exports.computeBandSimilarityToMustBands = function(user){
 				computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDistToMust);
 			}
 			else{
-				console.log("[SIM2MUST] No bands found in the database.");
+				global.log.warn("Sim2Must: No bands found in the database.");
 			}
 
 		}
@@ -57,7 +55,7 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 
 			simToMust[allBands[band].lowercase] = 1; // store into temp array
 
-			if(deepDebug) console.log("Setting similarity to must of band " + allBands[band].lowercase + " : 1");
+			global.log.trace("Sim2Must: Setting similarity to must of band " + allBands[band].lowercase + " : 1");
 
 		}
 		// not a must band
@@ -76,10 +74,10 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 			var harmMean 	 	= mustBands.length / sumInvDist;
 			var normHarmMean 	= (harmMean - maxDist) / (minDist - maxDist)
 
-			if(deepDebug) console.log("Computing similarity to must of band " + allBands[band].lowercase);
-			if(deepDebug) console.log("- sumInvDist   : " + sumInvDist);
-			if(deepDebug) console.log("- harmMean     : " + harmMean);
-			if(deepDebug) console.log("- normHarmMean : " + normHarmMean);
+			global.log.trace("Sim2Must: Computing similarity to must of band " + allBands[band].lowercase);
+			global.log.trace("Sim2Must: - sumInvDist   : " + sumInvDist);
+			global.log.trace("Sim2Must: - harmMean     : " + harmMean);
+			global.log.trace("Sim2Must: - normHarmMean : " + normHarmMean);
 
 			// store into temp array
 			simToMust[allBands[band].lowercase] = normHarmMean;
@@ -100,7 +98,7 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 		}, 
 		function(err, user){
 			if (err) throw err;
-			console.log("[SIM2MUST]: Similarity to Must bands succesfully stored for user " + user.telegramId);
+			global.log.debug("Sim2Must: Similarity to Must bands succesfully stored for user " + user.telegramId);
 		}
 	);
 

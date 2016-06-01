@@ -8,25 +8,23 @@ var Band = require('../db/band');
 
 var freeSlots = []
 
-deepDebug = false;
-
 exports.generateSchedule = function(user, bandsInfo){
 
-	console.log("[SCHEDULE] Computing schedule for user " + user.telegramId);
+	global.log.debug("Schedule: Computing schedule for user " + user.telegramId);
 
 	// remove discarded bands
 	var bandsToSort = user.simToMust
-	if(deepDebug) console.log("BEFORE REMOVING\n" + JSON.stringify(bandsToSort));
+	global.log.trace("Schedule: Before Removing\n" + JSON.stringify(bandsToSort));
 	for (db in user.avoidBands){
 		//console.log("Remove " + user.avoidBands[db])
 		delete bandsToSort[user.avoidBands[db]]
 	}
-	if(deepDebug) console.log("AFTER REMOVING\n" + JSON.stringify(bandsToSort));
+	global.log.trace("Schedule: After Removing\n" + JSON.stringify(bandsToSort));
 
 
 	// sort user bands by similarity
 	var sortedBandNames = getSortedKeys(bandsToSort, "descending");
-	if(deepDebug) console.log("SORTED\n" + JSON.stringify(sortedBandNames));
+	global.log.trace("Schedule: Sorted\n" + JSON.stringify(sortedBandNames));
 
 	// compute schedule with mode "FullConcert"
 	freeSlots = [{"start": moment(config.festivalInfo.start), "end": moment(config.festivalInfo.end)}];
@@ -36,13 +34,13 @@ exports.generateSchedule = function(user, bandsInfo){
 		bandName = sortedBandNames[b]
 		simToMust = user.simToMust[bandName];
 
-		if(deepDebug) console.log("Trying to add " + bandName + " to the schedule");
+		global.log.trace("Schedule: Trying to add " + bandName + " to the schedule");
 
 		var slotIndex = isThereAFreeSlotBetweenDates(bandsInfo[bandName]["startTime"], bandsInfo[bandName]["endTime"]);
 		
 		if ( slotIndex != -1 ){ // if slot found
 			
-			if(deepDebug) console.log("Found a free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
+			global.log.trace("Schedule: Found a free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
 			
 			bandsToAttend.push(bandName);
 
@@ -51,7 +49,7 @@ exports.generateSchedule = function(user, bandsInfo){
 		}
 		else if( user.simToMust[bandName] == 1 ){ // if slot not found but it is a Must band
 
-			if(deepDebug) console.log("[SCHEDULE] No free slot for band " + bandName + " but it is a Must band (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
+			global.log.trace("Schedule: No free slot for band " + bandName + " but it is a Must band (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
 
 			// force to list of attending bands
 			bandsToAttend.push(bandName);
@@ -59,12 +57,12 @@ exports.generateSchedule = function(user, bandsInfo){
 		}
 		else { // if slot not found and it is not a must band
 			
-			if(deepDebug) console.log("[SCHEDULE] No free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
+			global.log.trace("Schedule: No free slot for band " + bandName + " (" + moment(bandsInfo[bandName]["startTime"]).format("D HH:mm") + " - " + moment(bandsInfo[bandName]["endTime"]).format("D HH:mm") + ")");
 
 		}
 	}
 
-	if(deepDebug) console.log("BANDS TO ATTEND\n" + JSON.stringify(bandsToAttend));
+	global.log.trace("Schedule: Bands to attend\n" + JSON.stringify(bandsToAttend));
 
 	return(bandsToAttend);
 }
@@ -135,12 +133,9 @@ function updateFreeSlotAfterAddingBand(bandName, slotIndex, bandsInfo){
 }
 
 function printFreeSlots(){
-
-	console.log("[SCHEDULE] Free Slots:")
+	global.log.debug("Schedule: Free Slots:")
 	for (fs in freeSlots) {
-
-		console.log("  " + freeSlots[fs]["start"].format("D HH:mm") + " - " + freeSlots[fs]["end"].format("D HH:mm"))
-
+		global.log.debug("  " + freeSlots[fs]["start"].format("D HH:mm") + " - " + freeSlots[fs]["end"].format("D HH:mm"))
 	}
 }
 

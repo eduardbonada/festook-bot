@@ -102,7 +102,7 @@ function loadBandSimilarityMatrix(doneCallback){
 				bandCount--; // decrement back to 0 to detect when last save is done
 
 				if(bandCount == 0){
-					console.log('[FILE2DB] Saved similarities for ' + numBands + ' bands');
+					global.log.info('File2db: Saved similarities for ' + numBands + ' bands');
 					doneCallback(numBands);
 				}
 			}

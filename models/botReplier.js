@@ -54,6 +54,8 @@ var unknownAnswerSentences = [
 
 var replyToAsyncComment = function(msg){
 
+	global.log.debug("BotReplier: Replies to async comment");
+
 	var message = msg.toLowerCase();
 
 	// check if patterns are found in the message string
@@ -71,6 +73,8 @@ var replyToAsyncComment = function(msg){
 
 
 var replyToUnknownAnswer = function(message){
+	global.log.debug("BotReplier: Replies to unknown answer");
+
 	return unknownAnswerSentences[Math.floor(Math.random()*unknownAnswerSentences.length)];
 }
 
