@@ -30,7 +30,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 				newUser.save(function(err, user) {
 					if (err) throw err;
 
-					global.log.debug("User: Created user with telegramId " + user.telegramId);
+					console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
 
 					mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
 
@@ -42,7 +42,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 				user.update({
 					botFsmState: "Welcome"
 				}, function(updated){
-					global.log.debug("User: Reset of user with telegramId " + telegramId);
+					console.log("[USER] Reset of user with telegramId " + telegramId);
 					done(false);
 				});
 			}
@@ -60,7 +60,26 @@ exports.clearUser = function(telegramId, doneCallback){
 			if (err) throw err;
 			
 			if (!user){
-				global.log.warn("User: User not found while trying to clear user " + telegramId);
+
+				// // create new user
+				// var newUser = new User({
+				// 	telegramId: telegramId,
+				// 	telegramFirstName: telegramFirstName,
+				// 	telegramLastName: telegramLastName,
+				// 	botFsmState: "Welcome"
+				// });
+
+				// // Attempt to save into DB
+				// newUser.save(function(err, user) {
+				// 	if (err) throw err;
+
+				// 	console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
+
+				// 	mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
+
+				// 	done(true);
+				// });
+
 			}
 			else{
 				user.update({
@@ -73,7 +92,7 @@ exports.clearUser = function(telegramId, doneCallback){
 					botFsmState: "Welcome",
 					nextBandToList: 0
 				}, function(updated){
-					global.log.debug("User: Cleared info of user " + telegramId);
+					console.log("[USER] Clear info of user with telegramId " + telegramId);
 					doneCallback(false);
 				});
 			}

@@ -9,7 +9,7 @@ var botReplier = require('./botReplier');
 
 function setupFsm(user, initialState, sendOutgoingMessage){
 
-	global.log.debug("BotFsm: Setup FSM of " + user.telegramId + " to state " + initialState);
+	console.log("[FSM] Setup FSM of " + user.telegramId + " to state " + initialState);
 
 	return StateMachine.create({
 		initial: initialState,
@@ -106,8 +106,6 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 
 var wakeUpBot = function(userId, message, outgoingMessageCallback){
 
-	global.log.debug("BotFsm: WakeUpBot for user " + userId);
-
 	User.findOne({ telegramId: userId }, function(err, user){
 		if (err) throw err;
 
@@ -179,8 +177,10 @@ function updateFsmStateToDB(user, state){
 	User.update({ telegramId: user.telegramId }, {
 		botFsmState : state
 	}, function(err, numberAffected, rawResponse) {
-		if (err) throw err;
-		global.log.debug('Updated botFsmState of user ' + user.telegramId + ' to ' + state);
+		if (err){ 
+			console.error('[FSM] Could not update botFsmState of user ' + user.telegramId + ' to ' + state);
+		};
+		console.log('[FSM] Updated botFsmState of user ' + user.telegramId + ' to ' + state);
 	})
 }
 
