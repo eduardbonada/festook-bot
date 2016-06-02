@@ -189,7 +189,7 @@ function textRepresentationOfScheduleInRange(objectSchedule, momentsRange){
 
 var nowPlaying = function(telegramId, callback) {
 
-	console.log("[SCHEDCTRL] Gathering now playing bands for user " + telegramId);
+	logger.debug("ScheduleCtrl: Gathering now playing bands for user " + telegramId);
 
 	var now = moment();
 	//var now = moment().add(3, 'days'); //.add(8, 'hours');

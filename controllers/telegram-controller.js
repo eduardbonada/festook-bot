@@ -75,7 +75,8 @@ bot.onText(/\/reset/, function (message) {
 
 	userCntrl.clearUser(telegramId, function(created){
 		notify(message.chat.id, 
-			"Well... I just deleted all your information :(", 
+			"Well... I just deleted all your information :(\n" + 
+				"/start using Festook again.", 
 			"Sent message to user " + telegramId);
 	});
 });
@@ -293,7 +294,6 @@ function manageAddMust(telegramId, message, bandName){
 						if(user){
 
 							var firstMustBand = user.botFsmState == "WaitFirstMustBand" ? true : false;
-							console.log(user.botFsmState);
 
 							// Already in must bands
 							if(user.mustBands.indexOf(band.lowercase) != -1){
