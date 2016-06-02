@@ -74,11 +74,9 @@ bot.onText(/\/reset/, function (message) {
 	logger.info('Telegram: /reset - User' + telegramId + ' wants to reset');
 
 	userCntrl.clearUser(telegramId, function(created){
-		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
-			notify(message.chat.id, 
-				replyMessage, 
-				"Sent message to user " + telegramId);
-		});
+		notify(message.chat.id, 
+			"Well... I just deleted all your information :(", 
+			"Sent message to user " + telegramId);
 	});
 });
 
@@ -294,7 +292,8 @@ function manageAddMust(telegramId, message, bandName){
 
 						if(user){
 
-							var firstMustBand = user.mustBands.length == 0 ? true : false;
+							var firstMustBand = user.botFsmState == "WaitFirstMustBand" ? true : false;
+							console.log(user.botFsmState);
 
 							// Already in must bands
 							if(user.mustBands.indexOf(band.lowercase) != -1){
@@ -315,7 +314,7 @@ function manageAddMust(telegramId, message, bandName){
 
 									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
 
-									if(firstMustBand){									
+									if(firstMustBand){
 										botFSM.wakeUpBot(telegramId, "MustBandProvided", function(replyMessage){
 											notify(message.chat.id, 
 												replyMessage, 
@@ -346,7 +345,7 @@ function manageAddMust(telegramId, message, bandName){
 						if (err) throw err;
 
 						if(user){
-							var firstMustBand = user.mustBands.length == 0 ? true : false;
+							var firstMustBand = user.botFsmState == "WaitFirstMustBand" ? true : false;
 
 							if(firstMustBand){
 								botFSM.wakeUpBot(telegramId, "MustBandNotProvidedYet", function(replyMessage){
@@ -769,10 +768,7 @@ bot.onText(/\/schedule/, function (message) {
 						{
 							reply_markup: JSON.stringify(
 								{
-									force_reply: true,
-									//keyboard: daysKeyboard,
-									//resize_keyboard:true,
-									//one_time_keyboard: true
+									force_reply: true
 								}
 							)
 						}
@@ -794,15 +790,35 @@ bot.onText(/\/schedule/, function (message) {
 
 									notify(message.chat.id, 
 										scheduleMessage, 
-										"User " + telegramId + " got the schedule for day " + festivalDay);
+										"User " + telegramId + " got the schedule for day " + festivalDay);										
 
+									var firstSchedule = user.botFsmState == "WaitFirstSchedule" ? true : false;
+									if(firstSchedule){
+										setTimeout(function() {
+											botFSM.wakeUpBot(telegramId, "ScheduleRequested", function(replyMessage){
+												notify(message.chat.id, 
+													replyMessage, 
+													"Sent message to user " + telegramId);
+											});
+										}, 1000);
+									}
 								});
 
 							}
 							else{
-								notify(message.chat.id, 
-									"There is no festival on " + message.text + " :(\nTry the /schedule for another day...", 
-									"User " + telegramId + " entered a wrong festival day : " + festivalDay);
+								var firstSchedule = user.botFsmState == "WaitFirstSchedule" ? true : false;
+								if(firstSchedule){
+									botFSM.wakeUpBot(telegramId, "ScheduleNotRequestedYet", function(replyMessage){
+										notify(message.chat.id, 
+											replyMessage, 
+											"Sent message to user " + telegramId);
+									});
+								}
+								else{
+									notify(message.chat.id, 
+										"There is no festival on " + message.text + " :(\nTry the /schedule for another day...", 
+										"User " + telegramId + " entered a wrong festival day : " + festivalDay);
+								}
 							}
 
 						});
@@ -810,7 +826,7 @@ bot.onText(/\/schedule/, function (message) {
 				}
 				else{
 					notify(message.chat.id, 
-						"Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me which bands you don't want to miss typing /addmust.", 
+						"Hold on! Before building a schedule for you I first need to know a little bit of your musical taste. Tell me a band you don't want to miss typing /addmust.", 
 						"User " + telegramId + " asks for the schedule but withou must bands set");
 
 				}

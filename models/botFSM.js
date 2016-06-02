@@ -16,10 +16,14 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 		initial: initialState,
 		events: [
 			{ name: 'WelcomeDone',  from: 'Welcome',  to: 'WaitFirstMustBand' },
-			{ name: 'FirstMustBandProvided',  from: 'WaitFirstMustBand',  to: 'WaitCommand' },
-			{ name: 'UnknownBand',  from: 'WaitFirstMustBand',  to: 'WaitFirstMustBand' },
+			{ name: 'FirstMustBandProvided',  from: 'WaitFirstMustBand',  to: 'WaitFirstSchedule' },
+			{ name: 'FirstScheduleAsked',  from: 'WaitFirstSchedule',  to: 'WaitCommand' },
+
+			{ name: 'UnknownBand', from: 'WaitFirstMustBand',  to: 'WaitFirstMustBand' },
+			{ name: 'UnknownScheduleDay', from: 'WaitFirstSchedule',  to: 'WaitFirstSchedule' },
 
 			{ name: 'AsyncMessage',  from: 'WaitFirstMustBand', to: 'WaitFirstMustBand' },
+			{ name: 'AsyncMessage',  from: 'WaitFirstSchedule', to: 'WaitFirstSchedule' },
 			{ name: 'AsyncMessage',  from: 'WaitCommand', to: 'WaitCommand' }
 
 			// { name: 'FirstYes',  from: 'WaitYes', to: 'SaidYes' },
@@ -73,6 +77,39 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 				sendOutgoingMessage(message);
 			},
 
+			onFirstScheduleAsked: function(event, from, to) {
+				message = "That was easy, right?\n" + 
+							"Now type /help and explore everything I can do...\n" + 
+							"I'm here to assist! :)";
+
+				sendOutgoingMessage(message);
+			},
+
+			onUnknownScheduleDay: function(event, from, to) {   
+				message = "Wrong day!\n" + 
+							"Type /schedule and try again";
+				sendOutgoingMessage(message);
+			},
+
+			onAsyncMessage: function(event, from, to, message) {
+				console.log(message);
+				if(from == "WaitFirstMustBand"){
+					message = "If you want me to help I need to know one band you MUST see.\nType /addmust and tell me...";
+					sendOutgoingMessage(message);
+				}
+				if(from == "WaitFirstSchedule"){
+					message = "Don't you want to know the plan I prepared for you?\nType /schedule to see it!";
+					sendOutgoingMessage(message);
+				}
+				else if(from == "WaitCommand"){
+					sendOutgoingMessage(botReplier.toAsyncComment(message));				
+				}
+			},
+
+			onafterevent: function(event, from, to) { // fired after all events
+				updateFsmStateToDB(user, this.current);
+			}
+
 			// onSaidYes: function(event, from, to) {
 			// 	message = "Cool!\n\n"+
 			// 		"Now add your favourite bands typing /addmust.\n\n"+
@@ -113,19 +150,6 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			// 	}
 			// },
 
-			onAsyncMessage: function(event, from, to) {
-				if(from == "WaitFirstMustBand"){
-					message = "If you want me to help I need to know one band you MUST see. Type /addmust and tell me...";
-					sendOutgoingMessage(message);
-				}
-				else if(from == "WaitCommand"){
-					sendOutgoingMessage(botReplier.toAsyncComment(message));				
-				}
-			},
-
-			onafterevent: function(event, from, to) { // fired after all events
-				updateFsmStateToDB(user, this.current);
-			}
 		}
 	});
 }
@@ -150,7 +174,25 @@ var wakeUpBot = function(userId, message, outgoingMessageCallback){
 						fsm.FirstMustBandProvided();
 					}
 					else {
-						fsm.AsyncMessage();						
+						fsm.AsyncMessage(message);						
+					}
+					break;
+
+				case "WaitFirstSchedule":
+					if(message === "ScheduleNotRequestedYet"){
+						fsm.UnknownScheduleDay();
+					}
+					else if(message === "ScheduleRequested"){
+						fsm.FirstScheduleAsked();
+					}
+					else {
+						fsm.AsyncMessage(message);						
+					}
+					break;
+
+				case "WaitCommand":
+					if( fsm.can("AsyncMessage") ){
+						fsm.AsyncMessage(message);
 					}
 					break;
 
@@ -189,12 +231,6 @@ var wakeUpBot = function(userId, message, outgoingMessageCallback){
 				// 		fsm.UnknownAnswer();
 				// 	}
 				// 	break;
-
-				case "WaitCommand":
-					if( fsm.can("AsyncMessage") ){
-						fsm.AsyncMessage(message);
-					}
-					break;
 
 				default: break;
 			}
