@@ -193,7 +193,7 @@ var nowPlaying = function(telegramId, callback) {
 
 	var now;
 	if(process.env.OPENSHIFT_NODEJS_IP){
-		now = moment().add(7, 'hours'); //.add(8, 'hours');
+		now = moment().add(6, 'hours'); //.add(8, 'hours');
 	}
 	else{
 		now = moment();
