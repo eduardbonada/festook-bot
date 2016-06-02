@@ -6,10 +6,11 @@ var StateMachine = require("../libs/state-machine.js") // https://github.com/jak
 var config = require('../config');
 var User = require('../db/user');
 var botReplier = require('./botReplier');
+var logger = require('../logger');
 
 function setupFsm(user, initialState, sendOutgoingMessage){
 
-	console.log("[FSM] Setup FSM of " + user.telegramId + " to state " + initialState);
+	logger.debug("BotFsm: Setup FSM of " + user.telegramId + " to state " + initialState);
 
 	return StateMachine.create({
 		initial: initialState,
@@ -97,7 +98,6 @@ function setupFsm(user, initialState, sendOutgoingMessage){
 			},
 
 			onafterevent: function(event, from, to) { // fired after all events
-				//console.log("onafterevent : " + event + " | " + from + "=>" + to);
 				updateFsmStateToDB(user, this.current);
 			}
 		}
@@ -178,9 +178,9 @@ function updateFsmStateToDB(user, state){
 		botFsmState : state
 	}, function(err, numberAffected, rawResponse) {
 		if (err){ 
-			console.error('[FSM] Could not update botFsmState of user ' + user.telegramId + ' to ' + state);
+			logger.error('BotFsm: Could not update botFsmState of user ' + user.telegramId + ' to ' + state);
 		};
-		console.log('[FSM] Updated botFsmState of user ' + user.telegramId + ' to ' + state);
+		logger.debug('BotFsm: Updated botFsmState of user ' + user.telegramId + ' to ' + state);
 	})
 }
 

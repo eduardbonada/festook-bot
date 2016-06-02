@@ -1,5 +1,5 @@
-
 var moment  	= require('moment');
+var logger = require('../logger');
 
 // import db schemas
 var User = require('../db/user');
@@ -9,7 +9,7 @@ var Band = require('../db/band');
 	
 var computeScheduleForDay = function(telegramId, day, callback) {
 
-	console.log("[SCHEDCTRL] Constructing schedule for user " + telegramId + ' for day '+ day);
+	logger.debug("ScheduleCtrl: Constructing schedule for user " + telegramId + ' for day '+ day);
 	
 	// get schedule object from DB
 	User.findOne(
@@ -49,7 +49,7 @@ var computeScheduleForDay = function(telegramId, day, callback) {
 				}
 			}
 			else{
-				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute schedule for day " + day);
+				logger.warn("ScheduleCtrl: User " + telegramId + " not found while trying to compute schedule for day " + day);
 			}
 
 		}
@@ -60,7 +60,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 
 	// day in the format 'dd/mm/yyyy'
 
-	console.log("[SCHEDCTRL] Computing entire schedule for user " + telegramId);
+	logger.debug("ScheduleCtrl: Computing entire schedule for user " + telegramId);
 
 	var schedule = require('../models/schedule')
 
@@ -107,7 +107,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 							function(err, user){
 								if (err) throw err;
 
-								console.log("[SCHEDCTRL] Schedule object succesfully stored for user " + telegramId);
+								logger.debug("ScheduleCtrl: Schedule object succesfully stored for user " + telegramId);
 
 								callback();
 							}
@@ -116,7 +116,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 					}
 					else{
 
-						console.log("[SCHEDCTRL] No bands found while trying to compute schedule for day " + day);
+						logger.warn("ScheduleCtrl: No bands found while trying to compute schedule for day " + day);
 
 					}
 
@@ -124,7 +124,7 @@ var computeEntireScheduleForUser = function(telegramId, callback) {
 			
 			}
 			else{
-				console.log("[SCHEDCTRL] User " + telegramId + " not found while trying to compute entire schedule");
+				logger.warn("ScheduleCtrl: User " + telegramId + " not found while trying to compute entire schedule");
 			}
 
 
@@ -140,8 +140,6 @@ function objectRepresentationOfSchedule(bandsToAttend, bandsInfo){
 	for(b in bandsToAttend){
 
 		var bandName = bandsToAttend[b];
-
-		//console.log(JSON.stringify(bandsInfo[bandName]));
 
 		var bandObj = {
 			lowercase: bandsInfo[bandName].lowercase,
@@ -195,7 +193,6 @@ var nowPlaying = function(telegramId, callback) {
 
 	var now = moment();
 	//var now = moment().add(3, 'days'); //.add(8, 'hours');
-	//console.log(now.format('DD/MM/YYYY HH:mm'));
 
 	var nowPlayingBands = [];
 	

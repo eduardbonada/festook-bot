@@ -1,5 +1,5 @@
-// import db schemas
 var User = require('../db/user');
+var logger = require('../logger');
 
 
 /// ---------- COMPUTE SIMILARITIES TO MUST BANDS ---------- ///
@@ -24,11 +24,11 @@ var addMustBandForUser = function(telegramId, mustBand){
 			if (err) throw err;
 
 			if(user){
-				console.log("[MUSTCTRL] Must bands succesfully stored for user " + user.telegramId);
+				logger.debug("MustCtrl: Must bands succesfully stored for user " + user.telegramId);
 				computeSimToMustBandsForUser(telegramId)
 			}
 			else{
-				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to add a must band");
+				logger.warn("MustCtrl: User " + telegramId + " not found while trying to add a must band");
 			}
 
 		}
@@ -57,7 +57,7 @@ var removeMustBandForUser = function(telegramId, mustBand){
 
 			if(user){
 
-				console.log("[MUSTCTRL] Must band succesfully removed for user " + user['telegramId']);
+				logger.debug("MustCtrl: Must band succesfully removed for user " + user['telegramId']);
 				
 				if(user.mustBands.length>0){
 					computeSimToMustBandsForUser(telegramId)
@@ -65,7 +65,7 @@ var removeMustBandForUser = function(telegramId, mustBand){
 
 			}
 			else{
-				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to remove a must band");
+				logger.warn("MustCtrl: User " + telegramId + " not found while trying to remove a must band");
 			}
 
 		}
@@ -86,12 +86,12 @@ var computeSimToMustBandsForUser = function(telegramId){
 
 			if (user){
 				if(user.mustBands.length>0){
-					console.log("[MUSTCTRL] Computing Similarity to must bands for user " + user.telegramId);				
+					logger.debug("MustCtrl: Computing Similarity to must bands for user " + user.telegramId);				
 					simToMust.computeBandSimilarityToMustBands(user);
 				}
 			}
 			else{
-				console.log("[MUSTCTRL] User " + telegramId + " not found while trying to compute similarity to must bands");
+				logger.warn("MustCtrl: User " + telegramId + " not found while trying to compute similarity to must bands");
 			}
 		});
 

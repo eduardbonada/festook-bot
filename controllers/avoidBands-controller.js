@@ -1,5 +1,5 @@
-// import db schemas
 var User = require('../db/user');
+var logger = require('../logger');
 
 
 /// ---------- UPDATE AVOID BANDS ---------- ///
@@ -23,10 +23,10 @@ var addAvoidBandForUser = function(telegramId, avoidBand){
 			if (err) throw err;
 
 			if(user){
-				console.log("[AVOIDCTRL] Avoid bands succesfully stored for user " + user.telegramId);
+				logger.debug("AvoidCtrl: Avoid bands succesfully stored for user " + user.telegramId);
 			}
 			else{
-				console.log("[AVOIDCTRL] User " + telegramId + " not found while trying to add an avoid band");
+				logger.warn("AvoidCtrl: User " + telegramId + " not found while trying to add an avoid band");
 			}
 
 		}
@@ -53,10 +53,10 @@ var removeAvoidBandForUser = function(telegramId, avoidBand){
 			if (err) throw err;
 
 			if(user){
-				console.log("[AVOIDCTRL] Avoid band succesfully removed for user " + user['telegramId']);
+				logger.debug("AvoidCtrl: Avoid band succesfully removed for user " + user['telegramId']);
 			}
 			else{
-				console.log("[AVOIDCTRL] User " + telegramId + " not found while trying to remove a avoid band");
+				logger.warn("AvoidCtrl: User " + telegramId + " not found while trying to remove a avoid band");
 			}
 
 		}

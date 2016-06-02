@@ -1,5 +1,5 @@
-// import db schemas
 var User = require('../db/user');
+var logger = require('../logger');
 
 var mustBandsCntrl = require('../controllers/mustBands-controller');
 
@@ -30,7 +30,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 				newUser.save(function(err, user) {
 					if (err) throw err;
 
-					console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
+					logger.debug("UserCtrl: User with telegramId " + user.telegramId + " succesfully created");
 
 					mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
 
@@ -42,7 +42,7 @@ exports.createUser = function(telegramId, telegramFirstName, telegramLastName, d
 				user.update({
 					botFsmState: "Welcome"
 				}, function(updated){
-					console.log("[USER] Reset of user with telegramId " + telegramId);
+					logger.debug("UserCtrl: Reset botFsmState of user with telegramId " + telegramId);
 					done(false);
 				});
 			}
@@ -61,24 +61,7 @@ exports.clearUser = function(telegramId, doneCallback){
 			
 			if (!user){
 
-				// // create new user
-				// var newUser = new User({
-				// 	telegramId: telegramId,
-				// 	telegramFirstName: telegramFirstName,
-				// 	telegramLastName: telegramLastName,
-				// 	botFsmState: "Welcome"
-				// });
-
-				// // Attempt to save into DB
-				// newUser.save(function(err, user) {
-				// 	if (err) throw err;
-
-				// 	console.log("[USER] User with telegramId " + user.telegramId + " succesfully created");
-
-				// 	mustBandsCntrl.computeSimToMustBandsForUser(telegramId);
-
-				// 	done(true);
-				// });
+				logger.warn("UserCtrl: User " + telegramId + " not found while trying to reset it");
 
 			}
 			else{
@@ -92,7 +75,7 @@ exports.clearUser = function(telegramId, doneCallback){
 					botFsmState: "Welcome",
 					nextBandToList: 0
 				}, function(updated){
-					console.log("[USER] Clear info of user with telegramId " + telegramId);
+					logger.debug("UserCtrl: Clear info of user with telegramId " + telegramId);
 					doneCallback(false);
 				});
 			}

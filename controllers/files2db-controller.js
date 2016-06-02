@@ -1,3 +1,4 @@
+var logger = require('../logger');
 
 //// ---------- ARGUMENTS ---------- ////
 
@@ -17,7 +18,7 @@ var config 		= require('../config');
 
 var loadFestivalInfo = function(messageCallabck){
 
-	console.log("[FILE2DB] Loading festival info from files into DB");
+	logger.info("File2db: Loading festival info from files into DB");
 
 	Band.remove({}, function(err) { 
 		if(err){
@@ -37,6 +38,8 @@ var loadFestivalInfo = function(messageCallabck){
 
 function loadListOfBands(doneCallback){
 
+	logger.debug("File2db: Loading Lits of bands");
+
 	// sync file load & json parse
 	var bands = JSON.parse(require('fs').readFileSync(listBandsFile, 'utf8'));
 	var numBands = Object.keys(bands).length;
@@ -49,7 +52,7 @@ function loadListOfBands(doneCallback){
 		// pick only the field we want to store
 		var bandClean = _.pick(bands[bandName], 'lowercaseName', 'uppercaseName', 'startTime', 'endTime', 'stage', 'infoText');
 		
-		//console.log('[FILE2DB] Saving band "' + bandClean.uppercaseName + '" into DB (' + bandCount + ' of ' + Object.keys(bands).length + ')');
+		logger.trace('File2db: Saving band "' + bandClean.uppercaseName + '" into DB (' + bandCount + ' of ' + Object.keys(bands).length + ')');
 
 		// create new band
 		var newBand = new Band({
@@ -68,7 +71,7 @@ function loadListOfBands(doneCallback){
 			bandCount--; // decrement back to 0 to detect when last save is done
 
 			if(bandCount == 0){
-				console.log('[FILE2DB] Saved list of ' + numBands + ' bands');
+				logger.debug('File2db: Saved list of ' + numBands + ' bands');
 				doneCallback();
 			}
 		});
@@ -77,6 +80,8 @@ function loadListOfBands(doneCallback){
 
 
 function loadBandSimilarityMatrix(doneCallback){
+
+	logger.debug("File2db: Loading Lits Band Similarity Matrix");
 
 	// sync file load & json parse
 	var matrix = JSON.parse(require('fs').readFileSync(matrixFile, 'utf8'));
@@ -102,7 +107,7 @@ function loadBandSimilarityMatrix(doneCallback){
 				bandCount--; // decrement back to 0 to detect when last save is done
 
 				if(bandCount == 0){
-					console.log('[FILE2DB] Saved similarities for ' + numBands + ' bands');
+					logger.debug('File2db: Saved similarities for ' + numBands + ' bands');
 					doneCallback(numBands);
 				}
 			}
@@ -113,34 +118,3 @@ function loadBandSimilarityMatrix(doneCallback){
 module.exports = {
 	loadFestivalInfo : loadFestivalInfo,
 }
-
-/*
-console.log(bandNames.length + " found in list of bands");
-console.log(JSON.stringify(bandNames))
-for(b in bandNames){
-
-	if(bandNamesMatrix.indexOf(bandNames[b]) >= 0){
-		//console.log("Band " + bandNames[b] + " found in both lists" );
-	}else{
-		console.log("Band " + bandNames[b] + " NOT found in both lists" );
-	}
-
-}
-
-console.log("-----");
-
-console.log(bandNamesMatrix.length + " found in matrix of bands");
-console.log(JSON.stringify(bandNamesMatrix))
-for(b in bandNamesMatrix){
-
-	if(bandNames.indexOf(bandNamesMatrix[b]) >= 0){
-		//console.log("Band " + bandNames[b] + " found in both lists" );
-	}else{
-		console.log("Band " + bandNamesMatrix[b] + " NOT found in both lists" );
-	}
-
-}
-*/
-
-
-

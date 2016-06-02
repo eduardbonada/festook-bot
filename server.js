@@ -1,12 +1,7 @@
 var config = require('./config');
 var logger = require('./logger');
 
-logger.trace('This is a trace log')
-logger.debug('This is a debug log')
-logger.info('This is a info log')
-logger.warn('This is a warn log')
-logger.error('This is a error log')
-logger.fatal('This is a fatal log')
+global.logLevel = global.logLevels.info;
 
 /// ---------- LOAD DEPENDECIES ---------- ///
 
@@ -40,7 +35,7 @@ app.get('/loadFestivalInfo', function(req, res){
 
 var localIP;
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-	console.log("[SERV] Local IP is " + add);
+	logger.info("Server: Local IP is " + add);
 	localIP = add;
 	
 	app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
@@ -52,11 +47,11 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 	}
 	mongoose.connect(mongoUrl, function(err) {
 		if (err) throw err;
-		console.log('[SERV] Succesfully connected to DB');
+		logger.info('Server: Succesfully connected to DB');
 
 			// start the server once the db has been succesfully set
 			server.listen(app.get('port'), app.get('ip'), function() {
-				console.log('[SERV] Server listening at ' + app.get('ip') + ":" + app.get('port'));
+				logger.info('Server: Listening at ' + app.get('ip') + ":" + app.get('port'));
 			});
 		});
 });

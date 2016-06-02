@@ -4,6 +4,7 @@ var TelegramBot = require('node-telegram-bot-api');
 var moment = require('moment');
 
 var config = require('../config');
+var logger = require('../logger');
 
 // import controllers
 var userCntrl = require('../controllers/user-controller');
@@ -29,7 +30,7 @@ var bot = setupBotConnection(connectionType, app);
 
 // Test bot
 bot.getMe().then(function (me) {
-	console.log('[BOT] %s is ready!', me.username);
+	logger.info('Telegram: ' + me.username + ' is ready!');
 });
 
 var commands = ["/start", "/help", "/bands", "/must", "/addmust", "/removemust", "/avoid", "/addavoid", "/removeavoid", "/schedule", "/now", "/users", "/reset"]
@@ -42,7 +43,7 @@ bot.onText(/\/start/, function (message) {
 	var telegramFirstName = message.from.first_name;
 	var telegramLastName = message.from.last_name;
 	
-	serverLog('New user connected: ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
+	logger.info('Telegram: /start - User ' + telegramId + ' - ' + telegramFirstName + ' ' + telegramLastName);
 
 	userCntrl.createUser(telegramId, telegramFirstName, telegramLastName, function(created){
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
@@ -61,7 +62,7 @@ bot.onText(/\/start/, function (message) {
 bot.onText(/\/help/, function (message) {
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' asks for help');
+	logger.info('Telegram: /help - User ' + telegramId + ' asks for help');
 
 	notifyHelp(telegramId, message.chat.id);
 });
@@ -70,7 +71,7 @@ bot.onText(/\/reset/, function (message) {
 
 	var telegramId = message.from.id;
 	
-	serverLog('User' + telegramId + ' wants to reset');
+	logger.info('Telegram: /reset - User' + telegramId + ' wants to reset');
 
 	userCntrl.clearUser(telegramId, function(created){
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
@@ -89,7 +90,7 @@ bot.onText(/\/bands/, function (message) {
 
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' wants the list of bands');
+	logger.info('Telegram: /bands - User ' + telegramId + ' wants the list of bands');
 
 	User.findOne(
 		{
@@ -138,7 +139,7 @@ bot.onText(/\/bands/, function (message) {
 						//update nextBand (nextBand + bandsPerPage)
 						var nextBandNextRound = (nextBand+bandsPerPage)<(numBands-1) ? nextBand+bandsPerPage : 0;
 						user.update({ nextBandToList: nextBandNextRound }, function(updated){
-							serverLog("Updated next band for user " + telegramId);
+							logger.debug("Telegram: Updated next band for user " + telegramId);
 						});
 
 						notify(message.chat.id, 
@@ -167,7 +168,7 @@ bot.onText(/\/must/, function (message) {
 
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' listing must bands');
+	logger.info('Telegram: /must - User ' + telegramId + ' listing must bands');
 
 	User.findOne(
 		{
@@ -229,7 +230,7 @@ bot.onText(/\/addmust/, function (message) {
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
 	if(message.text == "/addmust"){
 
-		serverLog('User ' + telegramId + ' wants to add a must band');
+		logger.info('Telegram: /addmust - User ' + telegramId + ' wants to add a must band');
 
 		bot.sendMessage(
 			message.chat.id,
@@ -256,7 +257,7 @@ bot.onText(/\/addmust (.+)/, function (message, match) {
 	var telegramId = message.from.id;
 	var bandName = match[1];
 
-	serverLog('User ' + telegramId + ' wants to add the must band ' + bandName);
+	logger.info('Telegram: /addmust <band> - User ' + telegramId + ' wants to add the must band ' + bandName);
 
 	manageAddMust(telegramId, message, bandName);
 
@@ -266,7 +267,7 @@ function manageAddMust(telegramId, message, bandName){
 
 	var mustBandToAdd = removeDiacritics(bandName.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-	serverLog('Trying to add must band ' + mustBandToAdd);
+	logger.debug('Telegram: Adding must band ' + mustBandToAdd);
 
 	// check of this must band exists in the list of must bands
 	Band.findOne(
@@ -342,7 +343,7 @@ bot.onText(/\/removemust/, function (message) {
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
 	if(message.text == "/removemust"){
 
-		serverLog('User ' + telegramId + ' wants to remove a must band');
+		logger.info('Telegram: /removemust - User ' + telegramId + ' wants to remove a must band');
 
 		bot.sendMessage(
 			message.chat.id,
@@ -368,7 +369,7 @@ bot.onText(/\/removemust (.+)/, function (message, match) {
 	var telegramId = message.from.id;
 	var bandName = match[1];
 
-	serverLog('User ' + telegramId + ' wants to remove the must band ' + bandName);
+	logger.info('Telegram: /removemust <band> - User ' + telegramId + ' wants to remove the must band ' + bandName);
 
 	manageRemoveMust(telegramId, message, bandName);
 });
@@ -377,7 +378,7 @@ function manageRemoveMust(telegramId, message, bandName){
 
 	var mustBandToRemove = removeDiacritics(bandName.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-	serverLog('User ' + telegramId + ' trying to remove must band ' + mustBandToRemove);
+	logger.debug('Telegram: User ' + telegramId + ' trying to remove must band ' + mustBandToRemove);
 
 	// check of this must band exists in the list of must bands
 	Band.findOne(
@@ -441,7 +442,7 @@ bot.onText(/\/avoid/, function (message) {
 
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' listing avoid bands');
+	logger.info('Telegram: /avoid - User ' + telegramId + ' listing avoid bands');
 
 	User.findOne(
 		{
@@ -503,7 +504,7 @@ bot.onText(/\/addavoid/, function (message) {
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
 	if(message.text == "/addavoid"){
 
-		serverLog('User ' + telegramId + ' wants to add an avoid band');
+		logger.info('Telegram: /addavoid - User ' + telegramId + ' wants to add an avoid band');
 
 		bot.sendMessage(
 			message.chat.id,
@@ -529,7 +530,7 @@ bot.onText(/\/addavoid (.+)/, function (message, match){
 	var telegramId = message.from.id;
 	var bandName = match[1];
 
-	serverLog('User ' + telegramId + ' wants to add the avoid band ' + bandName);
+	logger.info('Telegram: /addavoid <band> - User ' + telegramId + ' wants to add the avoid band ' + bandName);
 
 	manageAddAvoid(telegramId, message, bandName);
 });
@@ -538,7 +539,7 @@ function manageAddAvoid(telegramId, message, bandName){
 
 	var avoidBandToAdd = removeDiacritics(bandName.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-	serverLog('Trying to add avoid band ' + avoidBandToAdd);
+	logger.debug('Telegram: Trying to add avoid band ' + avoidBandToAdd);
 
 	// check of this avoid band exists in the list of avoid bands
 	Band.findOne(
@@ -612,7 +613,7 @@ bot.onText(/\/removeavoid/, function (message) {
 	// only proceed if the command has no arguments (otherwise is already captured by below function)
 	if(message.text == "/removeavoid"){
 
-		serverLog('User ' + telegramId + ' wants to remove a avoid band');
+		logger.info('Telegram: /removeavoid - User ' + telegramId + ' wants to remove a avoid band');
 
 		bot.sendMessage(
 			message.chat.id,
@@ -638,7 +639,7 @@ bot.onText(/\/removeavoid (.+)/, function (message, match){
 	var telegramId = message.from.id;
 	var bandName = match[1];
 
-	serverLog('User ' + telegramId + ' wants to remove the avoid band ' + bandName);
+	logger.info('Telegram: /removeavoid <band> - User ' + telegramId + ' wants to remove the avoid band ' + bandName);
 
 	manageRemoveAvoid(telegramId, message, bandName);
 });
@@ -647,7 +648,7 @@ function manageRemoveAvoid(telegramId, message, bandName){
 
 	var avoidBandToRemove = removeDiacritics(bandName.toLowerCase().replace("&", "and").replace(/\s/g, '')).replace(/\W/g, '');
 
-	serverLog('User ' + telegramId + ' trying to remove avoid band ' + avoidBandToRemove);
+	logger.debug('Telegram: User ' + telegramId + ' trying to remove avoid band ' + avoidBandToRemove);
 
 	// check of this avoid band exists in the list of avoid bands
 	Band.findOne(
@@ -709,7 +710,7 @@ bot.onText(/\/schedule/, function (message) {
 
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' wants the schedule');
+	logger.info('Telegram: /schedule - User ' + telegramId + ' wants the schedule');
 
 	User.findOne(
 		{
@@ -794,7 +795,7 @@ bot.onText(/\/now/, function (message) {
 
 	var telegramId = message.from.id;
 
-	serverLog('User ' + telegramId + ' wants the now playing bands');
+	logger.info('Telegram: /now - User ' + telegramId + ' wants the now playing bands');
 
 	User.findOne(
 		{
@@ -844,7 +845,7 @@ bot.onText(/[\s\S]*/, function (msg) {
 
 		var telegramId = msg.from.id;
 
-		serverLog("Received message '" + message + "' from user " + telegramId);
+		logger.info("Telegram: anytext - Received message '" + message + "' from user " + telegramId);
 
 		botFSM.wakeUpBot(telegramId, message, function(replyMessage){
 			notify(msg.chat.id, 
@@ -861,7 +862,7 @@ bot.onText(/\/users/, function (msg) {
 
 	var telegramId = msg.from.id;
 
-	serverLog('User ' + telegramId + ' wants the list of users');
+	logger.info('Telegram: /users - User ' + telegramId + ' wants the list of users');
 
 	if(telegramId == adminChatId){ // only admin...
 
@@ -920,7 +921,7 @@ function notifyAdmin(userMessage){
 	bot.sendMessage(adminChatId, userMessage, {"parse_mode": "HTML"})
 	.then(function () {});
 		
-	console.log("[BOT] Admin notified");
+	logger.debug('Telegram: Admin notified');
 
 }
 
@@ -931,14 +932,10 @@ function notify(telegramChatId, userMessage, logMessage){
 		bot.sendMessage(telegramChatId, userMessage, {"parse_mode": "HTML"})
 		.then(function () {});
 		
-		console.log("[BOT] " + logMessage);
+		logger.debug("Telegram: " + logMessage);
 
 	}, 500);
 
-}
-
-function serverLog(logMessage){
-	console.log("[BOT] " + logMessage);
 }
 
 
@@ -1060,7 +1057,7 @@ function toTitleCase(str){
 
 function setupBotConnection(style, app){
 
-	serverLog("Setup bot in " + style );
+	logger.info("Telegram: Setup bot in " + style );
 
 	var bot = {};
 	switch(style){

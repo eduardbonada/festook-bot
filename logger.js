@@ -1,31 +1,29 @@
-var colors = require('colors');
 var moment = require('moment');
 
 global.logLevels = {trace: 0, debug: 1, info: 2, warn: 3, error: 4, fatal: 5};
-global.logLevel = global.logLevels.info;
 
 var trace = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " TRACE " + logMessage ).grey ) ;
+	if(global.logLevel <= global.logLevels.trace) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " TRACE " + logMessage ) ;
 };
 
 var debug = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " DEBUG " + logMessage ).grey );
+	if(global.logLevel <= global.logLevels.debug) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " DEBUG " + logMessage );
 };
 
 var info = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " INFO  " + logMessage ).white );
+	if(global.logLevel <= global.logLevels.info) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " INFO  " + logMessage );
 };
 
 var warn = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " WARN  " + logMessage ).yellow );
+	if(global.logLevel <= global.logLevels.warn) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " WARN  " + logMessage );
 };
 
 var error = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " ERROR " + logMessage ).red );
+	if(global.logLevel <= global.logLevels.error) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " ERROR " + logMessage );
 };
 
 var fatal = function (logMessage){
-	console.log( ( moment().format('HH:mm:ss DD-MM-YYYY') + " FATAL " + logMessage ).red );
+	if(global.logLevel <= global.logLevels.fatal) console.log( moment().format('HH:mm:ss DD-MM-YYYY') + " FATAL " + logMessage );
 };
 
 
