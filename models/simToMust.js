@@ -90,7 +90,7 @@ function computeAllBandsSimilarityForUser(user, allBands, mustBands, maxDist){
 	// store to Users collection
 	User.findOneAndUpdate(
 		{ 
-			name: user['name']
+			telegramId: user.telegramId
 		}, 
 		{
 			$set: { 
