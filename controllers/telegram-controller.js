@@ -949,15 +949,16 @@ function notifyBandNotFound(telegramId, telegramChatId, bandName){
 function notifyHelp(telegramId, telegramChatId){
 
 	var helpMessage = "What do you want to do?\n\n" + 
-			"See all /bands playing\n" + 
-			"See your /must bands\n" +
-			" · /addmust band\n" + 
-			" · /removemust band\n" + 
-			"See your /avoid bands\n" + 
-			" · /addavoid band\n" + 
-			" · /removeavoid band\n" + 
-			"See your /schedule\n" +
-			"Or /reset at your own risk"
+			"- See all /bands playing\n" + 
+			"- See your /must bands\n" +
+			"    - /addmust band\n" + 
+			"    - /removemust band\n" + 
+			"- See your /avoid bands\n" + 
+			"    - /addavoid band\n" + 
+			"    - /removeavoid band\n" + 
+			"- See your /schedule\n" +
+			"- See who is playing /now\n" +
+			"- Or /reset at your own risk"
 
 	notify(telegramChatId, 
 		helpMessage, 
