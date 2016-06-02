@@ -1,6 +1,12 @@
-// import configuration file
 var config = require('./config');
+var logger = require('./logger');
 
+logger.trace('This is a trace log')
+logger.debug('This is a debug log')
+logger.info('This is a info log')
+logger.warn('This is a warn log')
+logger.error('This is a error log')
+logger.fatal('This is a fatal log')
 
 /// ---------- LOAD DEPENDECIES ---------- ///
 
