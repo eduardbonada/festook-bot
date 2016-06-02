@@ -191,8 +191,13 @@ var nowPlaying = function(telegramId, callback) {
 
 	logger.debug("ScheduleCtrl: Gathering now playing bands for user " + telegramId);
 
-	var now = moment();
-	//var now = moment().add(3, 'days'); //.add(8, 'hours');
+	var now;
+	if(process.env.OPENSHIFT_NODEJS_IP){
+		now = moment().add(7, 'hours'); //.add(8, 'hours');
+	}
+	else{
+		now = moment();
+	}
 
 	var nowPlayingBands = [];
 	
