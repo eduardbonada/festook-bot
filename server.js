@@ -1,7 +1,7 @@
 var config = require('./config');
 var logger = require('./logger');
 
-global.logLevel = global.logLevels.info;
+global.logLevel = global.logLevels.debug;
 
 /// ---------- LOAD DEPENDECIES ---------- ///
 

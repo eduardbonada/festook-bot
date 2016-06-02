@@ -294,13 +294,13 @@ function manageAddMust(telegramId, message, bandName){
 
 						if(user){
 
+							var firstMustBand = user.mustBands.length == 0 ? true : false;
+
 							// Already in must bands
 							if(user.mustBands.indexOf(band.lowercase) != -1){
-
 								notify(message.chat.id, 
 									band.uppercase + " is already one of your /must bands!", 
 									"Band " + band.uppercase + " already in list of must bands");
-
 							}
 							// Not yet in must bands
 							else{
@@ -315,10 +315,18 @@ function manageAddMust(telegramId, message, bandName){
 
 									mustBandsCntrl.addMustBandForUser(telegramId, band.lowercase);
 
-									notify(message.chat.id, 
-										"Done! I added " + band.uppercase + " to your /must bands.\nAnother /addmust?", 
-										"User " + telegramId + " added must band: " + band.uppercase);
-
+									if(firstMustBand){									
+										botFSM.wakeUpBot(telegramId, "MustBandProvided", function(replyMessage){
+											notify(message.chat.id, 
+												replyMessage, 
+												"Sent message to user " + telegramId);
+										});
+									}
+									else{
+										notify(message.chat.id, 
+											"Done! I added " + band.uppercase + " to your /must bands.\nAnother /addmust?", 
+											"User " + telegramId + " added must band: " + band.uppercase);
+									}
 								}
 							}
 						}
@@ -329,10 +337,34 @@ function manageAddMust(telegramId, message, bandName){
 					});
 			}
 			else{
-				notifyBandNotFound(telegramId, message.chat.id, bandName);
+
+				User.findOne(
+					{
+						telegramId: telegramId
+					},
+					function(err, user){
+						if (err) throw err;
+
+						if(user){
+							var firstMustBand = user.mustBands.length == 0 ? true : false;
+
+							if(firstMustBand){
+								botFSM.wakeUpBot(telegramId, "MustBandNotProvidedYet", function(replyMessage){
+									notify(message.chat.id, 
+										replyMessage, 
+										"Sent message to user " + telegramId);
+								});
+							}
+							else{
+								notifyBandNotFound(telegramId, message.chat.id, bandName);
+							}
+						}
+						else{
+							notifyUserNotFound(telegramId, message.chat.id);
+						}
+					});
 			}
 	});
-
 }
 
 // Matches /removemust
@@ -893,7 +925,7 @@ function notifyUserNotFound(telegramId, telegramChatId){
 
 function notifyBandNotFound(telegramId, telegramChatId, bandName){
 	notify(telegramChatId, 
-		"McFly! Are you sure " + bandName  + " is playing? I don't see it the list of /bands.", 
+		"Are you sure " + bandName  + " is playing? I don't see it the list of /bands.", 
 		"User " + telegramId + " provided band " + bandName + " but not found in the list of bands."
 		);
 }
