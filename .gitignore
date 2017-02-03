@@ -1,4 +1,4 @@
-node-modules/
+node_modules/
 festivals-info/
 config_private.js
 bot-info.txt
@@ -6,3 +6,4 @@ rhc.txt
 TO-DO.txt
 use_cases.txt
 .openshift/
+.gitignore
